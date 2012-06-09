@@ -82,6 +82,7 @@ if ($_GET['delete'] !== "1") {
 						if (file_exists("./temp/".$port."/playlist/".$playlistfilecreatename.".lst")) {
 							$postvar_form = $_POST['arv'];
 							$postvar_form = urldecode($postvar_form);
+							$postvar_form = utf8_encode($postvar_form);
 							$postvar_name = "./temp/".$port."/playlist/".$playlistfilecreatename.".lst";
 							$filehandle = fopen($postvar_name, "w+");
 							$tok = explode(',',$postvar_form);
@@ -113,6 +114,7 @@ if ($_GET['delete'] !== "1") {
 				if (file_exists("./temp/".$port."/playlist/".base64_decode($_GET['listname']))) {
 					$postvar_form = $_POST['arv'];
 					$postvar_form = urldecode($postvar_form);
+					$postvar_form = utf8_encode($postvar_form);
 					$postvar_name = "./temp/".$port."/playlist/".base64_decode($_GET['listname']);
 					$filehandle = fopen($postvar_name, "w+");
 					$tok = explode(',',$postvar_form);

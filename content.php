@@ -205,10 +205,10 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
         $selectowner = mysql_query("SELECT * FROM servers WHERE portbase='" . $port . "' AND owner='" . $loginun . "'");
         if (mysql_num_rows($selectowner) == 1) {
             header("Content-type:text/xml");
-            echo ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
+            echo '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>';
             $listing_start = 1;
             $listing_end   = 10000;
-            $dirlisting = @scandir("" . dirname(__FILE__) . "/pages/uploads/" . $port . "") or die();
+            $dirlisting = @scandir(dirname(__FILE__) . '/pages/uploads/' . $port) or die();
             $dirlistingsearch  = array(
                 '&',
                 '<',
@@ -225,13 +225,15 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
             );
             if (!isset($dirlisting[$listing_start]))
                 die();
-            echo "<tree id=\"0\">";
+			echo '<tree id="0">';
             for ($i = $listing_start; $i <= $listing_end; $i++) {
-                if (($dirlisting[$i] != ".") and ($dirlisting[$i] != "..") and ($dirlisting[$i] != "")) {
-                    echo "<item id=\"" . utf8_decode("" . dirname(__FILE__) . "/pages/uploads/" . $port . "/" . str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]) . "") . "\" text=\"" . utf8_decode("" . str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]) . "") . "\" />";
+                if (($dirlisting[$i] != ".") && ($dirlisting[$i] != "..") && ($dirlisting[$i] != "")) {
+					$itemId = sprintf('%s/pages/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
+					$itemText = str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]);
+					printf('<item id="%s" text="%s"/>', $itemId, $itemText);
                 }
             }
-            echo "</tree>";
+            echo '</tree>';
             die();
         }
     }
@@ -267,13 +269,12 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
                 foreach ($entrys as $entry) {
                     $inta++;
                     $entry1 = str_replace(dirname(__FILE__) . "/pages/uploads/" . $port . "/", "", $entry);
-                    if ($entry1 != "")
-                        echo ("<item child='0' id='" . utf8_decode(str_replace($dirlistingsearch, $dirlistingreplace, $entry1) . "") . "' text='" . utf8_decode(str_replace($dirlistingsearch, $dirlistingreplace, $entry1) . "") . "'></item>");
+                    if ($entry1 != "") {
+						$magix = str_replace($dirlistingsearch, $dirlistingreplace, $entry1);
+						printf('<item child="0" id="%s" text="%s"></item>', $magix, $magix);
+					}
                 }
                 fclose($filehandle);
-            }
-            if (base64_decode($_GET['listname']) == "new playlist.lst") {
-                echo ("<item child='0' id='demo' text='Delete Me First!'></item>");
             }
             echo ("</tree>");
             die();
