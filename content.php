@@ -23,18 +23,30 @@
  * @link       http://www.streamerspanel.com
 
  */
+ini_set('display_errors', 1);
+ini_set('error_reporting', E_ALL | E_STRICT);
 
 if (!include("database.php"))
     die("database.php could not be loaded!");
 if ($db_host == "" || !isset($db_host))
     die("please reinstall this panel");
 //MySQL Verbindung wird getestet
+require_once 'functions.php';
+require_once 'meekrodb.2.0.class.php';
+
 $errors = array();
 $notifi = array();
 $correc = array();
 
 $connection = mysql_connect($db_host, $db_username, $db_password) or die("database could not be connected");
 $db = mysql_select_db($database) or die("database could not be selected");
+DB::$host = $db_host;
+DB::$user = $db_username;
+DB::$password = $db_password;
+DB::$dbName = $database;
+
+sendUsageStatisticsIfAllowed();
+
 session_start();
 $captcha_sql      = mysql_query("SELECT language FROM settings WHERE id='0'");
 $language_setting = mysql_result($captcha_sql, 0);

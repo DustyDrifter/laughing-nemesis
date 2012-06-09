@@ -114,6 +114,8 @@ $messages["i71"]	=		'Sprache der Benutzeroberfläche';
 $messages["i172"]	=		'Überprüfung der Vorraussetzung zur Installation';
 $messages["i66"]	=		'';// SSH USERNAME
 $messages["i666"]	=		'';// SSH USERNAME
+$messages['install_allow_usage_statistics_label'] = 'Nutzungsstatistiken senden';
+$messages['install_allow_usage_statistics_description'] = 'Sie helfen uns sehr, wenn sie uns diese Informationen zur Verfuegung stellen.';
 
 //
 //
@@ -765,4 +767,4 @@ $messages["dd16"]		=		"Capatchaabfrage aus";
 //
 //	language credit
 $messages["564"]	=		"<a href=\"http://www.streamerspanel.com\">Translated by djcrackhome</a>";
-$messages["564"]	=		'Streamers Panel | djcrackhome | Dave | <a href="http://www.streamerpanel.com">http://www.streamerpanel.com</a> | <a href="http://www.nagualmedia.de/">Design	by Zephon</a>';
+$messages["564"]	=		'Streamers Panel | djcrackhome | Dave | <a href="http://www.streamerspanel.com">http://www.streamerspanel.com</a> | <a href="http://www.nagualmedia.de/">Design	by Zephon</a>';

@@ -68,6 +68,11 @@ if (isset($_POST['sql_dns'])) {
 
             if (!mysql_query("INSERT INTO `users` (`id`, `username`,`user_password`,`md5_hash`, `user_level`, `user_email`, `contact_number`, `mobile_number`, `account_notes`, `name`, `surname`, `age`) VALUES ('', '".$_POST['user']."', '".$_POST['pass']."', '".md5($_POST['user'].$_POST['pass'])."', 'Super Administrator', 'admin@domain.com', 'none', '0', 'Default Administrator', 'Max', 'Mustermann', 'non') "))  { $errors[] = "<h2>".$messages["i8"]."</h2>";}
 
+			if (isset($_POST['allow_usage_statistics'])) {
+				$fileHandle = fopen('.isAllowedToSendUsageStatistics', 'w');
+				fclose($fileHandle);
+			}
+
         }
     }
 }
@@ -327,14 +332,19 @@ else {
                     </div>
                 </fieldset>
 <fieldset>
-						<legend>Other settings</legend>     
-
+						<legend>Other settings</legend>
+						<div>
+							<label for="a"><?php echo $messages['install_allow_usage_statistics_label'] ?></label>
+							<input type="checkbox" name="allow_usage_statistics" checked="checked" />
+							<span class="field_desc"><?php echo $messages['install_allow_usage_statistics_description'] ?></span>
+						</div>
+						<br />
 						<div class="input_field">
 							<select name="server_lang" >
 								<option  value="german" selected="selected">German (de) - Official Language*</option>
-								<option  value="" disabled="disabled">README_FIRST.txt !!</option>
+								<option  value="english">English (en)</option>
 							</select>
-							<span class="field_desc">Languagse which the panel will run with</span>
+							<span class="field_desc">Language which the panel will run with</span>
 						</div>        
 					</fieldset> 
                 <br />
@@ -345,7 +355,7 @@ else {
 </div>
 <div class="clear"></div>
 <div id="footer">
-    <p>Streamers Panel | djcrackhome | dave | <a href="http://www.streamerpanel.com">http://www.streamersadmin.com</a> | <a href="http://www.nagualmedia.de/">Design	by Zephon</a></p>
+    <p>StreamersAdminPanel | djcrackhome | dave | <a href="http://www.streamerspanel.com">http://www.streamerspanel.com</a> | <a href="http://www.nagualmedia.de/">Design	by Zephon</a></p>
 </div>
 </div>
 </body>

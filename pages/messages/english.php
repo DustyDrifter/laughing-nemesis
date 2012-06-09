@@ -113,6 +113,8 @@ $messages["i71"]	=		'UI language';
 $messages["i172"]	=		'Installation-Requirements check';
 $messages["i66"]	=		'';// SSH USERNAME
 $messages["i666"]	=		'';// SSH USERNAME
+$messages['install_allow_usage_statistics_label'] = 'Send usage statistics';
+$messages['install_allow_usage_statistics_description'] = 'It would be nice, if you provide us some usage information, so that we can improve StreamersAdminPanel.';
 
 //
 //
@@ -766,4 +768,4 @@ $messages["dd16"]		=		"captcha off";
 //
 //	language credit
 $messages["564"]	=		"<a href=\"http://www.streamerspanel.com\">Translated by djcrackhome</a>";
-$messages["564"]	=		'Streamers Panel | djcrackhome | Dave | <a href="http://www.streamerpanel.com">http://www.streamerpanel.com</a> | <a href="http://www.nagualmedia.de/">Design	by Zephon</a>';
+$messages["564"]	=		'Streamers Panel | djcrackhome | Dave | <a href="http://www.streamerspanel.com">http://www.streamerspanel.com</a> | <a href="http://www.nagualmedia.de/">Design	by Zephon</a>';
