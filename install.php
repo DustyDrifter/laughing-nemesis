@@ -19,7 +19,6 @@
  * @author     David Schomburg <dave@streamerspanel.com>
  * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
- * @version    3.2.1
  * @link       http://www.streamerspanel.com
 
  */
@@ -111,7 +110,7 @@ else {
             </div>
             <div class="navhead_blank">
                 <span><?php echo $messages["i11"];?></span>
-                <span>3.2.1</span>
+                <span>3.2.2</span>
             </div>
             <div class="subnav_child">
                 <ul class="submenu">

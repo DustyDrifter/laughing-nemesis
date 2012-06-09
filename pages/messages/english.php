@@ -19,7 +19,6 @@
  * @author     David Schomburg <dave@streamerspanel.com>
  * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
- * @version    3.2.1
  * @link       http://www.streamerspanel.com
 
  */
@@ -28,7 +27,7 @@
 //
 //
 //	General Variables
-$messages["g01"]		=   "3.2.1";
+$messages["g01"]		=   "3.2.2";
 $messages["g0"]		=		"Streamers Admin Panel - ".$messages["g01"]."";
 $messages["g1"]		=		"Database connection couldn't be established!";
 $messages["g2"]		=		"Database couldn't be found!";
@@ -49,7 +48,7 @@ $messages["i7"]		=		'MySQL: notices Content could not be inserted!';
 $messages["i7"]		=		'MySQL: settings Content could not be inserted!';
 $messages["i8"]		=		'MySQL: user Content could not be inserted!';
 $messages["i9"]		=		'Installation successful! To the panel';
-$messages["i10"]	=       'Installation of Streamers Panel 3.2.1';
+$messages["i10"]	=       'Installation of Streamers Panel 3.2.2';
 $messages["i11"]	=		'INSTALLATION';
 $messages["i12"]	=		'Have fun!';
 $messages["i13"]	=		'PHP extensions:';

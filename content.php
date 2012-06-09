@@ -19,7 +19,7 @@
  * @author     David Schomburg <dave@streamerspanel.com>
  * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
- * @version    3.2.1
+
  * @link       http://www.streamerspanel.com
 
  */
@@ -342,7 +342,7 @@ foreach (mysql_fetch_array($settingsq) as $key => $pref) {
     }
 }
 // update check
-$currentVersion = "3.2.1";
+$currentVersion = "3.2.2";
 
 
 
