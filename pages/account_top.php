@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
 			$update_ne = "1";
 			$loginpw = $_POST['u_user_password'];
 			$u_md5_hash = md5($loginun.$loginpw);
-			if (mysql_query("UPDATE users SET user_password='".$loginpw."',md5_hash='".md5($loginun.$loginpw)."',  WHERE id='".$userdata['id']."' ") )
+			if (mysql_query("UPDATE users SET user_password='".$loginpw."',md5_hash='".md5($loginun.$loginpw)."'  WHERE id='".$userdata['id']."' ") )
 				$_SESSION['user_password'] = $_POST['u_user_password'];
 		}
 		else {
