@@ -74,7 +74,7 @@ $messages["i31"]	=		'Server IP';
 $messages["i32"]	=		'Panel Version';
 $messages["i33"]	=		'Wilkommen zur Installation von Streamers Admin Panel '.$messages["g01"].'';
 $messages["i34"]	=		'Vor der Installation bitte prüfen ob folgende Erweiterungen auf dem Server installiert sind:';
-$messages["i35"]	=		'PHP Version 5 mit der Konfiguration  (safe_mode=&quot;off&quot;)';
+$messages["i35"]	=		'PHP Version 5.3 mit der Konfiguration  (safe_mode=&quot;off&quot;)';
 $messages["i36"]	=		'SSH2 als PHP extension';
 $messages["i37"]	=		'PHP auf Apache Server';
 $messages["i38"]	=		'Linux Server (Debian 6 Squeeze empfohlen)';
