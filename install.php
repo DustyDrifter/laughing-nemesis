@@ -65,7 +65,7 @@ if (isset($_POST['sql_dns'])) {
             if (isset($_POST['server_os']) && $_POST['server_os']  == "linux") {
                 $dir_new = $_POST['server_dir']."/";
             }
-            if (!mysql_query("INSERT INTO `settings` (`id`, `title`, `slogan`, `display_limit`, `host_add`, `os`, `dir_to_cpanel`, `scs_config`, `adj_config`, `php_mp3`, `php_exe`, `update_check`, `login_captcha`, `ssh_user`, `ssh_pass`, `ssh_port`, `language`) VALUES (0, '".$_POST['server_title']."', 'Public', 10, '".$_POST['server_dns']."', 'linux', '".dirname(__FILE__)."/', '0', '0', '20', '230', '1', '1', '".base64_encode($_POST['server_sshuser'])."', '".base64_encode($_POST['server_sshpass'])."', '".$_POST['server_sshport']."', '".$_POST['server_lang']."') ")){ $errors[] = "<h2>".$messages["i7"]."</h2>";}
+            if (!mysql_query("INSERT INTO `settings` (`id`, `title`, `slogan`, `display_limit`, `host_add`, `os`, `dir_to_cpanel`, `scs_config`, `adj_config`, `php_mp3`, `php_exe`, `update_check`, `login_captcha`, `ssh_user`, `ssh_pass`, `ssh_port`, `language`) VALUES (0, '".$_POST['server_title']."', 'Public', 10, '".$_POST['server_dns']."', 'linux', '".dirname(__FILE__)."/', '0', '0', '20', '230', '0', '1', '".base64_encode($_POST['server_sshuser'])."', '".base64_encode($_POST['server_sshpass'])."', '".$_POST['server_sshport']."', '".$_POST['server_lang']."') ")){ $errors[] = "<h2>".$messages["i7"]."</h2>";}
 
             if (!mysql_query("INSERT INTO `users` (`id`, `username`,`user_password`,`md5_hash`, `user_level`, `user_email`, `contact_number`, `mobile_number`, `account_notes`, `name`, `surname`, `age`) VALUES ('', '".$_POST['user']."', '".$_POST['pass']."', '".md5($_POST['user'].$_POST['pass'])."', 'Super Administrator', 'admin@domain.com', 'none', '0', 'Default Administrator', 'Max', 'Mustermann', 'non') "))  { $errors[] = "<h2>".$messages["i8"]."</h2>";}
 
@@ -74,13 +74,13 @@ if (isset($_POST['sql_dns'])) {
 }
 $cwd = str_replace("\\", "/", getcwd());
 
-if(count($errors) > 0 && ($_POST['sql_dns'])) {
+if(isset($errors) && (count($errors) > 0) && (isset($_POST['sql_dns']))) {
     foreach($errors as $errors_cont)
         $errors_list.="<div>".$errors_cont."</div>";
     echo ($errors_list);
 }
 else {
-    if ($_POST['sql_dns']) {
+    if (isset($_POST['sql_dns'])) {
         $correc[] = "<h2><a href=\"index.php\">".$messages["i9"]."</a></h2>";
     }
 }
@@ -167,7 +167,7 @@ else {
                     $server_sc =  substr(sprintf('%o', fileperms('files/linux/sc_trans.bin')), -4);
                     $trans_sc  = substr(sprintf('%o', fileperms('files/linux/sc_serv.bin')), -4);
                     if ( $server_sc == "777" && $trans_sc == "777" ){
-                        echo '<li><font color="green"></li><li><b>Dateirechte sc_serv.bin / sc_trans.bin OK!</b></li></font> ';
+                        echo '<li><font color="green"></li><li><b>Dateirechte sc_serv,bin / sc_trans.bin OK!</b></li></font> ';
                     } else {
                             echo ' <li><font color="red"></li><li><b>Dateirecht im Ordner "/files/linux/sc_serv.bin" überprüfen!!!</b></li></font> ';
                     }
