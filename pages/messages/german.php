@@ -72,7 +72,7 @@ $messages["i29"]	=		'Information';
 $messages["i30"]	=		'User IP';
 $messages["i31"]	=		'Server IP';
 $messages["i32"]	=		'Panel Version';
-$messages["i33"]	=		'Wilkommen zur Installation von Streamers Admin Panel '.$messages["g01"].'';
+$messages["i33"]	=		'Willkommen zur Installation von Streamers Admin Panel '.$messages["g01"].'';
 $messages["i34"]	=		'Vor der Installation bitte prüfen ob folgende Erweiterungen auf dem Server installiert sind:';
 $messages["i35"]	=		'PHP Version 5.3 mit der Konfiguration  (safe_mode=&quot;off&quot;)';
 $messages["i36"]	=		'SSH2 als PHP extension';
@@ -746,7 +746,7 @@ $messages["dd8"]		=		"Stream nicht öffentlich gezeigt";
 //
 //
 //admserver_bottom.php
-$messages["dd9"]		=		"Updates werden durchführt";
+$messages["dd9"]		=		"Updates werden durchgeführt";
 $messages["dd10"]		=		"Updates werden unterbunden";
 $messages["dd11"]		=		"AutoDJ Config wird gespeichert";
 $messages["dd12"]		=		"AutoDJ Config wird entfernt";
