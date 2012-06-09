@@ -19,7 +19,6 @@
  * @author     David Schomburg <dave@streamerspanel.com>
  * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
- * @version    3.2.1
  * @link       http://www.streamerspanel.com
 
  */
@@ -41,7 +40,7 @@ if (isset($_POST['submit'])) {
 			$update_ne = "1";
 			$loginpw = $_POST['u_user_password'];
 			$u_md5_hash = md5($loginun.$loginpw);
-			if (mysql_query("UPDATE users SET user_password='".$loginpw."',md5_hash='".md5($loginun.$loginpw)."',  WHERE id='".$userdata['id']."' ") )
+			if (mysql_query("UPDATE users SET user_password='".$loginpw."',md5_hash='".md5($loginun.$loginpw)."'  WHERE id='".$userdata['id']."' ") )
 				$_SESSION['user_password'] = $_POST['u_user_password'];
 		}
 		else {

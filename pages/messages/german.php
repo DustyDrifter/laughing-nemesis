@@ -1,29 +1,34 @@
 <?PHP
 /**
-* Streamers Admin Panel
-*
-* Originally written by Sebastian Graebner <djcrackhome>
-* Fixed and edited by David Schomburg <dave>
-*
-* The Streamers Admin Panel is a web-based administration interface for
-* Nullsoft, Inc.'s SHOUTcast Distributed Network Audio Server (DNAS),
-* and is intended for use on the Linux-distribution Debian.
-*
-* LICENSE: This work is licensed under the Creative Commons Attribution-
-* ShareAlike 3.0 Unported License. To view a copy of this license, visit
-* http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
-* Creative Commons, 444 Castro Street, Suite 900, Mountain View, California,
-* 94041, USA.
-*
-* @author     Sebastian Graebner <djcrackhome@streamerspanel.com>
-* @author     David Schomburg <dave@streamerspanel.com>
-* @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
-* @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
-* @version    3.2.1
-* @link       http://www.streamerspanel.com
-*/
+ * Streamers Admin Panel
+ *
+ * Originally written by Sebastian Graebner <djcrackhome>
+ * Fixed and edited by David Schomburg <dave>
+ *
+ * The Streamers Admin Panel is a web-based administration interface for
+ * Nullsoft, Inc.'s SHOUTcast Distributed Network Audio Server (DNAS),
+ * and is intended for use on the Linux-distribution Debian.
+ *
+ * LICENSE: This work is licensed under the Creative Commons Attribution-
+ * ShareAlike 3.0 Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, California,
+ * 94041, USA.
+ *
+ * @author     Sebastian Graebner <djcrackhome@streamerspanel.com>
+ * @author     David Schomburg <dave@streamerspanel.com>
+ * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
+ * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
+ * @version    3.2.1
+ * @link       http://www.streamerspanel.com
 
-$messages["g01"]		=   "3.2.1";
+ */
+
+
+//
+//
+//	General Variables
+$messages["g01"]		=   "3.2.2";
 $messages["g0"]		=		"Streamers Admin Panel - ".$messages["g01"]."";
 $messages["g1"]		=		"Es konnte keine Verbindung zur Datenbank hergestellt werden!";
 $messages["g2"]		=		"Die Datenbank wurde nicht gefunden!";
@@ -67,18 +72,18 @@ $messages["i29"]	=		'Information';
 $messages["i30"]	=		'User IP';
 $messages["i31"]	=		'Server IP';
 $messages["i32"]	=		'Panel Version';
-$messages["i33"]	=		'Willkommen zur Installation von Streamers Admin Panel '.$messages["g01"].'';
+$messages["i33"]	=		'Wilkommen zur Installation von Streamers Admin Panel '.$messages["g01"].'';
 $messages["i34"]	=		'Vor der Installation bitte prüfen ob folgende Erweiterungen auf dem Server installiert sind:';
 $messages["i35"]	=		'PHP Version 5.3 mit der Konfiguration  (safe_mode=&quot;off&quot;)';
-$messages["i36"]	=		'SSH2 als PHP Extension';
+$messages["i36"]	=		'SSH2 als PHP extension';
 $messages["i37"]	=		'PHP auf Apache Server';
 $messages["i38"]	=		'Linux Server (Debian 6 Squeeze empfohlen)';
 $messages["i39"]	=		'Linux: &quot;GNU C Library&quot; (glibc) auf einer 32 Bit Umgebung mit Version 6 oder neuer';
 $messages["i40"]	=		'Linux: Sudo wird benötigt';
 $messages["i41"]	=		'MySQL Datenbank Server';
 $messages["i42"]	=		'Hinweis';
-$messages["i43"]	=		'In dieser Box, erhalten Sie Informationen zur Bedingung';
-$messages["i44"]	=		'MySQL Konfiguration';
+$messages["i43"]	=		'In dieser Box, erhalten Sie Informationen zur Bedinung';
+$messages["i44"]	=		'MySQL Kofiguration';
 $messages["i45"]	=		'MySQL Server';
 $messages["i46"]	=		'Adresse der MySQL Server ( meistens localhost)';
 $messages["i47"]	=		'MySQL Benutzername';
@@ -89,7 +94,7 @@ $messages["i51"]	=		'';// Database Name for MySQL
 $messages["i52"]	=		'Admin Account';
 $messages["i53"]	=		'Admin Benutzername';
 $messages["i54"]	=		'';//Enter Admin Username for Panel
-$messages["i55"]	=		'Admin Passwort';
+$messages["i55"]	=		'Admin Paswort';
 $messages["i56"]	=		'';//Enter Admin Username for Panel
 $messages["i57"]	=		'Server Einstellungen';
 $messages["i58"]	=		'Server Pfad zum Panel';
@@ -106,14 +111,14 @@ $messages["i68"]	=		'SSH Port';
 $messages["i69"]	=		'Sprache';
 $messages["i70"]	=		'SAP Sprache';
 $messages["i71"]	=		'Sprache der Benutzeroberfläche';
-$messages["i172"]	=		'Überprüfung der Voraussetzung zur Installation';
+$messages["i172"]	=		'Überprüfung der Vorraussetzung zur Installation';
 $messages["i66"]	=		'';// SSH USERNAME
 $messages["i666"]	=		'';// SSH USERNAME
 
 //
 //
 //	./index.php
-$messages["1"]		=		"Die Login Daten wurden nicht korrekt eingegeben!";
+$messages["1"]		=		"Die Logindaten wurden nicht korrekt eingegeben!";
 $messages["2"]		=		"Der Captcha Code wurde nicht korrekt eingegeben!";
 $messages["3"]		=		"Sie wurden erfolgreich von dem Panel ausgeloggt!";
 $messages["4"]		=		"Benutzeranmeldung";
@@ -145,22 +150,22 @@ $messages["26"]		=		"Sie haben";			//	Sie haben 'zwei' neue Nachrichten
 $messages["27"]		=		"neue Nachrichten";
 $messages["28"]		=		"Benutzeransicht";
 $messages["29"]		=		"Hauptmenu";
-$messages["30"]		=		"Server, Seite und Stream";
+$messages["30"]		=		"server, seite und stream";
 $messages["31"]		=		"Nachrichtencenter";
 $messages["32"]		=		"Öffentliche Server";
 $messages["33"]		=		"Meine Kontoeinstellungen";
 $messages["34"]		=		"Eigene Radioserver";
 $messages["35"]		=		"AutoDJ";
-$messages["36"]		=		"autodj, Play List und mp3s";
+$messages["36"]		=		"autodj, playlist und mp3s";
 $messages["37"]		=		"MP3 Einstellungen";
 $messages["38"]		=		"AutoDJ Einstellungen";
 $messages["39"]		=		"Administration";
-$messages["40"]		=		"Server und Zugriff";
+$messages["40"]		=		"server und zugriff";
 $messages["41"]		=		"Servereinstellungen";
 $messages["42"]		=		"Radioserver Konfiguration";
 $messages["43"]		=		"Benutzerkonten";
 $messages["44"]		=		"Informationen";
-$messages["45"]		=		"Ip und Versions Info";
+$messages["45"]		=		"ip und versionsinfo";
 $messages["46"]		=		"Benutzer IP";
 $messages["47"]		=		"Server IP";
 $messages["48"]		=		"Version";
@@ -246,7 +251,7 @@ $messages["117"]	=		"Status f&uuml;r den AutoDJ f&uuml;r den Stream";
 $messages["118"]	=		"Webspace (MB)";
 $messages["119"]	=		"Einstellung des Webspeichers f&uuml;r den AutoDJ (in MB)";
 $messages["120"]	=		"Traffic (MB)";
-$messages["121"]	=		"Traffic-begrenzung des Servers (Coming Soon)";
+$messages["121"]	=		"Trafficbegrenzung des Servers (Coming Soon)";
 $messages["122"]	=		"Logfile";
 $messages["123"]	=		"Speicherort der Logfiles";
 $messages["124"]	=		"Realtime";
@@ -283,9 +288,9 @@ $messages["154"]	=		"ContentDir";
 $messages["155"]	=		"Verzeichnisangabe des Inhalts";
 $messages["156"]	=		"Introfile";
 $messages["157"]	=		"Verzeichnisangabe der Intro-Datei";
-$messages["158"]	=		"Title Format";
+$messages["158"]	=		"Titleformat";
 $messages["159"]	=		"Server Title Format";
-$messages["160"]	=		"Public Server";
+$messages["160"]	=		"Publicserver";
 $messages["161"]	=		"Shoutcast Server &ouml;ffentlich zeigen";
 $messages["162"]	=		"Allow Relay";
 $messages["163"]	=		"Server auf anderen Server als Inhalt erlauben";
@@ -393,7 +398,7 @@ $messages["258"]	=		"Nachname";
 $messages["259"]	=		"Ihr Nachname";
 $messages["260"]	=		"Geburtstag";
 $messages["261"]	=		"Ihr Alter f&uuml;r Statistikzwecke";
-$messages["262"]	=		"Super Admin Note";
+$messages["262"]	=		"SuperAdmin Note";
 $messages["263"]	=		"Notierungen des Administrator";
 $messages["264"]	=		"Absenden";
 $messages["265"]	=		"Zugriffsberechtigung";
@@ -483,7 +488,7 @@ $messages["341"]	=		"Bei Fragen rund um Ihren Shoutcast Server und dieses Panel 
 $messages["342"]	=		"Hier haben Sie die M&ouml;glichkeit den Administrator des Servers zu kontaktieren";
 $messages["343"]	=		"Name";
 $messages["344"]	=		""; //Hier bitte ihren Namen eintragen
-$messages["345"]	=		"E-Mail Adresse";
+$messages["345"]	=		"EMail Adresse";
 $messages["346"]	=		"Keine g&uuml;ltige EMail!";
 $messages["347"]	=		"Eintrag in Ordnung!";
 $messages["348"]	=		"Betreff";
@@ -599,7 +604,7 @@ $messages["442"]	=		"Starten";
 $messages["443"]	=		"Einstellen";
 $messages["444"]	=		"Eigenschaften des Shoutcast Server auf Port";
 $messages["445"]	=		"Folgend k&ouml;nnen Sie die Konfigurationsdatei des Shoutcast Servers &auml;ndern. Diese ist notwendig damit der Server einwandfrei funktioniert. Diese Einstellungen k&ouml;nnen Sie jederzeit &auml;ndern. Bitte versuchen Sie alle Eintr&auml;ge zu f&uuml;llen damit es zu keinen Komplikationen beim Start des Servers kommen kann. Alle diese Einstellungen kann jederzeit vom Administrator ver&auml;ndert werden.";
-$messages["446"]	=		"Shoutcast Konfiguration";
+$messages["446"]	=		"Shoutcast Konfig";
 $messages["447"]	=		"Bitte alle folgenden Formulareintr&auml;ge f&uuml;r die Konfiguration des Shoutcast Servers einstellen.";
 $messages["448"]	=		"Shoutcast Server Konfiguration";
 $messages["449"]	=		"Aktualisieren";
@@ -629,7 +634,7 @@ $messages["472"]	=		"AutoDumpUser";
 $messages["473"]	=		"AutoDumpUserTime";
 $messages["474"]	=		"ContentDir";
 $messages["475"]	=		"Introfile";
-$messages["476"]	=		"Title Format";
+$messages["476"]	=		"Titleformat";
 $messages["477"]	=		"Publicserver";
 $messages["478"]	=		"Allow Relay";
 $messages["479"]	=		"Allow Public Relay";
@@ -749,6 +754,11 @@ $messages["dd13"]		=		"Shoutcast Config ein";
 $messages["dd14"]		=		"Shoutcast Config aus";
 $messages["dd15"]		=		"Capatchaabfrage ein";
 $messages["dd16"]		=		"Capatchaabfrage aus";
+
+
+
+
+
 
 
 //
