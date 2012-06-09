@@ -354,7 +354,7 @@ foreach (mysql_fetch_array($settingsq) as $key => $pref) {
     }
 }
 // update check
-$currentVersion = "3.2.2";
+$currentVersion = SAP_VERSION;
 
 
 

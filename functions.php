@@ -7,6 +7,7 @@
 require_once 'meekrodb.2.0.class.php';
 require_once 'Requests.php';
 Requests::register_autoloader();
+define('SAP_VERSION', '3.2.2');
 
 function e($v) { echo $v; }
 function el($v) { e($v . PHP_EOL); }
@@ -33,6 +34,7 @@ function collectUsageData()
 		'phpinfo' => getPhpInfoAsArray(),
 		'amount_of_servers' => $amountOfServers,
 		'currently_running_servers' => $currentlyRunningServers,
+		'panel_version' => SAP_VERSION,
 	);
 }
 

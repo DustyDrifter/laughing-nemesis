@@ -28,7 +28,7 @@
 //
 //
 //	General Variables
-$messages["g01"]		=   "3.2.2";
+$messages["g01"]		=   SAP_VERSION;
 $messages["g0"]		=		"Streamers Admin Panel - ".$messages["g01"]."";
 $messages["g1"]		=		"Es konnte keine Verbindung zur Datenbank hergestellt werden!";
 $messages["g2"]		=		"Die Datenbank wurde nicht gefunden!";
@@ -49,7 +49,7 @@ $messages["i7"]		=		'MySQL: notices Inhalt kann nicht eingefügt werden!';
 $messages["i7"]		=		'MySQL: settings Inhalt kann nicht eingefügt werden!';
 $messages["i8"]		=		'MySQL: userInhalt kann nicht eingefügt werden!';
 $messages["i9"]		=		'Installation erfolgreich! Zum Panel';
-$messages["i10"]	=       'Installation vom Streamers Panel 3.2.1';
+$messages["i10"]	=       'Installation vom Streamers Panel ' . SAP_VERSION;
 $messages["i11"]	=		'INSTALLATION';
 $messages["i12"]	=		'Viel Spaß!';
 $messages["i13"]	=		'PHP Erweiterungen:';

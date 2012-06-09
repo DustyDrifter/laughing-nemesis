@@ -115,7 +115,7 @@ else {
             </div>
             <div class="navhead_blank">
                 <span><?php echo $messages["i11"];?></span>
-                <span>3.2.2</span>
+                <span><?php echo SAP_VERSION ?></span>
             </div>
             <div class="subnav_child">
                 <ul class="submenu">
