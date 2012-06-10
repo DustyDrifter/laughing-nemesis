@@ -1,9 +1,27 @@
 <?php
 /**
- * User: peaceman
- * Date: 6/9/12
- * Time: 11:37 PM
+ * Streamers Admin Panel
+ *
+ * Originally written by Sebastian Graebner <djcrackhome>
+ * Fixed and edited by David Schomburg <dave>
+ *
+ * The Streamers Admin Panel is a web-based administration interface for
+ * Nullsoft, Inc.'s SHOUTcast Distributed Network Audio Server (DNAS),
+ * and is intended for use on the Linux-distribution Debian.
+ *
+ * LICENSE: This work is licensed under the Creative Commons Attribution-
+ * ShareAlike 3.0 Unported License. To view a copy of this license, visit
+ * http://creativecommons.org/licenses/by-sa/3.0/ or send a letter to
+ * Creative Commons, 444 Castro Street, Suite 900, Mountain View, California,
+ * 94041, USA.
+ *
+ * @author     Sebastian Graebner <djcrackhome@streamerspanel.com>
+ * @author     David Schomburg <dave@streamerspanel.com>
+ * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
+ * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
+ * @link       http://www.streamerspanel.com
  */
+
 require_once 'meekrodb.2.0.class.php';
 require_once 'Requests.php';
 Requests::register_autoloader();
@@ -83,7 +101,7 @@ function getCurrentlyRunningServers()
 	$serverPorts = DB::queryOneColumn('portbase', 'SELECT * FROM `servers`');
 	foreach ($serverPorts as $serverPort) {
 		try {
-			$shoutcastStatusUrl = sprintf('http://sap.dashtec.de:%d/7.html', $serverPort);
+			$shoutcastStatusUrl = sprintf('http://localhost:%d/7.html', $serverPort);
 			$response = Requests::get($shoutcastStatusUrl, array('user-agent' => 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.A.B.C Safari/525.13'));
 			if (!$response->success) {
 				continue;
