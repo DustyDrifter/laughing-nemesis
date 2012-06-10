@@ -24,7 +24,22 @@ function sendUsageStatisticsIfAllowed()
 
 function isSendingOfUsageStatisticsAllowed()
 {
-	return file_exists('.isAllowedToSendUsageStatistics');
+	if (!file_exists('.isAllowedToSendUsageStatistics')) {
+		return false;
+	};
+
+	if (!file_exists('.lastUsageSentAt')) {
+		file_put_contents('.lastUsageSentAt', date('Y-m-d H'));
+		return true;
+	} else {
+		$lastUsageSentAt = file_get_contents('.lastUsageSentAt');
+		if ($lastUsageSentAt !== date('Y-m-d H')) {
+			file_put_contents('.lastUsageSentAt', date('Y-m-d H'));
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
 function collectUsageData()
