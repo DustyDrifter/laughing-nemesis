@@ -27,7 +27,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 }
 
 function shoutcastcheck($host, $port2, $wait_sec) {
-	$fp = @fsockopen($host, $port2, &$errstr, &$errno, $wait_sec);
+	$fp = @fsockopen($host, $port2, $errstr, $errno, $wait_sec);
 	if ($fp) {
 		fputs($fp, "GET / HTTP/1.0\r\nUser-Agent:AmIoffOrOn\r\n\r\n");
 		$ret = fgets($fp, 255);

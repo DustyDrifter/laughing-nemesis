@@ -27,7 +27,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
     die ("You can't access this file directly...");
 }
 
-define('entries_per_page',100);
+defined('entries_per_page') || define('entries_per_page',100);
 if (!isset($_GET['filecount']) or !is_numeric($_GET['filecount'])) $offset = 1;
 else $offset = $_GET['filecount'];
 if ($offset == 1) {
@@ -60,6 +60,10 @@ if (!isset($dirlisting[$listing_start]))
 			<tbody>
 				<?php
 				for($i=$listing_start;$i<=$listing_end;$i++) {
+					if (!isset($dirlisting[$i])) {
+						continue;
+					}
+
 					if (($dirlisting[$i]!=".") and ($dirlisting[$i]!="..") and ($dirlisting[$i]!="")) {
 						echo "<tr>
 							<td>$dirlisting[$i]</td>
@@ -71,7 +75,7 @@ if (!isset($dirlisting[$listing_start]))
 				?>
 			</tbody>
 		</table>
-		<?php if (!isset($_GET['playlist']) && ($_GET['indiv'] == "1")) { ?>
+		<?php if (!isset($_GET['playlist']) && (isset($_GET['indiv']) && $_GET['indiv'] == "1")) { ?>
 		<br />
 		<h2><?php echo $messages["401"];?></h2>
 		<form action="content.php?include=playlist&portbase=<?php echo $port;?>&indiv=1&listname=<?php echo $_GET['listname']; ?><?php if ($_GET['listname'] == "bmV3IHBsYXlsaXN0LmxzdA==") { echo "&new=1"; }?>" method=post name=treeform onSubmit=setValue()>
@@ -88,7 +92,7 @@ if (!isset($dirlisting[$listing_start]))
                     <div id="playlist_files"></div>
                 </div>
                 <div id="playlist_right">
-                    <h4>Playliste: <b>Test Playliste</b></h4>
+                    <h4>Playliste: <b><?php echo base64_decode($_GET['listname']); ?></b></h4>
                     <div id="playlist_available"></div>
                 </div>
             </div>

@@ -89,6 +89,10 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 				<tbody>
 					<?php
 					for($i=$listing_start;$i<=$listing_end;$i++) {
+						if (!isset($dirlisting[$i])) {
+							continue;
+						}
+
 						if (($dirlisting[$i]!=".") and ($dirlisting[$i]!="..") and ($dirlisting[$i]!="")) {
 							echo "<tr>
 								<td>$dirlisting[$i]</td>

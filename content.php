@@ -239,6 +239,10 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
                 die();
 			echo '<tree id="0">';
             for ($i = $listing_start; $i <= $listing_end; $i++) {
+				if (!isset($dirlisting[$i])) {
+					continue;
+				}
+
                 if (($dirlisting[$i] != ".") && ($dirlisting[$i] != "..") && ($dirlisting[$i] != "")) {
 					$itemId = sprintf('%s/pages/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
 					$itemText = str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]);
@@ -439,7 +443,7 @@ if ($include_php == 'playlist') {
                 var n = 0;
                 arvArray = new Array();
                 arvArray = getChilds(this.tree2.htmlNode, arvArray, "<?php
-    echo htmlspecialchars($soundfiles) . "/";
+    echo "/";
 ?>")
                 var arv = arvArray.toString();
                 document.treeform.arv.value = escape(arv);
