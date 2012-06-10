@@ -23,7 +23,9 @@
 
  */
 
+require_once 'functions.php';
 include "./pages/messages/german.php";
+
 if (isset($_POST['sql_dns'])) {
     if(!$connection = mysql_connect($_POST['sql_dns'], $_POST['sql_user'], $_POST['sql_pass'])) {
         $errors[] = "<h2>".$messages["i1"]."</h2>";
