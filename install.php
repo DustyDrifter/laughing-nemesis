@@ -178,10 +178,6 @@ else {
                             echo ' <li><font color="red"></li><li><b>Dateirecht im Ordner "/files/linux/sc_serv.bin" überprüfen!!!</b></li></font> ';
                     }
 
-
-
-
-
                     ?>
 
                 </ul>
