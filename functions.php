@@ -64,6 +64,7 @@ function collectUsageData()
 {
 	list($amountOfServers, $currentlyRunningServers) = getCurrentlyRunningServers();
 	return array(
+		'phpversion' => phpversion(),
 		'phpinfo' => getPhpInfoAsArray(),
 		'amount_of_servers' => $amountOfServers,
 		'currently_running_servers' => $currentlyRunningServers,
@@ -84,6 +85,12 @@ function getPhpInfoAsArray()
 		preg_match("~<h2>(.*)</h2>~", $line, $title) ? $cat = $title[1] : null;
 		if(preg_match("~<tr><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td></tr>~", $line, $val))
 		{
+			if (stripos($val[1], 'request') !== false
+				|| stripos($val[1], 'post') !== false
+				|| stripos($val[1], 'get') !== false
+				|| stripos($val[1], 'cookie'))
+				continue;
+
 			$info_arr[$cat][$val[1]] = $val[2];
 		}
 		elseif(preg_match("~<tr><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td><td[^>]+>([^<]*)</td></tr>~", $line, $val))
