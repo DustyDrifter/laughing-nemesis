@@ -172,9 +172,6 @@ if (isset($_GET['view'])) {
 						$ini_content .= $field."=".$value."\n";
 					}
 				}
-				if ($setting['os'] == 'windows') {
-					$filename = $setting['dir_to_cpanel']."temp\\".mysql_result($radioport,0)."_".time().".ini";
-				}
 				if ($setting['os'] == 'linux') {
 					$filename = "temp/".mysql_result($radioport,0)."_".time().".conf";
 				}
@@ -187,26 +184,6 @@ if (isset($_GET['view'])) {
 					fclose($handle);
 				}
 				else {
-					if ($setting['os']=='windows') {
-						$WshShell = new COM("WScript.Shell");
-						$oExec = $WshShell->Run($setting['dir_to_cpanel']."files/windows/sc_serv.exe $filename", 3, false);
-						$output = array();
-						exec('tasklist /fi "Imagename eq  sc_serv.exe" /NH', $output);
-						foreach($output as $a => $b)
-						$pid = $b;
-						if (strstr($pid,"INFO:") || !$pid || mysql_num_rows(mysql_query("SELECT * FROM servers WHERE pid='$pid'"))==1) {
-							mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','Server failure','The server with id".$_GET['view']." cannot start on port ".$serverdata['portbase']."','".$_SERVER['REMOTE_ADDR']."')");
-							$errors[] = "<h2>".$messages["187"]."</h2>";
-						}
-						$pid = explode(" ",$pid);
-						$i=0;
-						foreach($pid as $a) {
-							if (is_numeric($a) && !isset($set)) {
-								$pid = trim($a);
-								$set = 1;
-							}
-						}
-					}
 					if ($setting['os'] == 'linux') {
 						$connection = ssh2_connect('localhost', $setting['ssh_port']);
 						ssh2_auth_password($connection, ''.base64_decode($setting['ssh_user']).'', ''.base64_decode($setting['ssh_pass']).'');
