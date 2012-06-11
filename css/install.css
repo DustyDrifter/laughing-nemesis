@@ -45,6 +45,14 @@ a img {
 	margin: 0;
 }
 
+.success b {
+    color: green;
+}
+
+.failure b {
+    color: red;
+}
+
 h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
 
 h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }

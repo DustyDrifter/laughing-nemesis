@@ -58,8 +58,8 @@ $messages["i16"]	=		'MySql not found!';
 $messages["i17"]	=		'MySql Ok';
 $messages["i18"]	=		'PHP safe mode on!';
 $messages["i19"]	=		'PHP safe mode off';
-$messages["i20"]	=		'max_upload_size to low!';
-$messages["i21"]	=		'max_upload_size OK';
+$messages["i20"]	=		'upload_max_filesize to low!';
+$messages["i21"]	=		'upload_max_filesize OK';
 $messages["i22"]	=		'Datei database.php OK';
 $messages["i23"]	=		'Datei database.php has not the required permissions!';
 $messages["i24"]	=		'Directory permissions OK';
@@ -115,6 +115,10 @@ $messages["i66"]	=		'';// SSH USERNAME
 $messages["i666"]	=		'';// SSH USERNAME
 $messages['install_allow_usage_statistics_label'] = 'Send usage statistics';
 $messages['install_allow_usage_statistics_description'] = 'It would be nice, if you provide us some usage information, so that we can improve StreamersAdminPanel.';
+$messages['install_sc_serv_rights_checked'] = 'File permissions for sc_serv.bin OK';
+$messages['install_sc_serv_rights_failed'] = 'Check file permissions for files/linux/sc_serv.bin!';
+$messages['install_sc_trans_rights_checked'] = 'File permissions for sc_trans.bin OK';
+$messages['install_sc_trans_rights_failed'] = 'Check file permissions for file/linux/sc_trans.bin!';
 
 //
 //

@@ -20,11 +20,16 @@
  * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
  * @link       http://www.streamerspanel.com
-
  */
+
+if (version_compare(phpversion(), '5.3.0') < 0) {
+	echo 'needs at least php 5.3';
+	exit;
+}
 
 require_once 'functions.php';
 include "./pages/messages/german.php";
+require_once 'install.requirements.php';
 
 if (isset($_POST['sql_dns'])) {
     if(!$connection = mysql_connect($_POST['sql_dns'], $_POST['sql_user'], $_POST['sql_pass'])) {
@@ -123,63 +128,21 @@ else {
                 <ul class="submenu">
                     <li><b><?php echo $messages["i172"];?></b></li>
 
-                    <?php
-
-
-                    echo "<li>".$messages["i13"]."</li>";
-                    if (!extension_loaded('ssh2')) {
-                        echo '<li><font color="red"></li><li><b>'.$messages["i14"].'</b></li></font> ';
-                    }else{
-                        echo '<li><font color="green"><b>'.$messages["i15"].'</b></font> </li>';
-                    }
-                    if (!extension_loaded('mysql')) {
-                        echo '<li><font color="red"></li><li><b>'.$messages["i16"].'</b></li></font> ';
-                    }else{
-                        echo '<li><font color="green"><b>'.$messages["i17"].'</b></font> </li>';
-                    }
-                    if ( ini_get('safe_mode') ) {
-                        echo '<li><font color="red"></li><li><b>'.$messages["i18"].'</b></li></font> ';
-                    } else {
-                        echo '<li><font color="green"><b>'.$messages["i19"].'</b></font> </li>';
-                    }
-                    if ( ini_get('max_upload_size') >= "20" ) {
-                        echo '<li><font color="red"></li><li><b>'.$messages["i20"].'</b></li></font> ';
-                    } else {
-                        echo '<li><font color="green"><b>'.$messages["i21"].'</b></font> </li>';
-                    }
-                    if (is_writable ('database.php') && is_readable('database.php')) {
-                        echo '<li><font color="green"></li><li><b>'.$messages["i22"].'</b></li></font> ';
-                    } else {
-                        echo '<li><font color="red"><b>'.$messages["i23"].'</b></font> </li>';
-                    }
-
-                    $pages = substr(decoct( fileperms('./pages') ), 2);
-                    $temp = substr(decoct( fileperms('./temp') ), 2);
-                    if ( $pages == "777" && $temp == "777" ){
-                        echo '<li><font color="green"></li><li><b>'.$messages["i24"].'</b></li></font> ';
-                    } else {
-                        if ($pages == "777"){
-                            echo ' <li><font color="green"></li><li><b>'.$messages["i25"].'</b></li></font> ';
-                        }else{
-                            echo '<li><font color="red"><b>'.$messages["i27"].' '.$pages.'</b></font> </li>';
-                        }
-                        if ($temp == "777"){
-                            echo '<li><font color="green"></li><li><b>'.$messages["i26"].'</b></li></font> ';
-                        }else{
-                            echo '<li><font color="red"><b>'.$messages["i28"].' '.$temp.'</b></font> </li>';
-                        }
-                    }
-
-                    $server_sc =  substr(sprintf('%o', fileperms('files/linux/sc_trans.bin')), -4);
-                    $trans_sc  = substr(sprintf('%o', fileperms('files/linux/sc_serv.bin')), -4);
-                    if ( $server_sc == "777" && $trans_sc == "777" ){
-                        echo '<li><font color="green"></li><li><b>Dateirechte sc_serv.bin / sc_trans.bin OK!</b></li></font> ';
-                    } else {
-                            echo ' <li><font color="red"></li><li><b>Dateirecht im Ordner "/files/linux/sc_serv.bin" überprüfen!!!</b></li></font> ';
-                    }
-
-                    ?>
-
+					<?php foreach ($requirements as $requirement): ?>
+						<?php if (call_user_func($requirement['function']) === true): ?>
+							<li class="success">
+								<b>
+									<?php echo $messages[$requirement['success_message']] ?>
+								</b>
+							</li>
+						<?php else: ?>
+							<li class="failure">
+								<b>
+									<?php echo $messages[$requirement['failure_message']] ?>
+								</b>
+							</li>
+						<?php endif ?>
+					<?php endforeach ?>
                 </ul>
             </div>
             <div class="navhead">

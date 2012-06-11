@@ -59,8 +59,8 @@ $messages["i16"]	=		'MySql nicht gefunden!';
 $messages["i17"]	=		'MySql Ok';
 $messages["i18"]	=		'PHP safe mode on!';
 $messages["i19"]	=		'PHP safe mode off';
-$messages["i20"]	=		'max_upload_size zu gering!';
-$messages["i21"]	=		'max_upload_size OK';
+$messages["i20"]	=		'upload_max_filesize zu gering!';
+$messages["i21"]	=		'upload_max_filesize OK';
 $messages["i22"]	=		'Datei database.php OK';
 $messages["i23"]	=		'Datei database.php besitzt nicht die erforderlichen Rechte!';
 $messages["i24"]	=		'Ordner Zugriffsrecht OK';
@@ -116,6 +116,12 @@ $messages["i66"]	=		'';// SSH USERNAME
 $messages["i666"]	=		'';// SSH USERNAME
 $messages['install_allow_usage_statistics_label'] = 'Nutzungsstatistiken senden';
 $messages['install_allow_usage_statistics_description'] = 'Sie helfen uns sehr, wenn sie uns diese Informationen zur Verfuegung stellen.';
+$messages['install_sc_serv_rights_checked'] = 'Dateirechte sc_serv.bin OK';
+$messages['install_sc_serv_rights_failed'] = 'Dateirechte pruefen files/linux/sc_serv.bin!';
+$messages['install_sc_trans_rights_checked'] = 'Dateirechte sc_trans.bin OK';
+$messages['install_sc_trans_rights_failed'] = 'Dateirechte pruefen file/linux/sc_trans.bin!';
+$messages['install_post_max_size_checked'] = 'post_max_size OK';
+$messages['install_post_max_size_failed'] = 'post_max_size zu gering > 20M';
 
 //
 //
