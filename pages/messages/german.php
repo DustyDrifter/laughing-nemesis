@@ -326,6 +326,7 @@ $messages["184"]	=		"Der Server wurde erfolgreich auf der Datenbank und diesem P
 $messages["185"]	=		"Der gew&uuml;nschte Server konnte nicht aus diesem System gel&ouml;scht werden";
 $messages["186"]	=		"Die angegebene ID stimmt mit keinem Server auf diesem Server &uuml;berein";
 $messages["187"]	=		"Das Panel kann den Server nicht starten, bitte den Admin kontaktieren";
+$messages["adb1"]   =       "Bitte Liste wählen";
 //
 //
 //	./pages/admserver_bottom.php
