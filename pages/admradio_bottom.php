@@ -201,13 +201,11 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                     <select class="formselect_loca" name="bitrate">
                         <option value="320000"<?php if ($updateget_var_t_bitrate=='320000') echo " selected=\"selected\"";?>>320 kbps</option>
                         <option value="256000"<?php if ($updateget_var_t_bitrate=='256000') echo " selected=\"selected\"";?>>256 kbps</option>
-                        <option value="244000"<?php if ($updateget_var_t_bitrate=='244000') echo " selected=\"selected\"";?>>244 kbps</option>
                         <option value="192000"<?php if ($updateget_var_t_bitrate=='192000') echo " selected=\"selected\"";?>>192 kbps</option>
                         <option value="160000"<?php if ($updateget_var_t_bitrate=='160000') echo " selected=\"selected\"";?>>160 kbps</option>
                         <option value="128000"<?php if ($updateget_var_t_bitrate=='128000') echo " selected=\"selected\"";?>>128 kbps</option>
-                        <option value="122000"<?php if ($updateget_var_t_bitrate=='122000') echo " selected=\"selected\"";?>>122 kbps</option>
                         <option value="96000"<?php if ($updateget_var_t_bitrate=='96000') echo " selected=\"selected\"";?>>96 kbps</option>
-                        <option value="80000"<?php if ($updateget_var_t_bitrate=='80000') echo " selected=\"selected\"";?>>80 kbps</option>
+                        <option value="64000"<?php if ($updateget_var_t_bitrate=='80000') echo " selected=\"selected\"";?>>64 kbps</option>
                     </select>
 					<span class="field_desc"><?php echo $messages["111"];?></span>
                 </div>
