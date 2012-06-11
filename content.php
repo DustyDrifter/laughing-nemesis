@@ -446,7 +446,7 @@ if ($include_php == 'playlist') {
     echo "/";
 ?>")
                 var arv = arvArray.toString();
-                document.treeform.arv.value = escape(arv);
+                document.treeform.arv.value = arv;
             }
             function getChilds(Childs, arr, label) {
                 var i = 0;
