@@ -331,6 +331,8 @@ $messages["184"]	=		"The server was successfully removed from the panel and data
 $messages["185"]	=		"The requested server could not be deleted from the system";
 $messages["186"]	=		"The specified ID does not match any server on this server";
 $messages["187"]	=		"The panel can not start the server, please contact the admin";
+$messages["adb1"]   =       "Select Playlist";
+
 //
 //
 //	./pages/admserver_bottom.php
