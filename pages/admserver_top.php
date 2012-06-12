@@ -44,7 +44,7 @@ if ($user_level == "Super Administrator") {
 
 
         if ($_POST['ssh_pass'] != '***'){
-            if (mysql_query("UPDATE settings SET host_add='".$_POST['host_add']."',dir_to_cpanel='".addslashes($_POST['dir_to_cpanel'])."',title='".$_POST['title']."', slogan='".$_POST['slogan']."', scs_config='".$_POST['scs_config']."', adj_config='".$_POST['adj_config']."', php_mp3='".$_POST['php_mp3']."', php_exe='".$_POST['php_exe']."', display_limit='".$_POST['display_limit']."', update_check='".$_POST['update_check']."', ssh_user='".base64_encode($_POST['ssh_user'])."', language='".$_POST['language']."', ssh_pass='".base64_encode($_POST['ssh_pass'])."', ssh_port='".$_POST['ssh_port']."', login_captcha='".$_POST['login_captcha']."'")) {
+            if (mysql_query("UPDATE settings SET host_add='".$_POST['host_add']."',dir_to_cpanel='".addslashes($_POST['dir_to_cpanel'])."',title='".$_POST['title']."', slogan='".$_POST['slogan']."', scs_config='".$_POST['scs_config']."', adj_config='".$_POST['adj_config']."', php_mp3='".$_POST['php_mp3']."', php_exe='".$_POST['php_exe']."', display_limit='".$_POST['display_limit']."', update_check='".$_POST['update_check']."', ssh_user='".base64_encode($_POST['ssh_user'])."', language='".$_POST['language']."', ssh_pass='".base64_encode($_POST['ssh_pass'])."', ssh_port='".$_POST['ssh_port']."', login_captcha='".$_POST['login_captcha']."', shellset='".$_POST['rootsucess']."'")) {
 
                 // Anlegen einer htaccess Datein für Plesk User
                 //$htaccess_cont = @fopen(".htaccess","w+");
@@ -58,7 +58,7 @@ if ($user_level == "Super Administrator") {
                 $errors[] = "<h2>".$messages["227"]."</h2>";
             }
         }else{
-            if (mysql_query("UPDATE settings SET host_add='".$_POST['host_add']."',dir_to_cpanel='".addslashes($_POST['dir_to_cpanel'])."',title='".$_POST['title']."', slogan='".$_POST['slogan']."', scs_config='".$_POST['scs_config']."', adj_config='".$_POST['adj_config']."', php_mp3='".$_POST['php_mp3']."', php_exe='".$_POST['php_exe']."', display_limit='".$_POST['display_limit']."', update_check='".$_POST['update_check']."', ssh_user='".base64_encode($_POST['ssh_user'])."', language='".$_POST['language']."', ssh_port='".$_POST['ssh_port']."', login_captcha='".$_POST['login_captcha']."'")) {
+            if (mysql_query("UPDATE settings SET host_add='".$_POST['host_add']."',dir_to_cpanel='".addslashes($_POST['dir_to_cpanel'])."',title='".$_POST['title']."', slogan='".$_POST['slogan']."', scs_config='".$_POST['scs_config']."', adj_config='".$_POST['adj_config']."', php_mp3='".$_POST['php_mp3']."', php_exe='".$_POST['php_exe']."', display_limit='".$_POST['display_limit']."', update_check='".$_POST['update_check']."', ssh_user='".base64_encode($_POST['ssh_user'])."', language='".$_POST['language']."', ssh_port='".$_POST['ssh_port']."', login_captcha='".$_POST['login_captcha']."', shellset='".$_POST['rootsucess']."'")) {
 
                 // Anlegen einer htaccess Datein für Plesk User
                 //$htaccess_cont = @fopen(".htaccess","w+");

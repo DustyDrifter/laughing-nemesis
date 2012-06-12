@@ -21,8 +21,21 @@
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
  * @version    3.2.1
  * @link       http://www.streamerspanel.com
-
  */
+
+
+$messages["admsrv_1"] = "Server Newssystem";
+$messages["admsrv_2"] = "Newssystem Ein";
+$messages["admsrv_3"] = "Newssystem Aus";
+$messages["admsrv_4"] = "Server Newssystem für Serverstatus";
+
+$messages["admsrv_5"] = "Befehle ausführen als";
+$messages["admsrv_6"] = "ssh";
+$messages["admsrv_7"] = "shell_exec";
+$messages["admsrv_8"] = "ssh2 oder shell_exec verwenden";
+
+
+
 
 
 //
@@ -57,7 +70,7 @@ $messages["i14"]	=		'SSH2 nicht gefunden!';
 $messages["i15"]	=		'SSH2 OK';
 $messages["i16"]	=		'MySql nicht gefunden!';
 $messages["i17"]	=		'MySql Ok';
-$messages["i18"]	=		'PHP safe mode on!';
+$messages["i18"]	=		'PHP safe mode off!';
 $messages["i19"]	=		'PHP safe mode off';
 $messages["i20"]	=		'upload_max_filesize zu gering!';
 $messages["i21"]	=		'upload_max_filesize OK';
@@ -114,6 +127,7 @@ $messages["i71"]	=		'Sprache der Benutzeroberfläche';
 $messages["i172"]	=		'Überprüfung der Vorraussetzung zur Installation';
 $messages["i66"]	=		'';// SSH USERNAME
 $messages["i666"]	=		'';// SSH USERNAME
+
 $messages['install_allow_usage_statistics_label'] = 'Nutzungsstatistiken senden';
 $messages['install_allow_usage_statistics_description'] = 'Sie helfen uns sehr, wenn sie uns diese Informationen zur Verfuegung stellen.';
 $messages['install_sc_serv_rights_checked'] = 'Dateirechte sc_serv.bin OK';
@@ -122,6 +136,13 @@ $messages['install_sc_trans_rights_checked'] = 'Dateirechte sc_trans.bin OK';
 $messages['install_sc_trans_rights_failed'] = 'Dateirechte pruefen file/linux/sc_trans.bin!';
 $messages['install_post_max_size_checked'] = 'post_max_size OK';
 $messages['install_post_max_size_failed'] = 'post_max_size zu gering > 20M';
+$messages['issh1'] = "SSH methode wählen";
+$messages['issh2'] = "Bitte wählen Sie";
+$messages['issh3'] = "ssh2";
+$messages['issh4'] = "shellexec";
+$messages['issh5'] = "SSH Zugang wählen";
+
+
 
 //
 //

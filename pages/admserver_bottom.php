@@ -151,7 +151,29 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						<input class="mediumfield" name="display_limit" type="text" value="<?php echo $setting['display_limit'];?>" />
 						<span class="field_desc"><?php echo $messages["224"];?></span>
 					</div>
-					<input class="submit" type="submit" value="<?php echo $messages["225"];?>" />
+
+
+                  <!-- Comming soon
+                    <div class="input_field">
+                        <label for="a"><?php echo$messages["admsrv_1"];?></label>
+                        <select class="formselect_loca" name="servernews">
+                            <option value="news_on""><?php echo$messages["admsrv_2"];?></option>
+                            <option value="news_off"><?php echo$messages["admsrv_3"];?></option>
+                        </select>
+                        <span class="field_desc"><?php echo$messages["admsrv_4"];?></span>
+                    </div>
+                      --->
+                    <div class="input_field">
+                        <label for="a"><?php echo$messages["admsrv_5"];?></label>
+                        <select class="formselect_loca" name="rootsucess">
+                            <option value="ssh"<?php if ($setting['shellset']=='ssh') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_6"];?></option>
+                            <option value="shellexec"<?php if ($setting['shellset']=='shellexec') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_7"];?></option>
+                        </select>
+                        <span class="field_desc"><?php echo$messages["admsrv_8"];?></span>
+                    </div>
+                    <input class="submit" type="submit" value="<?php echo $messages["225"];?>" />
+
+
 				</fieldset>
 			</form>
 		</div>
