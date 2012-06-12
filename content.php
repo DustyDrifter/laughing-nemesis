@@ -19,7 +19,6 @@
  * @author     David Schomburg <dave@streamerspanel.com>
  * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
  * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
-
  * @link       http://www.streamerspanel.com
 
  */
@@ -48,13 +47,13 @@ DB::$dbName = $database;
 sendUsageStatisticsIfAllowed();
 
 session_start();
-$captcha_sql      = mysql_query("SELECT language FROM settings WHERE id='0'");
+$captcha_sql = mysql_query("SELECT language FROM settings WHERE id='0'");
 $language_setting = mysql_result($captcha_sql, 0);
 // Check if Language-file exists and include, else load English
 
 if (!file_exists('./pages/messages/' . $language_setting . '.php')) {
-    $errors[]         = "<h2>The language file could not be found, English is the default language!</h2>";
-    $language_setting = 'german';   // Language Change
+    $errors[] = "<h2>The language file could not be found, English is the default language!</h2>";
+    $language_setting = 'german'; // Language Change
 }
 require_once './pages/messages/' . $language_setting . '.php';
 // Get variable for include
@@ -94,16 +93,16 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
             }
         }
     }
-    $hash       = md5($loginun . $loginpw);
+    $hash = md5($loginun . $loginpw);
     $selectuser = mysql_query("SELECT * FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
     if (mysql_num_rows($selectuser) == 1) {
-        $_SESSION['username']      = $loginun;
+        $_SESSION['username'] = $loginun;
         $_SESSION['user_password'] = $loginpw;
-        $userdata                  = mysql_fetch_array($selectuser);
-        $loginun                   = $userdata['username'];
-        $user_level                = $userdata['user_level'];
-        $user_id                   = $userdata['id'];
-        $loggedin                  = TRUE;
+        $userdata = mysql_fetch_array($selectuser);
+        $loginun = $userdata['username'];
+        $user_level = $userdata['user_level'];
+        $user_id = $userdata['id'];
+        $loggedin = TRUE;
         if (isset($_POST['login_submit'])) {
             $correc[] = "<h2>" . $messages["15"] . "</h2>";
         }
@@ -125,7 +124,7 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
     $target_path = "pages/uploads/" . $_GET['upport'] . '/';
     $allowedExts = array();
     $maxFileSize = 0;
-    
+
     function ByteSize($bytes)
     {
         $size = $bytes / 1024;
@@ -143,29 +142,29 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
         }
         return $size;
     }
-    
+
     function getHeaders()
     {
         $headers = array();
         foreach ($_SERVER as $k => $v) {
             if (substr($k, 0, 5) == "HTTP_") {
-                $k           = str_replace('_', ' ', substr($k, 5));
-                $k           = str_replace(' ', '-', ucwords(strtolower($k)));
+                $k = str_replace('_', ' ', substr($k, 5));
+                $k = str_replace(' ', '-', ucwords(strtolower($k)));
                 $headers[$k] = $v;
             }
         }
         return $headers;
     }
-    
+
     $headers = getHeaders();
-    
+
     if ($headers['X-Requested-With'] == 'XMLHttpRequest') {
         $fileName = $headers['X-File-Name'];
         $fileSize = $headers['X-File-Size'];
-        $ext      = substr($fileName, strrpos($fileName, '.') + 1);
+        $ext = substr($fileName, strrpos($fileName, '.') + 1);
         if (in_array($ext, $allowedExts) or empty($allowedExts)) {
             if ($fileSize < $maxFileSize or empty($maxFileSize)) {
-                $input  = fopen("php://input", 'r');
+                $input = fopen("php://input", 'r');
                 $output = fopen($target_path . $fileName, 'a');
                 if ($output != false) {
                     while (!feof($input)) {
@@ -188,7 +187,7 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
         if ($_FILES['file']['name'] != '') {
             $fileName = $_FILES['file']['name'];
             $fileSize = $_FILES['file']['size'];
-            $ext      = substr($fileName, strrpos($fileName, '.') + 1);
+            $ext = substr($fileName, strrpos($fileName, '.') + 1);
             if (in_array($ext, $allowedExts) or empty($allowedExts)) {
                 if ($fileSize < $maxFileSize or empty($maxFileSize)) {
                     $target_path = $target_path . basename($_FILES['file']['name']);
@@ -205,23 +204,23 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
                 echo ('{"success":false, "details": "File type ' . $ext . ' not allowed."}');
         } else
             echo '{"success":false, "details": "No file received."}';
-        
-        
+
+
     }
     die();
 }
 
-if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
+if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
     if (isset($_GET['portbase'])) {
-        $port        = $_GET['portbase'];
+        $port = $_GET['portbase'];
         $selectowner = mysql_query("SELECT * FROM servers WHERE portbase='" . $port . "' AND owner='" . $loginun . "'");
         if (mysql_num_rows($selectowner) == 1) {
             header("Content-type:text/xml");
             echo '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>';
             $listing_start = 1;
-            $listing_end   = 10000;
+            $listing_end = 10000;
             $dirlisting = @scandir(dirname(__FILE__) . '/pages/uploads/' . $port) or die();
-            $dirlistingsearch  = array(
+            $dirlistingsearch = array(
                 '&',
                 '<',
                 '>',
@@ -237,16 +236,16 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
             );
             if (!isset($dirlisting[$listing_start]))
                 die();
-			echo '<tree id="0">';
+            echo '<tree id="0">';
             for ($i = $listing_start; $i <= $listing_end; $i++) {
-				if (!isset($dirlisting[$i])) {
-					continue;
-				}
+                if (!isset($dirlisting[$i])) {
+                    continue;
+                }
 
                 if (($dirlisting[$i] != ".") && ($dirlisting[$i] != "..") && ($dirlisting[$i] != "")) {
-					$itemId = sprintf('%s/pages/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
-					$itemText = str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]);
-					printf('<item id="%s" text="%s"/>', $itemId, $itemText);
+                    $itemId = sprintf('%s/pages/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
+                    $itemText = str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]);
+                    printf('<item id="%s" text="%s"/>', $itemId, $itemText);
                 }
             }
             echo '</tree>';
@@ -255,16 +254,16 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
     }
 } elseif ((isset($_GET['playlist']) && $_GET['playlist'] == "right") && (isset($_GET['listname']))) {
     if (isset($_GET['portbase'])) {
-        $port        = $_GET['portbase'];
+        $port = $_GET['portbase'];
         $selectowner = mysql_query("SELECT * FROM servers WHERE portbase='" . $port . "' AND owner='" . $loginun . "'");
         if (mysql_num_rows($selectowner) == 1) {
             header("Content-type:text/xml");
             print("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>");
             if (base64_decode($_GET['listname']) !== "new playlist.lst") {
-                $filehandle        = fopen("" . dirname(__FILE__) . "/temp/" . $port . "/playlist/" . base64_decode($_GET['listname']) . "", "r");
-                $contents          = fread($filehandle, filesize("" . dirname(__FILE__) . "/temp/" . $port . "/playlist/" . base64_decode($_GET['listname']) . ""));
-                $entrys            = explode("\n", $contents);
-                $dirlistingsearch  = array(
+                $filehandle = fopen("" . dirname(__FILE__) . "/temp/" . $port . "/playlist/" . base64_decode($_GET['listname']) . "", "r");
+                $contents = fread($filehandle, filesize("" . dirname(__FILE__) . "/temp/" . $port . "/playlist/" . base64_decode($_GET['listname']) . ""));
+                $entrys = explode("\n", $contents);
+                $dirlistingsearch = array(
                     '&',
                     '<',
                     '>',
@@ -286,9 +285,9 @@ if (isset($_GET['playlist']) && $_GET['playlist']  == "left") {
                     $inta++;
                     $entry1 = str_replace(dirname(__FILE__) . "/pages/uploads/" . $port . "/", "", $entry);
                     if ($entry1 != "") {
-						$magix = str_replace($dirlistingsearch, $dirlistingreplace, $entry1);
-						printf('<item child="0" id="%s" text="%s"></item>', $magix, $magix);
-					}
+                        $magix = str_replace($dirlistingsearch, $dirlistingreplace, $entry1);
+                        printf('<item child="0" id="%s" text="%s"></item>', $magix, $magix);
+                    }
                 }
                 fclose($filehandle);
             }
@@ -322,23 +321,23 @@ if (file_exists("./pages/" . $include_php . "_bottom.php")) {
     $include_php = $include_php;
 } else {
     if (file_exists("./pages/main_bottom.php")) {
-        $errors[]    = $messages["g3"];
+        $errors[] = $messages["g3"];
         $include_php = "main";
     } else {
-        $errors[]    = $messages["g3"];
+        $errors[] = $messages["g3"];
         $include_php = "_no";
     }
 }
 if (($include_php == "admserver") || ($include_php == "admradio") || ($include_php == "admuser")) {
     if ($user_level != "Super Administrator") {
         $include_php = "main";
-        $errors[]    = "<h2>" . $messages["17"] . "</h2>";
+        $errors[] = "<h2>" . $messages["17"] . "</h2>";
     }
 }
 // check messages on headlines
 $newsq = mysql_query("SELECT * FROM headlines order by id DESC LIMIT 20") or die($messages["g4"]);
 $newsq_quant = mysql_num_rows($newsq);
-if ($user_level == "Super Administrator" && (isset($_GET['action']) && $_GET['action']  == "remove" && isset($_GET['delmessid']))) {
+if ($user_level == "Super Administrator" && (isset($_GET['action']) && $_GET['action'] == "remove" && isset($_GET['delmessid']))) {
     if (mysql_query(" DELETE FROM notices WHERE id='" . $_GET['delmessid'] . "' ")) {
         $correc[] = "<h2>" . $messages["18"] . "</h2>";
     } else {
@@ -361,13 +360,10 @@ foreach (mysql_fetch_array($settingsq) as $key => $pref) {
 $currentVersion = SAP_VERSION;
 
 
-
-
-
 if ($setting['update_check'] == 1 && $include_php == 'main') {
     require_once './pages/update.php';
 }
-if (isset($_GET['request']) && $_GET['request']  == 'html') {
+if (isset($_GET['request']) && $_GET['request'] == 'html') {
     require_once './pages/' . $include_php . '_bottom.php';
     die();
 }
@@ -376,245 +372,251 @@ if (isset($_GET['request']) && $_GET['request']  == 'html') {
 <html class="no-js">
 <head>
     <title><?php
-echo htmlspecialchars($setting['title']) . ' - ' . htmlspecialchars($setting['slogan']);
-?></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="./css/framework.css" />
+        echo htmlspecialchars($setting['title']) . ' - ' . htmlspecialchars($setting['slogan']);
+        ?></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="./css/framework.css"/>
     <script src="./js/jquery-1.5.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/modernizr.2.06.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/adminpanel.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/jquery.nyroModal-1.6.2.pack.js" type="text/javascript" charset="utf-8"></script>
     <?php
-if ($include_php == "main") {
-?>
+    if ($include_php == "main") {
+        ?>
         <script type="text/javascript">
-            $(function() {
+            $(function () {
                 function preloadImg(image) {
                     var img = new Image();
                     img.src = image;
                 }
+
                 preloadImg('images/modalwin/ajaxLoader.gif');
             });
         </script>
         <?php
-}
-?>
+    }
+    ?>
     <?php
-if ($include_php == "upload") {
-?>
-        <link rel="stylesheet" type="text/css" href="./css/uploadbox.css" />
+    if ($include_php == "upload") {
+        ?>
+        <link rel="stylesheet" type="text/css" href="./css/uploadbox.css"/>
         <script type="text/javascript" src="./js/uploadrr.js"></script>
         <script script type="text/javascript">
             var langArray = new Array('Durchsuchen', 'Um Multimedia-Dateien hochzuladen, klicken Sie bitte auf "Durchsuchen" ', ', oder schieben Sie die Multimedia-Dateien einfach in diese Box.', 'Erlaubte Dateitypen:', 'Upload', ' wird nicht akzeptiert.\r\nErlaubte Dateitypen: ', 'Löschen',
                 ' gelöscht.', ' Datei', ' Dateien', 'Maximale Dateigröße: ', 'Keine Dateien ausgewählt.', 'Aktuelle Datei: ', 'Zusammenfassung: ', ' Datei(en) ', 'Ihre Datei(en) wurden erfolgreich hochgeladen.', 'Server meldete eine ungültigen JSON Antwort.', 'Die gesendete Datei und die Datei die empfangen wurde, stimmen nicht überein.', 'Upload fehlgeschlagen.', 'Uploade: ', ' hinzugefügt.', 'Aktuelle Datei: ');
-            $(document).ready(function() {
+            $(document).ready(function () {
                 $('#uploadbox').Uploadrr({
                     allowedExtensions:['.mp3'],
-                    simpleFile: false,
-                    maxFileSize: -1,
-                    'onComplete': function () {setTimeout("location.reload(true);",3000);},
-                    progressGIF: 'images/pr.gif',
-                    target: 'content.php?include=upload&upport=<?php
-    echo htmlspecialchars($_GET['portbase']);
-?>'
+                    simpleFile:false,
+                    maxFileSize:-1,
+                    'onComplete':function () {
+                        setTimeout("location.reload(true);", 3000);
+                    },
+                    progressGIF:'images/pr.gif',
+                    target:'content.php?include=upload&upport=<?php
+                        echo htmlspecialchars($_GET['portbase']);
+                        ?>'
                 });
             });
         </script>
         <?php
-}
-?>
+    }
+    ?>
     <?php
-if ($include_php == 'playlist') {
-?>
+    if ($include_php == 'playlist') {
+        ?>
         <script language="javascript">
 
-            function clearPlaylist()
-            {
-                var itemId=this.tree2.rootId;
-                var temp=this.tree2._globalIdStorageFind(itemId);
+            function clearPlaylist() {
+                var itemId = this.tree2.rootId;
+                var temp = this.tree2._globalIdStorageFind(itemId);
                 this.tree2.deleteChildItems(itemId);
             }
-            function setValue()
-            {
+            function setValue() {
                 var i = 0;
                 var j = 0;
                 var n = 0;
                 arvArray = new Array();
                 arvArray = getChilds(this.tree2.htmlNode, arvArray, "<?php
-    echo "/";
-?>")
+                    echo "/";
+                    ?>")
                 var arv = arvArray.toString();
                 document.treeform.arv.value = arv;
             }
             function getChilds(Childs, arr, label) {
                 var i = 0;
-                for(i = 0; i < Childs.childsCount; i++) {
-                    if(Childs.childNodes[i].childsCount == 0) {
-                        if(Childs.childNodes[i].label[0] != "/") {
-                            arr.push(label+Childs.childNodes[i].label);
+                for (i = 0; i < Childs.childsCount; i++) {
+                    if (Childs.childNodes[i].childsCount == 0) {
+                        if (Childs.childNodes[i].label[0] != "/") {
+                            arr.push(label + Childs.childNodes[i].label);
                         }
                         else arr.push(Childs.childNodes[i].label);
                     }
                     else {
-                        arr = getChilds(Childs.childNodes[i], arr, label+Childs.childNodes[i].label+"/")
+                        arr = getChilds(Childs.childNodes[i], arr, label + Childs.childNodes[i].label + "/")
                     }
                 }
                 return arr;
             }
         </script>
         <?php
-}
-?>
+    }
+    ?>
 
 </head>
 <body>
 <div id="mainContainer">
     <header>
         <div class="header logo">
-            <a href="loadContent-main" title=""><img src="./images/logo.png" alt="" /></a>
+            <a href="loadContent-main" title=""><img src="./images/logo.png" alt=""/></a>
         </div>
         <span class="header profileStatus"><?php
-echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($loginun) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
-?>
+            echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($loginun) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
+            ?>
     </header>
     <div class="clear"></div>
     <div id="menuContainer">
         <div id="menuFrame">
             <div id="menuHead">
                 <span id="headContent"><?php
-echo htmlspecialchars($messages["22"]);
-?> <b id="menuHead.username"><?PHP
-echo htmlspecialchars($loginun);
-?></b></span>
+                    echo htmlspecialchars($messages["22"]);
+                    ?> <b id="menuHead.username"><?PHP
+                        echo htmlspecialchars($loginun);
+                        ?></b></span>
                 <?php
-if ($user_level == 'Super Administrator') {
-    $noticesq = mysql_query("SELECT * FROM notices");
-    if (mysql_num_rows($noticesq) == 0) {
-        echo '<span id="headContent_under">' . htmlspecialchars($messages["23"]) . '</span>';
-    } else {
-        $noticesqquant = mysql_num_rows($noticesq);
-        if ($noticesqquant == 1) {
-            echo '<span id="headContent_under">' . htmlspecialchars($messages["24"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["25"]) . "</span>";
-        } else {
-            echo '<span id="headContent_under">' . htmlspecialchars($messages["26"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["27"]) . " </span>";
-        }
-    }
-} else {
-    echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["28"]) . '</span>';
-}
-?>
+                if ($user_level == 'Super Administrator') {
+                    $noticesq = mysql_query("SELECT * FROM notices");
+                    if (mysql_num_rows($noticesq) == 0) {
+                        echo '<span id="headContent_under">' . htmlspecialchars($messages["23"]) . '</span>';
+                    } else {
+                        $noticesqquant = mysql_num_rows($noticesq);
+                        if ($noticesqquant == 1) {
+                            echo '<span id="headContent_under">' . htmlspecialchars($messages["24"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["25"]) . "</span>";
+                        } else {
+                            echo '<span id="headContent_under">' . htmlspecialchars($messages["26"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["27"]) . " </span>";
+                        }
+                    }
+                } else {
+                    echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["28"]) . '</span>';
+                }
+                ?>
             </div>
             <div id="navHead">
                 <h4><?php
-echo htmlspecialchars($messages["29"]);
-?></h4>
+                    echo htmlspecialchars($messages["29"]);
+                    ?></h4>
                 <h5><?php
-echo htmlspecialchars($messages["30"]);
-?></h5>
+                    echo htmlspecialchars($messages["30"]);
+                    ?></h5>
             </div>
             <nav class="navFirst">
                 <ul class="navMenu">
                     <li><a href="loadContent-contact" title=""><?php
-echo htmlspecialchars($messages["31"]);
-?></a></li>
+                        echo htmlspecialchars($messages["31"]);
+                        ?></a></li>
                     <li><a href="loadContent-public" title=""><?php
-echo htmlspecialchars($messages["32"]);
-?></a></li>
+                        echo htmlspecialchars($messages["32"]);
+                        ?></a></li>
                     <li><a href="loadContent-account" title=""><?php
-echo htmlspecialchars($messages["33"]);
-?></a></li>
+                        echo htmlspecialchars($messages["33"]);
+                        ?></a></li>
                     <li><a href="loadContent-server" title=""><?php
-echo htmlspecialchars($messages["34"]);
-?></a></li>
+                        echo htmlspecialchars($messages["34"]);
+                        ?></a></li>
                 </ul>
             </nav>
             <?php
-if ($setting['os'] == 'linux') {
-?>
+            if ($setting['os'] == 'linux') {
+                ?>
                 <div id="navHeadSub">
                     <h4><?php
-    echo htmlspecialchars($messages["35"]);
-?></h4>
+                        echo htmlspecialchars($messages["35"]);
+                        ?></h4>
                     <h5><?php
-    echo htmlspecialchars($messages["36"]);
-?></h5>
+                        echo htmlspecialchars($messages["36"]);
+                        ?></h5>
                 </div>
                 <nav class="navBottom">
                     <ul class="navMenu">
                         <li><a href="loadContent-music" title=""><?php
-    echo htmlspecialchars($messages["37"]);
-?></a></li>
+                            echo htmlspecialchars($messages["37"]);
+                            ?></a></li>
                         <li><a href="loadContent-autodj" title=""><?php
-    echo htmlspecialchars($messages["38"]);
-?></a></li>
+                            echo htmlspecialchars($messages["38"]);
+                            ?></a></li>
                     </ul>
                 </nav>
                 <?php
-}
-?>
+            }
+            ?>
             <?php
-if ($user_level == 'Super Administrator') {
-?>
+            if ($user_level == 'Super Administrator') {
+                ?>
                 <div id="navHeadSub_2">
                     <h4><?php
-    echo htmlspecialchars($messages["39"]);
-?></h4>
+                        echo htmlspecialchars($messages["39"]);
+                        ?></h4>
                     <h5><?php
-    echo htmlspecialchars($messages["40"]);
-?></h5>
+                        echo htmlspecialchars($messages["40"]);
+                        ?></h5>
                 </div>
                 <nav class="navBottom">
                     <ul class="navMenu">
                         <li><a href="loadContent-admserver" title=""><?php
-    echo htmlspecialchars($messages["41"]);
-?></a></li>
+                            echo htmlspecialchars($messages["41"]);
+                            ?></a></li>
                         <li><a href="loadContent-admradio" title=""><?php
-    echo htmlspecialchars($messages["42"]);
-?></a></li>
+                            echo htmlspecialchars($messages["42"]);
+                            ?></a></li>
                         <li><a href="loadContent-admuser" title=""><?php
-    echo htmlspecialchars($messages["43"]);
-?></a></li>
+                            echo htmlspecialchars($messages["43"]);
+                            ?></a></li>
+
+                        <li><a href="loadContent-admnews" title=""><?php
+                            echo htmlspecialchars($messages["nws1"]);
+                            ?></a></li>
+
                     </ul>
                 </nav>
                 <?php
-}
-?>
+            }
+            ?>
             <div id="navHeadSub_3">
                 <h4><?php
-echo htmlspecialchars($messages["44"]);
-?></h4>
+                    echo htmlspecialchars($messages["44"]);
+                    ?></h4>
                 <h5><?php
-echo htmlspecialchars($messages["45"]);
-?></h5>
+                    echo htmlspecialchars($messages["45"]);
+                    ?></h5>
             </div>
             <div id="infoBox">
                 <table class="ip_table">
                     <tbody>
                     <tr>
                         <td class="ip_table"><?php
-echo $messages["46"];
-?></td>
+                            echo $messages["46"];
+                            ?></td>
                         <td class="ip_table_under"><?PHP
-echo ($_SERVER['REMOTE_ADDR']);
-?></td>
+                            echo ($_SERVER['REMOTE_ADDR']);
+                            ?></td>
                     </tr>
                     <tr>
                         <td class="ip_table"><?php
-echo $messages["47"];
-?></td>
+                            echo $messages["47"];
+                            ?></td>
                         <td class="ip_table_under"><?PHP
-echo ($_SERVER['SERVER_ADDR']);
-?></td>
+                            echo ($_SERVER['SERVER_ADDR']);
+                            ?></td>
                     </tr>
                     <tr>
                         <td class="ip_table"><?php
-echo $messages["48"];
-?></td>
+                            echo $messages["48"];
+                            ?></td>
                         <td class="ip_table_under"><?php
-echo $currentVersion;
-?></td>
+                            echo $currentVersion;
+                            ?></td>
                     </tr>
                     </tbody>
                 </table>
@@ -627,37 +629,43 @@ echo $currentVersion;
         <?PHP
 
 
-if (count($errors) > 0) {
-    echo array_reduce($errors, function($initial, $value) {
-        return $initial . sprintf('<div class="error">%s</div>', $value);
-    }, '');
-}
+        if (count($errors) > 0) {
+            echo array_reduce($errors, function($initial, $value)
+            {
+                return $initial . sprintf('<div class="error">%s</div>', $value);
+            }, '');
+        }
 
-if (count($notifi) > 0) {
-    echo array_reduce($notifi, function($initial, $value) {
-        return $initial . sprintf('<div class="notifi">%s</div>', $value);
-    }, '');
-}
+        if (count($notifi) > 0) {
+            echo array_reduce($notifi, function($initial, $value)
+            {
+                return $initial . sprintf('<div class="notifi">%s</div>', $value);
+            }, '');
+        }
 
-if (count($correc) > 0) {
-    echo array_reduce($correc, function($initial, $value) {
-        return $initial . sprintf('<div class="correct">%s</div>', $value);
-    }, '');
-}
+        if (count($correc) > 0) {
+            echo array_reduce($correc, function($initial, $value)
+            {
+                return $initial . sprintf('<div class="correct">%s</div>', $value);
+            }, '');
+        }
 
-echo '<section id="content">';
-echo '<div class="box">';
-require_once './pages/' . $include_php . '_bottom.php';
-echo '</div>';
-echo '</section>';
-?>
+        echo '<section id="content">';
+        echo '<div class="box">';
+        require_once './pages/' . $include_php . '_bottom.php';
+        echo '</div>';
+        echo '</section>';
+        ?>
     </div>
     <div class="clear"></div>
     <footer>
         <p>
-            Streamers Admin Panel | djcrackhome | Dave | <a href="http://www.streamerspanel.com/" target="_blank">http://www.streamerspanel.com</a> | <a href="http://www.nagualmedia.de/" target="_blank">Design by Zephon</a> | Translated by: <i><?php
+            Streamers Admin Panel | djcrackhome | Dave | <a href="http://www.streamerspanel.com/" target="_blank">http://www.streamerspanel.com</a>
+            | <a href="http://www.nagualmedia.de/" target="_blank">Design by Zephon</a> | Translated by: <i><?php
 
-?></i> | <a href="http://www.facebook.com/streamers.admin.panel" target="_blank"><img src="./images/facebook.png" alt=""></a><a href="http://www.twitter.com/streamerspanel" target="_blank"><img src="./images/twitter.png" alt="" ></a>
+            ?></i> | <a href="http://www.facebook.com/streamers.admin.panel" target="_blank"><img
+            src="./images/facebook.png" alt=""></a><a href="http://www.twitter.com/streamerspanel" target="_blank"><img
+            src="./images/twitter.png" alt=""></a>
         </p>
     </footer>
 </div>

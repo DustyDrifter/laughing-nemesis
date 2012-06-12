@@ -34,7 +34,10 @@ $messages["admsrv_6"] = "ssh";
 $messages["admsrv_7"] = "shell_exec";
 $messages["admsrv_8"] = "ssh2 oder shell_exec verwenden";
 
-
+$messages["admsrv_9"] = "Server News";
+$messages["admsrv_10"] = "Ein";
+$messages["admsrv_11"] = "Aus";
+$messages["admsrv_12"] = "Server Nachrichten auf der Startseite anzeigen";
 
 
 
@@ -193,6 +196,7 @@ $messages["40"]		=		"server und zugriff";
 $messages["41"]		=		"Servereinstellungen";
 $messages["42"]		=		"Radioserver Konfiguration";
 $messages["43"]		=		"Benutzerkonten";
+$messages["nws1"]   =       "Server Nachrichten";
 $messages["44"]		=		"Informationen";
 $messages["45"]		=		"ip und versionsinfo";
 $messages["46"]		=		"Benutzer IP";
@@ -760,7 +764,6 @@ $messages["562"]	=		"Das Verzeichnis konnte nicht ausgelesen werden!";
 $messages["563"]	=		"Das Verzeichnis konnte nicht ausgelesen werden!";
 
 
-
 //
 //
 // autodj_bottom.php
@@ -785,10 +788,18 @@ $messages["dd14"]		=		"Shoutcast Config aus";
 $messages["dd15"]		=		"Capatchaabfrage ein";
 $messages["dd16"]		=		"Capatchaabfrage aus";
 
-
-
-
-
+//
+//
+//admnews_bottom.php
+$messages["adm1"]		=		"Server News";
+$messages["adm2"]		=		"Streamers Admin Panel - News Center, Nachrichten die Sie hie hinterlegen werden auf der Startseite angezeigt!";
+$messages["adm3"]		=		"Server News";
+$messages["adm4"]		=		"Es werden jeweils die letzten 3 Meldungen auf der Startseite angezeigt.";
+$messages["adm5"]		=		"Sie haben hier die Möglichkeit Ihren Kunden eine Nachricht zu hinterlassen";
+$messages["adm6"]		=		"Titel";
+$messages["adm"]		=		"Updates";
+$messages["adm"]		=		"Updates";
+$messages["adm"]		=		"Updates";
 
 
 //

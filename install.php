@@ -58,7 +58,7 @@ if (isset($_POST['sql_dns'])) {
             if(!mysql_query("CREATE TABLE IF NOT EXISTS `servers` ( `id` int(11) NOT NULL auto_increment, `owner` varchar(100) NOT NULL default '', `maxuser` varchar(100) NOT NULL default '', `portbase` int(11) NOT NULL default '0', `bitrate` varchar(100) NOT NULL default '',  `adminpassword` varchar(100) NOT NULL default '', `password` varchar(100) NOT NULL default '',  `sitepublic` varchar(100) NOT NULL default '1', `logfile` varchar(100) NOT NULL default '../logs/sc_{port}.log',  `realtime` varchar(100) NOT NULL default '1',   `screenlog` varchar(100) NOT NULL default '0', `showlastsongs` varchar(100) NOT NULL default '10', `tchlog` varchar(100) NOT NULL default 'Yes', `weblog` varchar(100) NOT NULL default 'no', `w3cenable` varchar(100) NOT NULL default 'Yes', `w3clog` varchar(100) NOT NULL default 'sc_w3c.log', `srcip` varchar(100) NOT NULL default 'ANY', `destip` varchar(100) NOT NULL default 'ANY', `yport` varchar(100) NOT NULL default '80', `namelookups` varchar(100) NOT NULL default '0', `relayport` varchar(100) NOT NULL default '0', `relayserver` varchar(100) NOT NULL default 'empty', `autodumpusers` varchar(100) NOT NULL default '0', `autodumpsourcetime` varchar(100) NOT NULL default '30', `contentdir` varchar(100) NOT NULL default '', `introfile` varchar(100) NOT NULL default '', `titleformat` varchar(100) NOT NULL default '', `publicserver` varchar(100) NOT NULL default 'default', `allowrelay` varchar(100) NOT NULL default 'Yes', `allowpublicrelay` varchar(100) NOT NULL default 'Yes', `metainterval` varchar(100) NOT NULL default '32768', `suspended` varchar(100) NOT NULL default '', `abuse` int(11) NOT NULL default '0', `pid` varchar(100) NOT NULL default '', `autopid` varchar(100) NOT NULL, `webspace` varchar(100) NOT NULL, `serverip` varchar(100) NOT NULL, `serverport` varchar(100) NOT NULL, `streamtitle` varchar(100) NOT NULL, `streamurl` varchar(100) NOT NULL, `shuffle` int(1) NOT NULL default '1', `samplerate` varchar(100) NOT NULL, `channels` int(1) NOT NULL default '2', `genre` varchar(100) NOT NULL, `quality` int(1) NOT NULL default '1', `crossfademode` varchar(100) NOT NULL, `crossfadelength` varchar(100) NOT NULL, `useid3` int(1) NOT NULL default '1', `public` int(1) NOT NULL default '1', `aim` varchar(100) NOT NULL, `icq` varchar(100) NOT NULL, `irc` varchar(100) NOT NULL, PRIMARY KEY  (`id`)) ENGINE=MyISAM AUTO_INCREMENT=67 DEFAULT CHARSET=utf8 AUTO_INCREMENT=67 ")
             ){$errors[] = "<h2>".$messages["i3"]."</h2>";}
 
-            if(!mysql_query("CREATE TABLE IF NOT EXISTS `settings` ( `id` int(11) NOT NULL default '0', `title` varchar(50) NOT NULL, `slogan` varchar(50) NOT NULL default '', `display_limit` int(11) NOT NULL default '10', `host_add` varchar(100) NOT NULL default '192.168.0.1', `os` varchar(100) NOT NULL default '', `dir_to_cpanel` varchar(100) NOT NULL default '', `scs_config` varchar(1) NOT NULL, `adj_config` varchar(1) NOT NULL, `php_mp3` varchar(50) NOT NULL default '10', `php_exe` varchar(50) NOT NULL default '250', `update_check` varchar(1) NOT NULL default '1', `login_captcha` varchar(1) NOT NULL default '1', `ssh_user` varchar(256) NOT NULL, `ssh_pass` varchar(256) NOT NULL, `ssh_port` varchar(11) NOT NULL default '22', `language` varchar(256) NOT NULL,`shellset` varchar(20) NOT NULL, PRIMARY KEY  (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 ")
+            if(!mysql_query("CREATE TABLE IF NOT EXISTS `settings` ( `id` int(11) NOT NULL default '0', `title` varchar(50) NOT NULL, `slogan` varchar(50) NOT NULL default '', `display_limit` int(11) NOT NULL default '10', `host_add` varchar(100) NOT NULL default '192.168.0.1', `os` varchar(100) NOT NULL default '', `dir_to_cpanel` varchar(100) NOT NULL default '', `scs_config` varchar(1) NOT NULL, `adj_config` varchar(1) NOT NULL, `php_mp3` varchar(50) NOT NULL default '10', `php_exe` varchar(50) NOT NULL default '250', `update_check` varchar(1) NOT NULL default '1', `login_captcha` varchar(1) NOT NULL default '1', `ssh_user` varchar(256) NOT NULL, `ssh_pass` varchar(256) NOT NULL, `ssh_port` varchar(11) NOT NULL default '22', `language` varchar(256) NOT NULL,`shellset` varchar(20),`server_news` varchar(1) NOT NULL, PRIMARY KEY  (`id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 ")
             ){$errors[] = "<h2>".$messages["i4"]."</h2>";}
 
             if(!mysql_query("CREATE TABLE IF NOT EXISTS `users` ( `id` int(11) NOT NULL auto_increment, `username` varchar(100) NOT NULL default '', `user_password` varchar(50) NOT NULL default '', `md5_hash` varchar(100) NOT NULL default '', `user_level` varchar(100) NOT NULL default '', `user_email` varchar(200) NOT NULL default '', `contact_number` varchar(15) NOT NULL, `mobile_number` varchar(15) NOT NULL, `account_notes` text NOT NULL, `name` varchar(50) NOT NULL default '', `surname` varchar(50) NOT NULL default '', `age` varchar(3) NOT NULL, PRIMARY KEY  (`id`)) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ")
@@ -71,7 +71,7 @@ if (isset($_POST['sql_dns'])) {
             if (isset($_POST['server_os']) && $_POST['server_os']  == "linux") {
                 $dir_new = $_POST['server_dir']."/";
             }
-            if (!mysql_query("REPLACE INTO `settings` (`id`, `title`, `slogan`, `display_limit`, `host_add`, `os`, `dir_to_cpanel`, `scs_config`, `adj_config`, `php_mp3`, `php_exe`, `update_check`, `login_captcha`, `ssh_user`, `ssh_pass`, `ssh_port`, `language`,`shellset`) VALUES (0, '".$_POST['server_title']."', 'Public', 10, '".$_POST['server_dns']."', 'linux', '".dirname(__FILE__)."/', '0', '0', '20', '230', '1', '1', '".base64_encode($_POST['server_sshuser'])."', '".base64_encode($_POST['server_sshpass'])."', '".$_POST['server_sshport']."', '".$_POST['server_lang'].", '".$_POST['server_shell']."')")) { $errors[] = "<h2>".$messages["i7"]."</h2>";}
+            if (!mysql_query("REPLACE INTO `settings` (`id`, `title`, `slogan`, `display_limit`, `host_add`, `os`, `dir_to_cpanel`, `scs_config`, `adj_config`, `php_mp3`, `php_exe`, `update_check`, `login_captcha`, `ssh_user`, `ssh_pass`, `ssh_port`, `language`,`shellset`, `server_news`) VALUES (0, '".$_POST['server_title']."', 'Public', 10, '".$_POST['server_dns']."', 'linux', '".dirname(__FILE__)."/', '0', '0', '20', '230', '1', '1', '".base64_encode($_POST['server_sshuser'])."', '".base64_encode($_POST['server_sshpass'])."', '".$_POST['server_sshport']."', '".$_POST['server_lang']."', '".$_POST['server_shell']."',1)")) { $errors[] = "<h2>".$messages["i7"]."</h2>";}
 
             if (!mysql_query("REPLACE INTO `users` (`id`, `username`,`user_password`,`md5_hash`, `user_level`, `user_email`, `contact_number`, `mobile_number`, `account_notes`, `name`, `surname`, `age`) VALUES (1, '".$_POST['user']."', '".$_POST['pass']."', '".md5($_POST['user'].$_POST['pass'])."', 'Super Administrator', 'admin@domain.com', 'none', '0', 'Default Administrator', 'Max', 'Mustermann', 'non') "))  { $errors[] = "<h2>".$messages["i8"]."</h2>";}
 
@@ -180,21 +180,16 @@ else {
             return $initial . sprintf('<div class="error">%s</div>', $value);
         }, '');
     }
-
     if (count($notifi) > 0) {
         echo array_reduce($notifi, function($initial, $value) {
             return $initial . sprintf('<div class="notifi">%s</div>', $value);
         }, '');
     }
-
     if (count($correc) > 0) {
         echo array_reduce($correc, function($initial, $value) {
             return $initial . sprintf('<div class="correct">%s</div>', $value);
         }, '');
     }
-
-
-
     ?>
     <div id="content">
         <div class="box">
@@ -215,12 +210,10 @@ else {
                 <div class="main_right">
                     <h2><?php echo $messages["i42"];?></h2>
                     <p><?php echo $messages["i43"];?></p>
-
                 </div>
             </div>
             <form action="install.php" method="post">
                 <fieldset>
-
                     <legend><?php echo $messages["i44"];?></legend>
                     <div class="input_field">
                         <label for="a"><?php echo $messages["i45"];?></label>
@@ -294,7 +287,7 @@ else {
                     <div class="input_field">
                         <label for="a"><?php echo $messages["issh1"];?></label>
                         <select class="formselect_loca" name="server_shell">
-                            <option value=""><?php echo $messages["issh2"];?></option>
+                            <option value="ssh2"><?php echo $messages["issh2"];?></option>
                             <option value="ssh2"><?php echo $messages["issh3"];?></option>
                             <option value="shellexec"><?php echo $messages["issh4"];?></option>
                         </select>
@@ -315,8 +308,8 @@ else {
 								<option  value="english">English (en)</option>
 							</select>
 							<span class="field_desc">Language which the panel will run with</span>
-						</div>        
-					</fieldset> 
+						</div>
+					</fieldset>
                 <br />
                 <input class="submit" type="submit" value="Install" />
             </form>

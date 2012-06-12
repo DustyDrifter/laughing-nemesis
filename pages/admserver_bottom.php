@@ -60,6 +60,14 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						<input class="mediumfield" name="ssh_pass" type="password" value="***" />
 						<span class="field_desc"><?php echo $messages["200"];?></span>
 					</div>
+                    <div class="input_field">
+                    <label for="a"><?php echo$messages["admsrv_5"];?></label>
+                    <select class="formselect_loca" name="rootsucess">
+                        <option value="ssh"<?php if ($setting['shellset']=='ssh') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_6"];?></option>
+                        <option value="shellexec"<?php if ($setting['shellset']=='shellexec') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_7"];?></option>
+                    </select>
+                    <span class="field_desc"><?php echo$messages["admsrv_8"];?></span>
+                    </div>
 					<div class="input_field">
 						<label for="a"><?php echo $messages["201"];?></label>
 						<input class="mediumfield" name="ssh_port" type="text" value="<?php echo $setting['ssh_port'];?>" />
@@ -139,38 +147,26 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						<span class="field_desc"><?php echo $messages["220"];?></span>
 					</div>
 					<div class="input_field">
-                        <label for="a"><?php echo $messages["221"];?></label>
-                        <select class="formselect_loca" name="login_captcha">
-                            <option value="1"<?php if ($setting['login_captcha']=='1') echo " selected=\"selected\"";?>><?php echo $messages["dd15"]; ?></option>
-                            <option value="0"<?php if ($setting['login_captcha']=='0') echo " selected=\"selected\"";?>><?php echo $messages["dd16"]; ?></option>
-                        </select>
-						<span class="field_desc"><?php echo $messages["222"];?></span>
-					</div>
-					<div class="input_field">
 						<label for="a"><?php echo $messages["223"];?></label>
 						<input class="mediumfield" name="display_limit" type="text" value="<?php echo $setting['display_limit'];?>" />
 						<span class="field_desc"><?php echo $messages["224"];?></span>
 					</div>
-
-
-                  <!-- Comming soon
                     <div class="input_field">
-                        <label for="a"><?php echo$messages["admsrv_1"];?></label>
+                        <label for="a"><?php echo $messages["223"];?></label>
+                        <input class="mediumfield" name="display_limit" type="text" value="<?php echo $setting['display_limit'];?>" />
+                        <span class="field_desc"><?php echo $messages["224"];?></span>
+                    </div>
+
+
+                    <div class="input_field">
+                        <label for="a"><?php echo$messages["admsrv_9"];?></label>
                         <select class="formselect_loca" name="servernews">
-                            <option value="news_on""><?php echo$messages["admsrv_2"];?></option>
-                            <option value="news_off"><?php echo$messages["admsrv_3"];?></option>
+                            <option value="1"<?php if ($setting['server_news']=='1') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_10"];?></option>
+                            <option value="0"<?php if ($setting['server_news']=='0') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_11"];?></option>
                         </select>
-                        <span class="field_desc"><?php echo$messages["admsrv_4"];?></span>
+                        <span class="field_desc"><?php echo$messages["admsrv_12"];?></span>
                     </div>
-                      --->
-                    <div class="input_field">
-                        <label for="a"><?php echo$messages["admsrv_5"];?></label>
-                        <select class="formselect_loca" name="rootsucess">
-                            <option value="ssh"<?php if ($setting['shellset']=='ssh') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_6"];?></option>
-                            <option value="shellexec"<?php if ($setting['shellset']=='shellexec') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_7"];?></option>
-                        </select>
-                        <span class="field_desc"><?php echo$messages["admsrv_8"];?></span>
-                    </div>
+
                     <input class="submit" type="submit" value="<?php echo $messages["225"];?>" />
 
 
