@@ -50,6 +50,14 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						<input class="mediumfield" name="os" type="text" value="<?php echo $setting['os'];?>" disabled="disabled" />
 						<span class="field_desc"><?php echo $messages["196"];?></span>
 					</div>
+                    <div class="input_field">
+                    <label for="a"><?php echo$messages["admsrv_5"];?></label>
+                    <select class="formselect_loca" name="rootsucess">
+                        <option value="ssh"<?php if ($setting['shellset']=='ssh') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_6"];?></option>
+                        <option value="shellexec"<?php if ($setting['shellset']=='shellexec') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_7"];?></option>
+                    </select>
+                    <span class="field_desc"><?php echo$messages["admsrv_8"];?></span>
+                    </div>
 					<div class="input_field">
 						<label for="a"><?php echo $messages["197"];?></label>
 						<input class="mediumfield" name="ssh_user" type="text" value="<?php echo base64_decode($setting['ssh_user']);?>" />
@@ -60,25 +68,19 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						<input class="mediumfield" name="ssh_pass" type="password" value="***" />
 						<span class="field_desc"><?php echo $messages["200"];?></span>
 					</div>
-                    <div class="input_field">
-                    <label for="a"><?php echo$messages["admsrv_5"];?></label>
-                    <select class="formselect_loca" name="rootsucess">
-                        <option value="ssh"<?php if ($setting['shellset']=='ssh') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_6"];?></option>
-                        <option value="shellexec"<?php if ($setting['shellset']=='shellexec') echo " selected=\"selected\"";?>><?php echo$messages["admsrv_7"];?></option>
-                    </select>
-                    <span class="field_desc"><?php echo$messages["admsrv_8"];?></span>
-                    </div>
 					<div class="input_field">
 						<label for="a"><?php echo $messages["201"];?></label>
 						<input class="mediumfield" name="ssh_port" type="text" value="<?php echo $setting['ssh_port'];?>" />
 						<span class="field_desc"><?php echo $messages["202"];?></span>
 					</div>
+
 					<div class="input_field">
 						<label for="a"><?php echo $messages["203"];?></label>
 						<input class="mediumfield" name="dir_to_cpanel" type="text" value="<?php echo $setting['dir_to_cpanel'];?>" />
 						<span class="field_desc"><?php echo $messages["204"];?></span>
 					</div>
-					<div class="input_field">
+
+                    <div class="input_field">
 						<label for="a"><?php echo $messages["205"];?></label>
 						<input class="mediumfield" name="title" type="text" value="<?php echo $setting['title'];?>" />
 						<span class="field_desc"><?php echo $messages["206"];?></span>

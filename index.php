@@ -138,11 +138,7 @@ if (isset($loggedin) && $loggedin == TRUE) {
             echo '</div> </div>';
         }
 
-
-
 ?>
-
-
 
         <div id="content">
             <div class="box">

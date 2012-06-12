@@ -107,6 +107,14 @@ else {
     <title><?php echo $messages["g0"];?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" href="./css/install.css" />
+    <script type="text/javascript">
+
+        function einblenden(){
+            var select = document.getElementById('kleidungsstueck').selectedIndex;
+            document.getElementById('ssh2').style.display = (select == 1? "block": "none");
+            document.getElementById('shell_exec').style.display = (select == 2? "block": "none");
+        }
+</script>
 </head>
 <body>
 <div id="container">
@@ -273,31 +281,39 @@ else {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <legend><?php echo $messages["i64"];?></legend>
-                    <div class="input_field">
-                        <label for="a"><?php echo $messages["i65"];?></label>
-                        <input type="text" name="server_sshuser" class="mediumfield" />
-                        <span class="field_desc"><?php echo $messages["i66"];?></span>
-                    </div>
-                    <div class="input_field">
-                        <label for="a"><?php echo $messages["i67"];?></label>
-                        <input type="password" name="server_sshpass" class="mediumfield" />
-                        <span class="field_desc"><?php echo $messages["i66"];?></span>
-                    </div>
-                    <div class="input_field">
-                        <label for="a"><?php echo $messages["i68"];?></label>
-                        <input type="text" name="server_sshport" class="smallfield" value="22" />
-                        <span class="field_desc"><?php echo $messages["i68"];?></span>
-                    </div>
-                    <div class="input_field">
-                        <label for="a"><?php echo $messages["issh1"];?></label>
-                        <select class="formselect_loca" name="server_shell">
-                            <option value="ssh2"><?php echo $messages["issh2"];?></option>
-                            <option value="ssh2"><?php echo $messages["issh3"];?></option>
-                            <option value="shellexec"><?php echo $messages["issh4"];?></option>
-                        </select>
-                        <span class="field_desc"><?php echo $messages["issh5"];?></span>
-                    </div>
+
+                        <div class="input_field">
+                            <label for="a"><?php echo $messages["issh1"];?></label>
+                            <select class="formselect_loca" name="server_shell"name="kleidungsstueck" id="kleidungsstueck" onchange="einblenden()">
+                                <option value="ssh2"><?php echo $messages["issh2"];?></option>
+                                <option value="ssh2"><?php echo $messages["issh3"];?></option>
+                                <option value="shellexec"><?php echo $messages["issh4"];?></option>
+                            </select>
+                            <span class="field_desc"><?php echo $messages["issh5"];?></span>
+                        </div> <br>
+
+                        <div id="ssh2" style="display: none;">
+
+                            <legend><?php echo $messages["i64"];?></legend>
+                            <div class="input_field">
+                                <label for="a"><?php echo $messages["i65"];?></label>
+                                <input type="text" name="server_sshuser" class="mediumfield" />
+                                <span class="field_desc"><?php echo $messages["i66"];?></span>
+                            </div>
+                            <div class="input_field">
+                                <label for="a"><?php echo $messages["i67"];?></label>
+                                <input type="password" name="server_sshpass" class="mediumfield" />
+                                <span class="field_desc"><?php echo $messages["i66"];?></span>
+                            </div>
+                            <div class="input_field">
+                                <label for="a"><?php echo $messages["i68"];?></label>
+                                <input type="text" name="server_sshport" class="smallfield" value="22" />
+                                <span class="field_desc"><?php echo $messages["i68"];?></span>
+                            </div>
+
+                        </div>
+                        <div id="shell_exec" style="display: none;"></div>
+
                 </fieldset>
 <fieldset>
 						<legend>Other settings</legend>
