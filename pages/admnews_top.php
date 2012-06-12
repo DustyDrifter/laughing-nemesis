@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
                         $messagesql = htmlspecialchars_decode($_POST['message'], ENT_QUOTES);
                     if (function_exists('htmlspecialchars_decode'))
                         $reasonsql = htmlspecialchars_decode($_POST['titel'], ENT_QUOTES);
-                    if (mysql_query("INSERT INTO news (head_line,news) VALUES('$reasonsql','$messagesql' )")) {
+                    if (mysql_query("INSERT INTO news (titel,text) VALUES('$reasonsql','$messagesql' )")) {
                         $correc[] = "<h2>".$messages["355"]."</h2>";
                     }
                     else {

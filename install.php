@@ -50,7 +50,12 @@ if (isset($_POST['sql_dns'])) {
             $datei = fopen("database.php","w");
             fwrite($datei, $dbconfig);
 
+
             if(!mysql_query("CREATE TABLE IF NOT EXISTS `headlines` ( `id` int(11) NOT NULL auto_increment, `username` varchar(100) NOT NULL default '', `title` varchar(100) NOT NULL default '', `text` text NOT NULL, PRIMARY KEY  (`id`)) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ")){ $errors[] = "<h2>MySQL: headlines could not be created!</h2>";}
+
+            if(!mysql_query("CREATE TABLE IF NOT EXISTS `news` ( `id` int(11) NOT NULL auto_increment, `titel` varchar(255) NOT NULL default '', `text` text NOT NULL, PRIMARY KEY  (`id`) ) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ")
+            ){ $errors[] = "<h2>".$messages["i2"]."</h2>";}
+
 
             if(!mysql_query("CREATE TABLE IF NOT EXISTS `notices` ( `id` int(11) NOT NULL auto_increment, `username` varchar(100) NOT NULL default '', `reason` varchar(100) NOT NULL default '', `message` varchar(10240) NOT NULL, `ip` varchar(100) NOT NULL default '', `time` varchar(100) NOT NULL default '', PRIMARY KEY  (`id`) ) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 AUTO_INCREMENT=77 ")
             ){ $errors[] = "<h2>".$messages["i2"]."</h2>";}

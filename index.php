@@ -126,13 +126,12 @@ if (isset($loggedin) && $loggedin == TRUE) {
              <div id="content">
         <div class="box">
             <h2>Server News</h2>
-
             <?php
-
+            $news_reporter = mysql_query("SELECT * FROM news ORDER BY id DESC LIMIT 2");
             while($row = mysql_fetch_object($news_reporter))
             {
-                echo "<h3><b>".$row->head_line."</b></h3>";
-                echo "<p>".$row->news."</p>";
+                echo "<h3><b>".$row->titel."</b></h3>";
+                echo "<p>".$row->text."</p>";
                 echo "<br>";
 
             }
