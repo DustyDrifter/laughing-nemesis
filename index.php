@@ -138,7 +138,11 @@ if (isset($loggedin) && $loggedin == TRUE) {
             echo '</div> </div>';
         }
 
+
+
 ?>
+
+
 
         <div id="content">
             <div class="box">
@@ -206,6 +210,15 @@ if (isset($loggedin) && $loggedin == TRUE) {
                 </form>
             </div>
         </div>
+
+
+
+
+
+
+
+
+
 
     </div>
     <div class="clear"></div>

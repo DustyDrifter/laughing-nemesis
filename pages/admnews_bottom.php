@@ -15,11 +15,11 @@
  * Creative Commons, 444 Castro Street, Suite 900, Mountain View, California,
  * 94041, USA.
  *
- * @author Sebastian Graebner <djcrackhome@streamerspanel.com>
- * @author David Schomburg <dave@streamerspanel.com>
- * @copyright 2009-2012 S. Graebner <djcrackhome> D. Schomburg <dave>
- * @license http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
- * @link http://www.streamerspanel.com
+ * @author     Sebastian Graebner <djcrackhome@streamerspanel.com>
+ * @author     David Schomburg <dave@streamerspanel.com>
+ * @copyright  2009-2012  S. Graebner <djcrackhome> D. Schomburg <dave>
+ * @license    http://creativecommons.org/licenses/by-sa/3.0/ Creative Commons Attribution-ShareAlike 3.0 Unported License
+ * @link       http://www.streamerspanel.com
 
  */
 if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
@@ -64,7 +64,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                         echo "<span class=\"validate_error\">".$messages["2"]."</span>";
                     }
                     else {
-                        echo "<span class=\"validate_success\">".$messages["adm7"]."</span>";
+                        echo "<span class=\"validate_success\">".$messages["352"]."</span>";
                     }
                 }
                 ?>
