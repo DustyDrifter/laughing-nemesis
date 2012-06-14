@@ -46,11 +46,11 @@ if (isset($_POST['submit'])) {
                 }
                 else {
                     if (function_exists('htmlspecialchars_decode'))
-                        $messagesql = htmlspecialchars_decode($_POST['message'], ENT_QUOTES);
+                        $messagesql = nl2br($_POST['message']);
                     if (function_exists('htmlspecialchars_decode'))
                         $reasonsql = htmlspecialchars_decode($_POST['titel'], ENT_QUOTES);
                     if (mysql_query("INSERT INTO news (titel,text) VALUES('$reasonsql','$messagesql' )")) {
-                        $correc[] = "<h2>".$messages["355"]."</h2>";
+                        $correc[] = "<h2>".$messages["adm7"]."</h2>";
                     }
                     else {
                         $errors[] = "<h2>".$messages["356"]."</h2>";

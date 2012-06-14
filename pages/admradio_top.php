@@ -160,7 +160,7 @@ if (isset($_GET['view'])) {
                     }
                     if ($setting["os"] == "linux") {
 
-                         if ($messages["shell"] == 'ssh2'){
+                         if ($messages["shell"] == 'ssh'){
                              $connection = ssh2_connect('localhost', $setting['ssh_port']);
                              ssh2_auth_password($connection, '' . base64_decode($setting['ssh_user']) . '', '' . base64_decode($setting['ssh_pass']) . '');
                              $ssh2_exec_com = ssh2_exec($connection, 'kill ' . mysql_result($pid, 0));
@@ -198,7 +198,7 @@ if (isset($_GET['view'])) {
                 else {
                     if ($setting['os'] == 'linux') {
 
-                        if ($messages["shell"] == 'ssh2'){
+                        if ($messages["shell"] == 'ssh'){
                             $connection = ssh2_connect('localhost', $setting['ssh_port']);
                             ssh2_auth_password($connection, '' . base64_decode($setting['ssh_user']) . '', '' . base64_decode($setting['ssh_pass']) . '');
                             $ssh2_exec_com = ssh2_exec($connection, $setting["dir_to_cpanel"] . 'files/linux/sc_serv.bin ' . $setting["dir_to_cpanel"] . $filename . ' </dev/null 2>/dev/null >/dev/null & echo $!');
@@ -236,7 +236,7 @@ if (isset($_GET['view'])) {
             }
             if ($setting["os"] == "linux") {
 
-                if ($messages["shell"] == 'ssh2'){
+                if ($messages["shell"] == 'ssh'){
 
                     $connection = ssh2_connect('localhost', $setting['ssh_port']);
                     ssh2_auth_password($connection, '' . base64_decode($setting['ssh_user']) . '', '' . base64_decode($setting['ssh_pass']) . '');

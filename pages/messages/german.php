@@ -797,9 +797,10 @@ $messages["adm3"]		=		"Server News";
 $messages["adm4"]		=		"Es werden jeweils die letzten 3 Meldungen auf der Startseite angezeigt.";
 $messages["adm5"]		=		"Sie haben hier die Möglichkeit Ihren Kunden eine Nachricht zu hinterlassen";
 $messages["adm6"]		=		"Titel";
+$messages["adm7"]		=		"Ihr Nachricht wurde erfolgreich in die Server-News eingetragen";
 $messages["adm"]		=		"Updates";
 $messages["adm"]		=		"Updates";
-$messages["adm"]		=		"Updates";
+
 
 
 //

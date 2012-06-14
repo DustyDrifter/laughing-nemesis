@@ -382,6 +382,26 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
     <script src="./js/modernizr.2.06.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/adminpanel.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/jquery.nyroModal-1.6.2.pack.js" type="text/javascript" charset="utf-8"></script>
+   <!---
+    <script type="text/javascript" src="./tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+            mode : "textareas",
+            theme : "advanced",
+            plugins : "emotions,spellchecker,advhr,insertdatetime,preview",
+
+            // Theme options - button# indicated the row# only
+            theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,|,justifyleft,justifycenter,justifyright,fontselect,fontsizeselect,formatselect",
+            theme_advanced_buttons2 : "cut,copy,paste,|,bullist,numlist,|,outdent,indent,|,undo,redo,|,link,unlink,anchor,image,|,code,preview,|,forecolor,backcolor",
+            theme_advanced_buttons3 : "insertdate,inserttime,|,spellchecker,advhr,,removeformat,|,sub,sup,|,charmap,emotions",
+            theme_advanced_toolbar_location : "top",
+            theme_advanced_toolbar_align : "left",
+            theme_advanced_statusbar_location : "bottom",
+            theme_advanced_resizing : true
+
+        });
+    </script>
+        --->
     <?php
     if ($include_php == "main") {
         ?>
@@ -467,6 +487,8 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
 
 </head>
 <body>
+<form>
+
 <div id="mainContainer">
     <header>
         <div class="header logo">
