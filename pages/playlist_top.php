@@ -52,7 +52,7 @@ else {
 if (($_GET['indiv'] == "0") && (isset($_GET['listname'])) && ($_GET['delete'] == "1")) {
 	$deletefiledecoded = strip_tags(str_replace('/', '', base64_decode($_GET['listname'])));
 	if (file_exists("./temp/".$port."/playlist/".$deletefiledecoded."")) {
-		unlink("./temp/".$port."/playlist/".$deletefiledecoded."");
+		//unlink("./temp/".$port."/playlist/".$deletefiledecoded."");
 		$correc[] = "<h2>".$messages["407"]."</h2>";
 	}
 	else {

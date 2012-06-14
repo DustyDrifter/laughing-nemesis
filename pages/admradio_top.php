@@ -217,7 +217,7 @@ if (isset($_GET['view'])) {
                     mysql_query("UPDATE servers SET pid='$pid' WHERE id='" . $_GET['view'] . "'");
                     $correc[] = "<h2>" . $messages["181"] . "</h2>";
                     if ($setting["scs_config"] == "0") {
-                        unlink($filename);
+                        //unlink($filename);
                     }
                 }
             }
@@ -273,9 +273,9 @@ if (isset($_GET['view'])) {
                 @rmdir($dirname);
             }
 
-            delete_directory("./pages/uploads/" . $unlink_port_sql_port . "/");
-            delete_directory("./temp/" . $unlink_port_sql_port . "/playlist/");
-            delete_directory("./temp/" . $unlink_port_sql_port . "/");
+            //delete_directory("./pages/uploads/" . $unlink_port_sql_port . "/");
+            //delete_directory("./temp/" . $unlink_port_sql_port . "/playlist/");
+            //delete_directory("./temp/" . $unlink_port_sql_port . "/");
             if (mysql_query("DELETE FROM servers WHERE id='" . $_GET['view'] . "'")) {
                 $correc[] = "<h2>" . $messages["184"] . "</h2>";
             }

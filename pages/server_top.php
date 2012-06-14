@@ -122,7 +122,7 @@ if (isset($_GET['view'])) {
                         mysql_query("UPDATE servers SET pid='$pid' WHERE id='" . $_GET['view'] . "'");
                         $correc[] = "<h2>" . $messages["518"] . "</h2>";
                         if ($setting["scs_config"] == "0") {
-                            unlink($filename);
+                            //unlink($filename);
                         }
                     }
                 }

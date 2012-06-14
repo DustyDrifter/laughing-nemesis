@@ -169,7 +169,7 @@ else {
 	if (isset($_GET['delete'])) {
 		$deletefiledecoded = base64_decode($_GET['delete']);
 		if (file_exists("./pages/uploads/".$port."/".$deletefiledecoded."")) {
-			unlink("./pages/uploads/".$port."/".$deletefiledecoded."");
+			//unlink("./pages/uploads/".$port."/".$deletefiledecoded."");
 			$correc[] = "<h2>".$messages["556"]."</h2>";
 			$playlistupdate = "2";
 		}

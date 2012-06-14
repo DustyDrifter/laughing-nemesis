@@ -98,7 +98,14 @@ if (isset($_GET['id'])) {
                         $connection = ssh2_connect('localhost', $setting['ssh_port']);
                         ssh2_auth_password($connection, ''.base64_decode($setting['ssh_user']).'', ''.base64_decode($setting['ssh_pass']).'');
                         $ssh2_exec_com = ssh2_exec($connection, $setting["dir_to_cpanel"].'files/linux/sc_trans.bin '.$setting["dir_to_cpanel"].$filename.' </dev/null 2>/dev/null >/dev/null & echo $!');
+                        sleep(4);
                         $pid = stream_get_contents($ssh2_exec_com);
+                        if (!$pid || $pid == "") {
+                            mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','Server failure','The server with id ".$_GET['view']." cannot start on port ".$serverdata['portbase']."','".$_SERVER['REMOTE_ADDR']."')");
+                            echo "Could not start server, please contact administration using the contact form on your left";
+                            echo "".$filename."";
+                        }
+
                     }elseif($setting["shellset"] == 'shellexec'){
                         $pid = shell_exec("nohup " . $setting['dir_to_cpanel'] . "files/linux/sc_trans.bin " . $setting['dir_to_cpanel'] . $filename . " > /dev/null & echo $!");
                         sleep(4);
@@ -112,7 +119,7 @@ if (isset($_GET['id'])) {
                 mysql_query("UPDATE servers SET autopid='$pid' WHERE id='" . $_GET['id'] . "'");
                 $correc[] = "<h2>" . $messages["333"] . "</h2>";
                 if ($setting["adj_config"] == "0") {
-                    unlink($filename);
+                    //unlink($filename);
                 }
             }
         }
