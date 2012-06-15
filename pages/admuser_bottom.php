@@ -116,19 +116,22 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 					<label for="a"><?php echo $messages["265"];?></label>
 					<?php
 					if ($_GET['action'] == "newuser") {
-						echo '<select class="formselect_loca" name="euser_level"><option value="Super Administrator">'.$messages["247"].'</option><option selected="selected" value="User">'.$messages["248"].'</option></select>';
+						echo '<select class="formselect_loca" name="euser_level"><option value="Super Administrator">'.$messages["247"].'</option><option selected="selected" value="User">'.$messages["248"].'</option><option selected="selected" value="dj">'.$messages["add247"].'</option></select>';
 					}
 					else {
-						echo '<select class="formselect_loca" name="euser_level"><option ';
-						if($userdata['user_level']=="Super Administrator") { 
-							echo "selected ";
-						}
-						echo " value=\"Super Administrator\">".$messages["247"]."</option><option ";
-						if($userdata['user_level']=="User") {
-							echo "selected ";
-						}
-						echo " value=\"User\">".$messages["248"]."</option></select>";
-					}
+                        echo '<select class="formselect_loca" name="euser_level">';
+
+                        ?>
+                         <option value="Super Administrator" <? if($userdata['user_level'] == 'Super Adminsitrator') echo'selected="selected"' ?>>Super Adminstrator</option>
+                         <option value="User" <? if($userdata['user_level'] == 'User') echo'selected="selected"'  ?>>User</option>
+                         <option value="dj" <? if($userdata['user_level'] == 'dj') echo'selected="selected"' ?>>Dj</option>
+                        </select>
+
+                        <?php
+
+
+                    }
+
 					?>                    
 					<span class="field_desc"><?php echo $messages["249"];?></span>
 				</div>

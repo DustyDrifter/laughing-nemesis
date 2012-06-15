@@ -44,17 +44,17 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                 $editNews = mysql_query("SELECT id,titel FROM news ");
                 while($row = mysql_fetch_object($editNews))
                 {
-
                     echo "<tr>";
+                    echo '<td><input type="checkbox" name="chboxid" value="'. $row->id . '" </td>';
                     echo "<td>",$row->titel,"</td>";
                     echo "<td>",$row->text,"</td>";
-                    echo '<td><input class="submit" type="submit" name="delmes" value="Löschen" onClick = "location.href"=\'xyz.htm\';></td>';
+                    echo '<td></td>';
                     echo "</tr>";
                 }
                 echo "</table>";
 
                 ?>
-
+<input class="submit" type="submit" name="delmes" value="Löschen">
 
 
         </form>

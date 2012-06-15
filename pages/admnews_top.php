@@ -64,9 +64,6 @@ if (isset($_POST['submit'])) {
 
 if ($_POST['delmes']){
 
-
-            $formerror = "message";
-
-
+    DB::delete('news', "id=%s", $_POST['chboxid']);
 
 }

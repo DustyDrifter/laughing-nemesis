@@ -47,7 +47,9 @@ DB::$dbName = $database;
 sendUsageStatisticsIfAllowed();
 
 session_start();
+
 $captcha_sql = mysql_query("SELECT language FROM settings WHERE id='0'");
+
 $language_setting = mysql_result($captcha_sql, 0);
 // Check if Language-file exists and include, else load English
 
@@ -81,6 +83,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
     }
     if (isset($_POST['login_submit'])) {
         $captcha_sql = mysql_query("SELECT login_captcha FROM settings WHERE id='0'");
+
         if (mysql_result($captcha_sql, 0) == "1") {
             if ($_POST['captcha_field'] != $_SESSION['captcha_streamerspanel']) {
                 if ($include_php !== "main" || $include_php !== "") {
@@ -94,6 +97,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         }
     }
     $hash = md5($loginun . $loginpw);
+
     $selectuser = mysql_query("SELECT * FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
     if (mysql_num_rows($selectuser) == 1) {
         $_SESSION['username'] = $loginun;
@@ -101,7 +105,21 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         $userdata = mysql_fetch_array($selectuser);
         $loginun = $userdata['username'];
         $user_level = $userdata['user_level'];
-        $user_id = $userdata['id'];
+
+
+        if ($user_level == 'dj'){
+            $selectuser = mysql_query("SELECT dj_of_user FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
+            $selectuser = mysql_fetch_object($selectuser);
+            $user_id =      $selectuser->dj_of_user;
+            // REWRITE LOGINNUM
+
+            $ergebnis = mysql_query("SELECT username FROM users WHERE id = '$user_id'");
+            $row = mysql_fetch_object($ergebnis);
+            $loginun = $row->username;
+        }else{
+            $user_id = $userdata['id'];
+        }
+
         $loggedin = TRUE;
         if (isset($_POST['login_submit'])) {
             $correc[] = "<h2>" . $messages["15"] . "</h2>";
@@ -498,12 +516,15 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                             echo '<span id="headContent_under">' . htmlspecialchars($messages["26"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["27"]) . " </span>";
                         }
                     }
-                } else {
+                } elseif($user_level == 'User') {
                     echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["28"]) . '</span>';
+                }else{
+                    echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["add28"]) . '</span>';
                 }
                 ?>
             </div>
             <div id="navHead">
+
                 <h4><?php
                     echo htmlspecialchars($messages["29"]);
                     ?></h4>
@@ -511,7 +532,10 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                     echo htmlspecialchars($messages["30"]);
                     ?></h5>
             </div>
-            <nav class="navFirst">
+            <?php
+            if ($user_level == 'User' OR $user_level == 'Super Administrator') {
+                ?>
+                <nav class="navFirst">
                 <ul class="navMenu">
                     <li><a href="loadContent-contact" title=""><?php
                         echo htmlspecialchars($messages["31"]);
@@ -527,7 +551,9 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                         ?></a></li>
                 </ul>
             </nav>
-            <?php
+
+                <?php
+            }
             if ($setting['os'] == 'linux') {
                 ?>
                 <div id="navHeadSub">
