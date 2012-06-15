@@ -100,9 +100,14 @@ if (isset($_GET['view'])) {
                             if ($setting["shellset"] == 'ssh2'){
                                 $connection = ssh2_connect('localhost', $setting['ssh_port']);
                                 ssh2_auth_password($connection, ''.base64_decode($setting['ssh_user']).'', ''.base64_decode($setting['ssh_pass']).'');
-                                $ssh2_exec_com = ssh2_exec($connection, $setting["dir_to_cpanel"].'files/linux/sc_serv.bin '.$setting["dir_to_cpanel"].$filename.' </dev/null 2>/dev/null >/dev/null & echo $!');
+                                $ssh2_exec_com = ssh2_exec($connection, 'sudo -u '.base64_decode($setting['ssh_user']).' '.$setting["dir_to_cpanel"].'files/linux/sc_serv.bin '.$setting["dir_to_cpanel"].$filename.' </dev/null 2>/dev/null >/dev/null & echo $!');
                                 sleep(4);
                                 $pid = stream_get_contents($ssh2_exec_com);
+                                if (!$pid || $pid == "") {
+                                    mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','Server failure','The server with id ".$_GET['view']." cannot start on port ".$serverdata['portbase']."','".$_SERVER['REMOTE_ADDR']."')");
+                                    $errors[] = "<h2>".$messages["517"]."</h2>";
+                                }
+
                             }elseif($setting["shellset"] == 'shellexec'){
                                 $pid = shell_exec("nohup " . $setting['dir_to_cpanel'] . "files/linux/sc_serv.bin " . $setting['dir_to_cpanel'] . $filename . " > /dev/null & echo $!");
                             }

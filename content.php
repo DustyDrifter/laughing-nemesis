@@ -105,16 +105,23 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         $userdata = mysql_fetch_array($selectuser);
         $loginun = $userdata['username'];
         $user_level = $userdata['user_level'];
-
+        $_SESSION['loginun']  = $loginun;
+        $_SESSION['loginun'] = $loginun;
+            // Abfrage Server
         if ($user_level == 'dj'){
             $selectuser = mysql_query("SELECT dj_of_user FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
-            $selectuser = mysql_fetch_object($selectuser);
-            $user_id =      $selectuser->dj_of_user;
+            $selectit = mysql_fetch_object($selectuser);
+
+            $user_id =      $selectit->dj_of_user;
+            echo $user_id;
+
             // REWRITE LOGINNUM
 
             $ergebnis = mysql_query("SELECT username FROM users WHERE id = '$user_id'");
             $row = mysql_fetch_object($ergebnis);
             $loginun = $row->username;
+
+
         }else{
             $user_id = $userdata['id'];
         }
@@ -498,7 +505,7 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
             <a href="loadContent-main" title=""><img src="./images/logo.png" alt=""/></a>
         </div>
         <span class="header profileStatus"><?php
-            echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($loginun) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
+            echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($_SESSION['loginun']) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
             ?>
     </header>
     <div class="clear"></div>
