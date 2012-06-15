@@ -89,6 +89,8 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 					}
 				}
 			}
+
+
 		?>
 		<br />
 		<h2><?php if ($_GET['action'] == "newuser") { echo $messages["238"]; } else { echo $messages["239"]; }?></h2>
@@ -125,15 +127,32 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                          <option value="Super Administrator" <? if($userdata['user_level'] == 'Super Adminsitrator') echo'selected="selected"' ?>>Super Adminstrator</option>
                          <option value="User" <? if($userdata['user_level'] == 'User') echo'selected="selected"'  ?>>User</option>
                          <option value="dj" <? if($userdata['user_level'] == 'dj') echo'selected="selected"' ?>>Dj</option>
+                        <option value="banned" <? if($userdata['user_level'] == 'banned') echo'selected="selected"' ?>>Disable</option>
                         </select>
-
+                        <span class="field_desc">DJ bitte einem Benutzer zuordnen!</span>
                         <?php
-
-
                     }
 
-					?>                    
-					<span class="field_desc"><?php echo $messages["249"];?></span>
+                    if ($_GET['action'] != "newuser"){
+					?>
+                <div class="input_field">
+                    <label for="a">Benutzerzuordnung</label>
+                    <select class="formselect_loca" name="seluser">
+                        <option>Bitte DJ wählen!</option>
+                        <?php
+                    $userlist= mysql_query("SELECT * FROM users WHERE user_level ='User'");
+                    while($lsituser = mysql_fetch_object($userlist)) {
+                        echo "<option value=".$lsituser->id.">".$lsituser->username."</option>";
+                    }
+
+                    ?>
+                    </select>
+                    <span class="field_desc">Zu welchem Benutzer gehört der DJ</span>
+                </div>
+
+                    <?php } ?>
+
+
 				</div>
 				<div class="input_field">
 					<label for="a"><?php echo $messages["250"];?></label>

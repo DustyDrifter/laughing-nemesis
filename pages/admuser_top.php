@@ -41,7 +41,8 @@ else
 $p = $_POST['p'] * $limit;
 $l = $p + $limit;
 if ($_GET['action'] == "newuser" && $_GET['function'] == "update") {
-	if (mysql_num_rows(mysql_query("SELECT * FROM users WHERE username='".$_POST['eusername']."'")) == 1) {
+
+    if (mysql_num_rows(mysql_query("SELECT * FROM users WHERE username='".$_POST['eusername']."'")) == 1) {
 		$errors[] = "<h2>".$messages["266"]."</h2>";
 	}
 	else {
@@ -60,6 +61,15 @@ if ($_GET['action'] == "newuser" && $_GET['function'] == "update") {
 	}
 }
 if ($_GET['action'] == "edit") { 
+
+    if (!empty($_POST['seluser'])){
+        $dj_of_user = $_POST['seluser'];
+         mysql_query("UPDATE users SET dj_of_user= '$dj_of_user' WHERE id='".$_GET['id']."'");
+    }
+
+
+
+
 	$user = mysql_query("SELECT username FROM users WHERE id='".$_GET['id']."'");
 	if (mysql_num_rows($user)==0) {
 		$errors[] = "<h2>".$messages["270"]."</h2>";

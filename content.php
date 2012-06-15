@@ -106,7 +106,6 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         $loginun = $userdata['username'];
         $user_level = $userdata['user_level'];
 
-
         if ($user_level == 'dj'){
             $selectuser = mysql_query("SELECT dj_of_user FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
             $selectuser = mysql_fetch_object($selectuser);
@@ -124,9 +123,17 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         if (isset($_POST['login_submit'])) {
             $correc[] = "<h2>" . $messages["15"] . "</h2>";
         }
+
+        if($user_level == 'banned') {
+            session_destroy();
+            $loggedin = FALSE;
+        }
+
+
     } else {
         session_destroy();
         $loggedin = FALSE;
+
     }
 }
 if (isset($loggedin) && $loggedin == TRUE) {
