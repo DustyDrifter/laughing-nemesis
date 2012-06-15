@@ -562,7 +562,11 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                 <?php
             }
             if ($setting['os'] == 'linux') {
-                ?>
+
+                if ($user_level == 'dj') {
+
+                } else{
+                    ?>
                 <div id="navHeadSub">
                     <h4><?php
                         echo htmlspecialchars($messages["35"]);
@@ -571,6 +575,8 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                         echo htmlspecialchars($messages["36"]);
                         ?></h5>
                 </div>
+                    <?php } ?>
+
                 <nav class="navBottom">
                     <ul class="navMenu">
                         <li><a href="loadContent-music" title=""><?php

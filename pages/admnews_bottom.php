@@ -37,31 +37,6 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
             <p><?php echo $messages["adm4"];?></p>
         </div>
     </div>
-    <fieldset>
-        <form method="post" action="content.php?include=admnews">
-            <table>
-                <?php
-                $editNews = mysql_query("SELECT id,titel FROM news ");
-                while($row = mysql_fetch_object($editNews))
-                {
-                    echo "<tr>";
-                    echo '<td><input type="checkbox" name="chboxid" value="'. $row->id . '" </td>';
-                    echo "<td>",$row->titel,"</td>";
-                    echo "<td>",$row->text,"</td>";
-                    echo '<td></td>';
-                    echo "</tr>";
-                }
-                echo "</table>";
-
-                ?>
-<input class="submit" type="submit" name="delmes" value="Löschen">
-
-
-        </form>
-    </fieldset>
-
-
-
 
     <form method="post" action="content.php?include=admnews" id="contactform">
         <fieldset>
@@ -99,4 +74,28 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
             <input class="submit" type="reset" value="<?php echo $messages["354"];?>" />
         </fieldset>
     </form>
+
+    <fieldset>
+        <form method="post" action="content.php?include=admnews">
+            <table>
+                <?php
+                $editNews = mysql_query("SELECT id,titel FROM news ");
+                while($row = mysql_fetch_object($editNews))
+                {
+                    echo "<tr>";
+                    echo '<td><input type="checkbox" name="chboxid" value="'. $row->id . '" </td>';
+                    echo "<td>",$row->titel,"</td>";
+                    echo "<td>",$row->text,"</td>";
+                    echo '<td></td>';
+                    echo "</tr>";
+                }
+                echo "</table>";
+
+                ?>
+                <input class="submit" type="submit" name="delmes" value="Löschen">
+
+
+        </form>
+    </fieldset>
+
 </div>

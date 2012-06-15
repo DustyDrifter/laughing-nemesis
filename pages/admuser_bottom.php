@@ -126,14 +126,14 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                         ?>
                          <option value="Super Administrator" <? if($userdata['user_level'] == 'Super Adminsitrator') echo'selected="selected"' ?>>Super Adminstrator</option>
                          <option value="User" <? if($userdata['user_level'] == 'User') echo'selected="selected"'  ?>>User</option>
-                         <option value="dj" <? if($userdata['user_level'] == 'dj') echo'selected="selected"' ?>>Dj</option>
+                         <option value="dj" <? if($userdata['user_level'] == 'dj') echo'selected="selected"' ?>>Dj-Moderator</option>
                         <option value="banned" <? if($userdata['user_level'] == 'banned') echo'selected="selected"' ?>>Disable</option>
                         </select>
                         <span class="field_desc">DJ bitte einem Benutzer zuordnen!</span>
                         <?php
                     }
 
-                    if ($_GET['action'] != "newuser"){
+                    if ($_GET['action'] != "newuser" && $userdata['user_level'] != 'User'){
 					?>
                 <div class="input_field">
                     <label for="a">Benutzerzuordnung</label>

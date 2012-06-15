@@ -61,6 +61,13 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password'])) {
     $loginun = $_SESSION['username'];
     $loginpw = $_SESSION['user_password'];
 }
+// get all settings of db
+$settingsq = mysql_query("SELECT * FROM settings WHERE id='0'") or die($messages["g5"]);
+foreach (mysql_fetch_array($settingsq) as $key => $pref) {
+    if (!is_numeric($key)) {
+        $setting[$key] = stripslashes($pref);
+    }
+}
 $hash = md5($loginun . $loginpw);
 $selectuser = mysql_query("SELECT * FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
 if (mysql_num_rows($selectuser) == 1) {
@@ -79,7 +86,9 @@ if (isset($loggedin) && $loggedin == TRUE) {
 <!DOCTYPE HTML>
 <html class="no-js">
 <head>
-    <title>Streamers Admin Panel - Web Login</title>
+    <title><?php
+        echo htmlspecialchars($setting['title']) . ' - ' . htmlspecialchars($setting['slogan']);
+        ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="icon" href="./images/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon"/>
@@ -119,7 +128,7 @@ if (isset($loggedin) && $loggedin == TRUE) {
             }, '');
         }
 
-       // Server News Modul
+        // Server News Modul
         $server_news = mysql_query("SELECT server_news FROM settings WHERE id='0'");
         if (mysql_result($server_news, 0) == "1") {
             ?>
@@ -140,7 +149,7 @@ if (isset($loggedin) && $loggedin == TRUE) {
 
 
 
-?>
+        ?>
 
 
 
@@ -221,17 +230,17 @@ if (isset($loggedin) && $loggedin == TRUE) {
 
 
     </div>
-    <div class="clear"></div>
-    <footer>
-        <p>
-            Steamers Admin Panel | Dev by: djcrackhome & Dave | <a href="http://www.streamerspanel.com/"
-                                                                   target="_blank">http://www.streamerspanel.com</a> |
-            <a href="http://www.nagualmedia.de/" target="_blank">Design by Zephon</a> | <a
-            href="http://www.facebook.com/streamers.admin.panel" target="_blank"><img src="./images/facebook.png"
-                                                                                      alt=""></a><a
-            href="http://www.twitter.com/streamerspanel" target="_blank"><img src="./images/twitter.png" alt=""></a>
-        </p>
-    </footer>
-</div>
+        <div class="clear"></div>
+        <footer>
+            <p>
+                Steamers Admin Panel | Dev by: djcrackhome & Dave | <a href="http://www.streamerspanel.com/"
+                                                                       target="_blank">http://www.streamerspanel.com</a> |
+                <a href="http://www.nagualmedia.de/" target="_blank">Design by Zephon</a> | <a
+                href="http://www.facebook.com/streamers.admin.panel" target="_blank"><img src="./images/facebook.png"
+                                                                                          alt=""></a><a
+                href="http://www.twitter.com/streamerspanel" target="_blank"><img src="./images/twitter.png" alt=""></a>
+            </p>
+        </footer>
+    </div>
 </body>
 </html>
