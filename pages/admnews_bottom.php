@@ -30,13 +30,39 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 <h2><?php echo $messages["adm1"];?></h2>
 <div class="contact_top_menu">
     <div class="tool_top_menu">
-        <div class="main_shorttool"><?php echo $messages["adm2"];?></div>
+        <div class="main_shorttool"><?php echo $messages["adm2"];?>
+        </div>
         <div class="main_righttool">
             <h2><?php echo $messages["adm3"];?></h2>
             <p><?php echo $messages["adm4"];?></p>
-            <p>&nbsp;</p>
         </div>
     </div>
+    <fieldset>
+        <form method="post" action="content.php?include=admnews">
+            <table>
+                <?php
+                $editNews = mysql_query("SELECT id,titel FROM news ");
+                while($row = mysql_fetch_object($editNews))
+                {
+
+                    echo "<tr>";
+                    echo "<td>",$row->titel,"</td>";
+                    echo "<td>",$row->text,"</td>";
+                    echo '<td><input class="submit" type="submit" name="delmes" value="Löschen" onClick = "location.href"=\'xyz.htm\';></td>';
+                    echo "</tr>";
+                }
+                echo "</table>";
+
+                ?>
+
+
+
+        </form>
+    </fieldset>
+
+
+
+
     <form method="post" action="content.php?include=admnews" id="contactform">
         <fieldset>
             <legend><?php echo $messages["adm5"];?></legend>
@@ -48,10 +74,10 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                 <?php
                 if (isset($formerror)) {
                     if ($formerror == "reason") {
-                        echo "<span class=\"validate_error\">".$messages["2"]."</span>";
+                       echo "<span class=\"validate_error\">".$messages["adm7"]."</span>";
                     }
                     else {
-                        echo "<span class=\"validate_success\">".$messages["2"]."</span>";
+
                     }
                 }
                 ?>
@@ -61,10 +87,10 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                 <?php
                 if (isset($formerror)) {
                     if ($formerror == "message") {
-                        echo "<span class=\"validate_error\">".$messages["2"]."</span>";
+                        echo "<span class=\"validate_error\">".$messages["adm7"]."</span>";
                     }
                     else {
-                        echo "<span class=\"validate_success\">".$messages["352"]."</span>";
+
                     }
                 }
                 ?>

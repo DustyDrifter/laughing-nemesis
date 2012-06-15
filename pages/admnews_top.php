@@ -53,9 +53,20 @@ if (isset($_POST['submit'])) {
                         $correc[] = "<h2>".$messages["adm7"]."</h2>";
                     }
                     else {
-                        $errors[] = "<h2>".$messages["356"]."</h2>";
+
                     }
                 }
             }
         }
     }
+
+
+
+if ($_POST['delmes']){
+
+
+            $formerror = "message";
+
+
+
+}

@@ -152,11 +152,13 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						<span class="field_desc"><?php echo $messages["224"];?></span>
 					</div>
                     <div class="input_field">
-                        <label for="a"><?php echo $messages["223"];?></label>
-                        <input class="mediumfield" name="display_limit" type="text" value="<?php echo $setting['display_limit'];?>" />
-                        <span class="field_desc"><?php echo $messages["224"];?></span>
+                    <label for="a"><?php echo $messages["221"];?></label>
+                    <select class="formselect_loca" name="login_captcha">
+                        <option value="1"<?php if ($setting['login_captcha']=='1') echo " selected=\"selected\"";?>><?php echo $messages["dd15"]; ?></option>
+                        <option value="0"<?php if ($setting['login_captcha']=='0') echo " selected=\"selected\"";?>><?php echo $messages["dd16"]; ?></option>
+                    </select>
+                    <span class="field_desc"><?php echo $messages["220"];?></span>
                     </div>
-
 
                     <div class="input_field">
                         <label for="a"><?php echo$messages["admsrv_9"];?></label>

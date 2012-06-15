@@ -798,7 +798,7 @@ $messages["adm4"]		=		"Es werden jeweils die letzten 3 Meldungen auf der Startse
 $messages["adm5"]		=		"Sie haben hier die Möglichkeit Ihren Kunden eine Nachricht zu hinterlassen";
 $messages["adm6"]		=		"Titel";
 $messages["adm7"]		=		"Ihre Nachricht wurde erfolgreich gespeichert";
-$messages["adm"]		=		"Updates";
+$messages["adm7"]		=		"Achtung dieses Feld darf nicht leer sein!";
 $messages["adm"]		=		"Updates";
 
 
