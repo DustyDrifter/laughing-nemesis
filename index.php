@@ -219,16 +219,6 @@ if (isset($loggedin) && $loggedin == TRUE) {
                 </form>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
     </div>
         <div class="clear"></div>
         <footer>
