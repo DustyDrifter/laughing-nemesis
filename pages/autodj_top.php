@@ -101,7 +101,7 @@ if (isset($_GET['id'])) {
                         sleep(4);
                         $pid = stream_get_contents($ssh2_exec_com);
                         if (!$pid || $pid == "") {
-                            mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','Server failure','The server with id ".$_GET['view']." cannot start on port ".$serverdata['portbase']."','".$_SERVER['REMOTE_ADDR']."')");
+                            mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','Server failure','The server with id ".mysql_real_escape_string($_GET['view'])." cannot start on port ".$serverdata['portbase']."','".$_SERVER['REMOTE_ADDR']."')");
                             echo "Could not start server, please contact administration using the contact form on your left";
                             echo "".$filename."";
                         }
@@ -111,7 +111,7 @@ if (isset($_GET['id'])) {
                         sleep(4);
                     }
                     if (!$pid || $pid == "") {
-                        mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('" . $loginun . "','Server failure','The server with id " . $_GET['view'] . " cannot start on port " . $serverdata['portbase'] . "','" . $_SERVER['REMOTE_ADDR'] . "')");
+                        mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('" . $loginun . "','Server failure','The server with id " . mysql_real_escape_string($_GET['view']) . " cannot start on port " . mysql_real_escape_string($serverdata['portbase']) . "','" . $_SERVER['REMOTE_ADDR'] . "')");
                         echo "Could not start server, please contact administration using the contact form on your left";
                         echo "" . $filename . "";
                     }

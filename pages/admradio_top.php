@@ -210,7 +210,7 @@ if (isset($_GET['view'])) {
                         sleep(3);
                         $pid = stream_get_contents($ssh2_exec_com);
                         if (!$pid || $pid == "") {
-                            mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('" . $loginun . "','Server failure','The server with id " . $_GET['view'] . " cannot start on port " . $serverdata['portbase'] . "','" . $_SERVER['REMOTE_ADDR'] . "')");
+                            mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('" . $loginun . "','Server failure','The server with id " . mysql_real_escape_string($_GET['view']) . " cannot start on port " . $serverdata['portbase'] . "','" . $_SERVER['REMOTE_ADDR'] . "')");
                             $errors[] = "<h2>" . $messages["180"] . "</h2>";
                         }
                     }

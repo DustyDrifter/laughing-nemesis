@@ -52,7 +52,14 @@ if (isset($_POST['submit'])) {
 	}
 	$fields = "";
 	$values = "";
-	if (mysql_query("UPDATE users SET user_email='".$_POST["u_user_email"]."',contact_number='".$_POST["u_contact_number"]."',mobile_number='".$_POST["u_mobile_number"]."',name='".$_POST["u_name"]."',surname='".$_POST["u_surname"]."',age='".$_POST["u_age"]."' WHERE id='".$userdata['id']."' ") ) {
+    $u_user_email = mysql_real_escape_string($_POST["u_user_email"]);
+    $u_contact_number = mysql_real_escape_string($_POST["u_contact_number"]);
+    $u_mobile_number = mysql_real_escape_string($_POST["u_mobile_number"]);
+    $u_name = mysql_real_escape_string($_POST["u_name"]);
+    $_surname = mysql_real_escape_string($_POST["u_surname"]);
+    $u_age = mysql_real_escape_string($_POST["u_age"]);
+
+	if (mysql_query("UPDATE users SET user_email='".$u_user_email."',contact_number='".$u_contact_number."',mobile_number='".$u_mobile_number."',name='".$u_name."',surname='".$_surname."',age='".$u_age."' WHERE id='".$userdata['id']."' ") ) {
 		$correc[] = "<h2>".$messages["84"]."</h2>";
 	}
 	else{

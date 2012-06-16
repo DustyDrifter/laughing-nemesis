@@ -73,10 +73,14 @@ if (isset($_GET['login']) && $_GET['login'] == "logout") {
     header('Location: index.php?login=logout');
 }
 $loggedin = FALSE;
+
+
 if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($_POST['username']) && isset($_POST['user_password'])) {
+
+
     if (isset($_POST['login_submit'])) {
-        $loginun = $_POST['username'];
-        $loginpw = $_POST['user_password'];
+        $loginun = mysql_real_escape_string($_POST['username']);
+        $loginpw = mysql_real_escape_string($_POST['user_password']);
     } else {
         $loginun = $_SESSION['username'];
         $loginpw = $_SESSION['user_password'];
@@ -112,8 +116,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
             $selectuser = mysql_query("SELECT dj_of_user FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
             $selectit = mysql_fetch_object($selectuser);
 
-            $user_id =      $selectit->dj_of_user;
-            echo $user_id;
+            $user_id = $selectit->dj_of_user;
+
 
             // REWRITE LOGINNUM
 
@@ -151,6 +155,7 @@ if (isset($loggedin) && $loggedin == TRUE) {
         header('Location: index.php?login=data');
     }
 }
+
 
 if ($include_php == "upload" && isset($_GET['upport'])) {
     $target_path = "pages/uploads/" . $_GET['upport'] . '/';
@@ -328,6 +333,11 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
         }
     }
 }
+
+
+
+
+
 // additional message insert by $_GET
 if (!isset($_GET['message_ext']) or !isset($_GET['message_lang'])) {
 } else {
@@ -341,6 +351,8 @@ if (!isset($_GET['message_ext']) or !isset($_GET['message_lang'])) {
         $correc[] = $messages[$_GET['message_lang']];
     }
 }
+
+
 // MySQL connection
 $connection = mysql_connect($db_host, $db_username, $db_password) or die($messages["g1"]);
 $db = mysql_select_db($database) or die($messages["g2"]);
@@ -399,6 +411,7 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
     require_once './pages/' . $include_php . '_bottom.php';
     die();
 }
+
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">

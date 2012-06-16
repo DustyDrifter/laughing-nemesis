@@ -49,10 +49,12 @@ if (isset($_POST['submit'])) {
 				}
 				else {
 					if (function_exists('htmlspecialchars_decode'))
-						$messagesql = htmlspecialchars_decode($_POST['message'], ENT_QUOTES);
+						$messagesql = htmlspecialchars_decode(mysql_real_escape_string($_POST['message']), ENT_QUOTES);
+                        //$messagesql = mysql_real_escape_string($messagesql);
 					if (function_exists('htmlspecialchars_decode'))
-						$reasonsql = htmlspecialchars_decode($_POST['reason'], ENT_QUOTES);
-					if (mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','".$reasonsql."','".$messagesql."','".$_SERVER['REMOTE_ADDR']."')")) {
+						$reasonsql = htmlspecialchars_decode(mysql_real_escape_string($_POST['reason']), ENT_QUOTES);
+                        //$reasonsql = mysql_real_escape_string($reasonsql);
+					if (mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('".$loginun."','".$reasonsql."','".$messagesql."','".mysql_real_escape_string($_SERVER['REMOTE_ADDR'])."')")) {
 						$correc[] = "<h2>".$messages["355"]."</h2>";
 					}
 					else {
