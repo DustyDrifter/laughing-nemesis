@@ -109,10 +109,10 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         $userdata = mysql_fetch_array($selectuser);
         $loginun = $userdata['username'];
         $user_level = $userdata['user_level'];
-        $_SESSION['loginun']  = $loginun;
         $_SESSION['loginun'] = $loginun;
-            // Abfrage Server
-        if ($user_level == 'dj'){
+
+        // Abfrage Server
+        if ($user_level == 'dj') {
             $selectuser = mysql_query("SELECT dj_of_user FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
             $selectit = mysql_fetch_object($selectuser);
 
@@ -126,7 +126,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
             $loginun = $row->username;
 
 
-        }else{
+        } else {
             $user_id = $userdata['id'];
         }
 
@@ -135,7 +135,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
             $correc[] = "<h2>" . $messages["15"] . "</h2>";
         }
 
-        if($user_level == 'banned') {
+        if ($user_level == 'banned') {
             session_destroy();
             $loggedin = FALSE;
         }
@@ -335,9 +335,6 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
 }
 
 
-
-
-
 // additional message insert by $_GET
 if (!isset($_GET['message_ext']) or !isset($_GET['message_lang'])) {
 } else {
@@ -513,56 +510,56 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
 </head>
 <body>
 <div id="mainContainer">
-    <header>
-        <div class="header logo">
-            <a href="loadContent-main" title=""><img src="./images/logo.png" alt=""/></a>
-        </div>
+<header>
+    <div class="header logo">
+        <a href="loadContent-main" title=""><img src="./images/logo.png" alt=""/></a>
+    </div>
         <span class="header profileStatus"><?php
             echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($_SESSION['loginun']) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
             ?>
-    </header>
-    <div class="clear"></div>
-    <div id="menuContainer">
-        <div id="menuFrame">
-            <div id="menuHead">
+</header>
+<div class="clear"></div>
+<div id="menuContainer">
+    <div id="menuFrame">
+        <div id="menuHead">
                 <span id="headContent"><?php
                     echo htmlspecialchars($messages["22"]);
                     ?> <b id="menuHead.username"><?PHP
                         echo htmlspecialchars($loginun);
                         ?></b></span>
-                <?php
-                if ($user_level == 'Super Administrator') {
-                    $noticesq = mysql_query("SELECT * FROM notices");
-                    if (mysql_num_rows($noticesq) == 0) {
-                        echo '<span id="headContent_under">' . htmlspecialchars($messages["23"]) . '</span>';
-                    } else {
-                        $noticesqquant = mysql_num_rows($noticesq);
-                        if ($noticesqquant == 1) {
-                            echo '<span id="headContent_under">' . htmlspecialchars($messages["24"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["25"]) . "</span>";
-                        } else {
-                            echo '<span id="headContent_under">' . htmlspecialchars($messages["26"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["27"]) . " </span>";
-                        }
-                    }
-                } elseif($user_level == 'User') {
-                    echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["28"]) . '</span>';
-                }else{
-                    echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["add28"]) . '</span>';
-                }
-                ?>
-            </div>
-            <div id="navHead">
-
-                <h4><?php
-                    echo htmlspecialchars($messages["29"]);
-                    ?></h4>
-                <h5><?php
-                    echo htmlspecialchars($messages["30"]);
-                    ?></h5>
-            </div>
             <?php
-            if ($user_level == 'User' OR $user_level == 'Super Administrator') {
-                ?>
-                <nav class="navFirst">
+            if ($user_level == 'Super Administrator') {
+                $noticesq = mysql_query("SELECT * FROM notices");
+                if (mysql_num_rows($noticesq) == 0) {
+                    echo '<span id="headContent_under">' . htmlspecialchars($messages["23"]) . '</span>';
+                } else {
+                    $noticesqquant = mysql_num_rows($noticesq);
+                    if ($noticesqquant == 1) {
+                        echo '<span id="headContent_under">' . htmlspecialchars($messages["24"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["25"]) . "</span>";
+                    } else {
+                        echo '<span id="headContent_under">' . htmlspecialchars($messages["26"]) . ' <b id="menuHead.amount">' . htmlspecialchars($noticesqquant) . "</b> " . htmlspecialchars($messages["27"]) . " </span>";
+                    }
+                }
+            } elseif ($user_level == 'User') {
+                echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["28"]) . '</span>';
+            } else {
+                echo '<span id="headContent_under">Shoutcast Admin Panel 3 - ' . htmlspecialchars($messages["add28"]) . '</span>';
+            }
+            ?>
+        </div>
+        <div id="navHead">
+
+            <h4><?php
+                echo htmlspecialchars($messages["29"]);
+                ?></h4>
+            <h5><?php
+                echo htmlspecialchars($messages["30"]);
+                ?></h5>
+        </div>
+        <?php
+        if ($user_level == 'User' OR $user_level == 'Super Administrator') {
+            ?>
+            <nav class="navFirst">
                 <ul class="navMenu">
                     <li><a href="loadContent-contact" title=""><?php
                         echo htmlspecialchars($messages["31"]);
@@ -574,19 +571,25 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                         echo htmlspecialchars($messages["33"]);
                         ?></a></li>
                     <li><a href="loadContent-server" title=""><?php
-                        echo htmlspecialchars($messages["34"]);
+                        if ($user_level == 'Super Administrator') {
+                            echo htmlspecialchars($messages["add34"]);
+                        } else {
+                            echo htmlspecialchars($messages["34"]);
+                        }
+
+
                         ?></a></li>
                 </ul>
             </nav>
 
-                <?php
-            }
-            if ($setting['os'] == 'linux') {
+            <?php
+        }
+        if ($setting['os'] == 'linux') {
 
-                if ($user_level == 'dj') {
+            if ($user_level == 'dj') {
 
-                } else{
-                    ?>
+            } else {
+                ?>
                 <div id="navHeadSub">
                     <h4><?php
                         echo htmlspecialchars($messages["35"]);
@@ -595,138 +598,138 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                         echo htmlspecialchars($messages["36"]);
                         ?></h5>
                 </div>
-                    <?php } ?>
+                <?php } ?>
 
-                <nav class="navBottom">
-                    <ul class="navMenu">
-                        <li><a href="loadContent-music" title=""><?php
-                            echo htmlspecialchars($messages["37"]);
-                            ?></a></li>
-                        <li><a href="loadContent-autodj" title=""><?php
-                            echo htmlspecialchars($messages["38"]);
-                            ?></a></li>
-                    </ul>
-                </nav>
-                <?php
-            }
-            ?>
+            <nav class="navBottom">
+                <ul class="navMenu">
+                    <li><a href="loadContent-music" title=""><?php
+                        echo htmlspecialchars($messages["37"]);
+                        ?></a></li>
+                    <li><a href="loadContent-autodj" title=""><?php
+                        echo htmlspecialchars($messages["38"]);
+                        ?></a></li>
+                </ul>
+            </nav>
             <?php
-            if ($user_level == 'Super Administrator') {
-                ?>
-                <div id="navHeadSub_2">
-                    <h4><?php
-                        echo htmlspecialchars($messages["39"]);
-                        ?></h4>
-                    <h5><?php
-                        echo htmlspecialchars($messages["40"]);
-                        ?></h5>
-                </div>
-                <nav class="navBottom">
-                    <ul class="navMenu">
-                        <li><a href="loadContent-admserver" title=""><?php
-                            echo htmlspecialchars($messages["41"]);
-                            ?></a></li>
-                        <li><a href="loadContent-admradio" title=""><?php
-                            echo htmlspecialchars($messages["42"]);
-                            ?></a></li>
-                        <li><a href="loadContent-admuser" title=""><?php
-                            echo htmlspecialchars($messages["43"]);
-                            ?></a></li>
-
-                        <li><a href="loadContent-admnews" title=""><?php
-                            echo htmlspecialchars($messages["nws1"]);
-                            ?></a></li>
-
-                    </ul>
-                </nav>
-                <?php
-            }
+        }
+        ?>
+        <?php
+        if ($user_level == 'Super Administrator') {
             ?>
-            <div id="navHeadSub_3">
+            <div id="navHeadSub_2">
                 <h4><?php
-                    echo htmlspecialchars($messages["44"]);
+                    echo htmlspecialchars($messages["39"]);
                     ?></h4>
                 <h5><?php
-                    echo htmlspecialchars($messages["45"]);
+                    echo htmlspecialchars($messages["40"]);
                     ?></h5>
             </div>
-            <div id="infoBox">
-                <table class="ip_table">
-                    <tbody>
-                    <tr>
-                        <td class="ip_table"><?php
-                            echo $messages["46"];
-                            ?></td>
-                        <td class="ip_table_under"><?PHP
-                            echo ($_SERVER['REMOTE_ADDR']);
-                            ?></td>
-                    </tr>
-                    <tr>
-                        <td class="ip_table"><?php
-                            echo $messages["47"];
-                            ?></td>
-                        <td class="ip_table_under"><?PHP
-                            echo ($_SERVER['SERVER_ADDR']);
-                            ?></td>
-                    </tr>
-                    <tr>
-                        <td class="ip_table"><?php
-                            echo $messages["48"];
-                            ?></td>
-                        <td class="ip_table_under"><?php
-                            echo $currentVersion;
-                            ?></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="rightFrame">
-        <div id="contentload">
-        </div>
-        <?PHP
+            <nav class="navBottom">
+                <ul class="navMenu">
+                    <li><a href="loadContent-admserver" title=""><?php
+                        echo htmlspecialchars($messages["41"]);
+                        ?></a></li>
+                    <li><a href="loadContent-admradio" title=""><?php
+                        echo htmlspecialchars($messages["42"]);
+                        ?></a></li>
+                    <li><a href="loadContent-admuser" title=""><?php
+                        echo htmlspecialchars($messages["43"]);
+                        ?></a></li>
 
+                    <li><a href="loadContent-admnews" title=""><?php
+                        echo htmlspecialchars($messages["nws1"]);
+                        ?></a></li>
 
-        if (count($errors) > 0) {
-            echo array_reduce($errors, function($initial, $value)
-            {
-                return $initial . sprintf('<div class="error">%s</div>', $value);
-            }, '');
+                </ul>
+            </nav>
+            <?php
         }
-
-        if (count($notifi) > 0) {
-            echo array_reduce($notifi, function($initial, $value)
-            {
-                return $initial . sprintf('<div class="notifi">%s</div>', $value);
-            }, '');
-        }
-
-        if (count($correc) > 0) {
-            echo array_reduce($correc, function($initial, $value)
-            {
-                return $initial . sprintf('<div class="correct">%s</div>', $value);
-            }, '');
-        }
-
-        echo '<section id="content">';
-        echo '<div class="box">';
-        require_once './pages/' . $include_php . '_bottom.php';
-        echo '</div>';
-        echo '</section>';
         ?>
+        <div id="navHeadSub_3">
+            <h4><?php
+                echo htmlspecialchars($messages["44"]);
+                ?></h4>
+            <h5><?php
+                echo htmlspecialchars($messages["45"]);
+                ?></h5>
+        </div>
+        <div id="infoBox">
+            <table class="ip_table">
+                <tbody>
+                <tr>
+                    <td class="ip_table"><?php
+                        echo $messages["46"];
+                        ?></td>
+                    <td class="ip_table_under"><?PHP
+                        echo ($_SERVER['REMOTE_ADDR']);
+                        ?></td>
+                </tr>
+                <tr>
+                    <td class="ip_table"><?php
+                        echo $messages["47"];
+                        ?></td>
+                    <td class="ip_table_under"><?PHP
+                        echo ($_SERVER['SERVER_ADDR']);
+                        ?></td>
+                </tr>
+                <tr>
+                    <td class="ip_table"><?php
+                        echo $messages["48"];
+                        ?></td>
+                    <td class="ip_table_under"><?php
+                        echo $currentVersion;
+                        ?></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="clear"></div>
-    <footer>
-        <p>
-            Streamers Admin Panel | djcrackhome | Dave | <a href="http://www.streamerspanel.com/" target="_blank">http://www.streamerspanel.com</a>
-            | <a href="http://www.nagualmedia.de/" target="_blank">Design by Zephon</a> | Translated by: <i><?php
+</div>
+<div id="rightFrame">
+    <div id="contentload">
+    </div>
+    <?PHP
 
-            ?></i> | <a href="http://www.facebook.com/streamers.admin.panel" target="_blank"><img
-            src="./images/facebook.png" alt=""></a><a href="http://www.twitter.com/streamerspanel" target="_blank"><img
-            src="./images/twitter.png" alt=""></a>
-        </p>
-    </footer>
+
+    if (count($errors) > 0) {
+        echo array_reduce($errors, function($initial, $value)
+        {
+            return $initial . sprintf('<div class="error">%s</div>', $value);
+        }, '');
+    }
+
+    if (count($notifi) > 0) {
+        echo array_reduce($notifi, function($initial, $value)
+        {
+            return $initial . sprintf('<div class="notifi">%s</div>', $value);
+        }, '');
+    }
+
+    if (count($correc) > 0) {
+        echo array_reduce($correc, function($initial, $value)
+        {
+            return $initial . sprintf('<div class="correct">%s</div>', $value);
+        }, '');
+    }
+
+    echo '<section id="content">';
+    echo '<div class="box">';
+    require_once './pages/' . $include_php . '_bottom.php';
+    echo '</div>';
+    echo '</section>';
+    ?>
+</div>
+<div class="clear"></div>
+<footer>
+    <p>
+        Streamers Admin Panel | djcrackhome | Dave | <a href="http://www.streamerspanel.com/" target="_blank">http://www.streamerspanel.com</a>
+        | <a href="http://www.nagualmedia.de/" target="_blank">Design by Zephon</a> | Translated by: <i><?php
+
+        ?></i> | <a href="http://www.facebook.com/streamers.admin.panel" target="_blank"><img
+        src="./images/facebook.png" alt=""></a><a href="http://www.twitter.com/streamerspanel" target="_blank"><img
+        src="./images/twitter.png" alt=""></a>
+    </p>
+</footer>
 </div>
 </body>
 </html>

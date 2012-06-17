@@ -35,7 +35,16 @@ else {
 	$p = $_GET['p'] * $limit;
 }
 $l = $p + $limit;
-$listq = mysql_query("SELECT * FROM servers WHERE owner='".$loginun."' ORDER BY id ASC LIMIT $p,$limit");
+
+if ($user_level == 'Super Administrator') {
+
+    $listq = mysql_query("SELECT * FROM servers ORDER BY id ASC LIMIT $p,$limit");
+}else{
+    $listq = mysql_query("SELECT * FROM servers WHERE owner='".$loginun."' ORDER BY id ASC LIMIT $p,$limit");
+}
+
+
+
 if (!isset($_GET['manage'])) {
 ?>
 		<h2><?php echo $messages["433"];?></h2>
@@ -51,9 +60,12 @@ if (!isset($_GET['manage'])) {
 				<table cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-							<th><?php echo $messages["437"];?></th>
+
+                            <?php   if ($user_level == 'Super Administrator') { echo "<th>".$messages["add439"]."</th>";} ?>
+                            <th><?php echo $messages["437"];?></th>
 							<th><?php echo $messages["438"];?></th>
 							<th><?php echo $messages["439"];?></th>
+
 							<th>&nbsp;</th>
 						</tr>
 					</thead>
@@ -66,7 +78,10 @@ if (!isset($_GET['manage'])) {
 						}
 						else {
 							while($data = mysql_fetch_array($listq)) {
-								echo '<tr>
+
+                                echo "<tr>";
+                                if ($user_level == 'Super Administrator') { echo "<td>".$data['owner']."</td>";}
+                                echo '
 									<td><a href="http://'.$setting['host_add'].':'.$data['portbase'].'/" target="_blank">'.$setting['host_add'].'</a></td>
 									<td><a href="http://'.$setting['host_add'].':'.$data['portbase'].'/" target="_blank">'.$data['portbase'].'</a></td>
 									<td><div class="space_show" style="background-position:';
