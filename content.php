@@ -158,7 +158,7 @@ if (isset($loggedin) && $loggedin == TRUE) {
 
 
 if ($include_php == "upload" && isset($_GET['upport'])) {
-    $target_path = "pages/uploads/" . $_GET['upport'] . '/';
+    $target_path = "uploads/" . $_GET['upport'] . '/';
     $allowedExts = array();
     $maxFileSize = 0;
 
@@ -256,7 +256,7 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
             echo '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>';
             $listing_start = 1;
             $listing_end = 10000;
-            $dirlisting = @scandir(dirname(__FILE__) . '/pages/uploads/' . $port) or die();
+            $dirlisting = @scandir(dirname(__FILE__) . '/uploads/' . $port) or die();
             $dirlistingsearch = array(
                 '&',
                 '<',
@@ -280,7 +280,7 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
                 }
 
                 if (($dirlisting[$i] != ".") && ($dirlisting[$i] != "..") && ($dirlisting[$i] != "")) {
-                    $itemId = sprintf('%s/pages/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
+                    $itemId = sprintf('%s/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
                     $itemText = str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]);
                     printf('<item id="%s" text="%s"/>', $itemId, $itemText);
                 }
@@ -320,7 +320,7 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
                 $inta = 0;
                 foreach ($entrys as $entry) {
                     $inta++;
-                    $entry1 = str_replace(dirname(__FILE__) . "/pages/uploads/" . $port . "/", "", $entry);
+                    $entry1 = str_replace(dirname(__FILE__) . "/uploads/" . $port . "/", "", $entry);
                     if ($entry1 != "") {
                         $magix = str_replace($dirlistingsearch, $dirlistingreplace, $entry1);
                         printf('<item child="0" id="%s" text="%s"></item>', $magix, $magix);
