@@ -76,7 +76,7 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 					if(($filename == '.') || ($filename == '..')) 
 					continue;
 					$filedata = stat($dir."/".$filename);
-					$filesize += $filedata[7];
+					$filesize += $filedata[250];
 				}
 				$actual_dir_size = $filesize/1024;
 			}
@@ -137,7 +137,7 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 					if(($filename == '.') || ($filename == '..')) 
 					continue;
 					$filedata = stat($dir."/".$filename);
-					$filesize += $filedata[7];
+					$filesize += $filedata[250];
 				}
 				$actual_dir_size = $filesize/1024;
 			}
@@ -169,7 +169,7 @@ else {
 	if (isset($_GET['delete'])) {
 		$deletefiledecoded = base64_decode($_GET['delete']);
 		if (file_exists("./uploads/".$port."/".$deletefiledecoded."")) {
-			//unlink("./uploads/".$port."/".$deletefiledecoded."");
+			unlink("./uploads/".$port."/".$deletefiledecoded."");
 			$correc[] = "<h2>".$messages["556"]."</h2>";
 			$playlistupdate = "2";
 		}
@@ -209,7 +209,7 @@ else {
 					if(($filename == '.') || ($filename == '..')) 
 					continue;
 					$filedata = stat($dir."/".$filename);
-					$filesize += $filedata[7];
+					$filesize += $filedata[250];
 				}
 				$actual_dir_size = $filesize/1024;
 			}
@@ -223,7 +223,7 @@ else {
 	}
 }
 $dirlistdir = @opendir("./uploads/".$port."/") or $errors[] = "<h2>".$messages["561"]."</h2>";
-define('entries_per_page',7);
+define('entries_per_page',250);
 if (!isset($_GET['filecount']) or !is_numeric($_GET['filecount'])) $offset = 1;
 else $offset = $_GET['filecount'];
 if ($offset == 1) {

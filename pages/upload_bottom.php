@@ -115,7 +115,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 					}
 				}
 				closedir($dirlistdir);
-				$pagessubcount = ceil($counter/7);
+				$pagessubcount = ceil($counter/250);
 				if ($offset == 1) {
 					echo "<li><a href=\"content.php?include=upload&portbase=".$port."&filecount=".($offset)."\">".$messages["545"]."</a></li>";
 				}

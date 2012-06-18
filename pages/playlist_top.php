@@ -52,7 +52,7 @@ else {
 if (($_GET['indiv'] == "0") && (isset($_GET['listname'])) && ($_GET['delete'] == "1")) {
 	$deletefiledecoded = strip_tags(str_replace('/', '', base64_decode($_GET['listname'])));
 	if (file_exists("./temp/".$port."/playlist/".$deletefiledecoded."")) {
-		//unlink("./temp/".$port."/playlist/".$deletefiledecoded."");
+		unlink("./temp/".$port."/playlist/".$deletefiledecoded."");
 		$correc[] = "<h2>".$messages["407"]."</h2>";
 	}
 	else {
@@ -131,7 +131,7 @@ if ($_GET['delete'] !== "1") {
 	}
 }
 else {
-	define('entries_per_page',100);
+	define('entries_per_page',2500);
 	if (!isset($_GET['filecount']) or !is_numeric($_GET['filecount'])) $offset = 1;
 	else $offset = $_GET['filecount'];
 	if ($offset == 1) {
