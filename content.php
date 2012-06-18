@@ -557,12 +557,17 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                 ?></h5>
         </div>
         <?php
+
+
         if ($user_level == 'User' OR $user_level == 'Super Administrator') {
             ?>
             <nav class="navFirst">
                 <ul class="navMenu">
+
+
+
                     <li><a href="loadContent-contact" title=""><?php
-                        echo htmlspecialchars($messages["31"]);
+                       echo htmlspecialchars($messages["31"]);
                         ?></a></li>
                     <li><a href="loadContent-public" title=""><?php
                         echo htmlspecialchars($messages["32"]);
@@ -576,20 +581,18 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                         } else {
                             echo htmlspecialchars($messages["34"]);
                         }
-
-
                         ?></a></li>
+
+
                 </ul>
             </nav>
 
             <?php
         }
         if ($setting['os'] == 'linux') {
-
-            if ($user_level == 'dj') {
-
-            } else {
                 ?>
+
+
                 <div id="navHeadSub">
                     <h4><?php
                         echo htmlspecialchars($messages["35"]);
@@ -598,12 +601,17 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                         echo htmlspecialchars($messages["36"]);
                         ?></h5>
                 </div>
-                <?php } ?>
+
 
             <nav class="navBottom">
                 <ul class="navMenu">
                     <li><a href="loadContent-music" title=""><?php
-                        echo htmlspecialchars($messages["37"]);
+
+                      if ($user_level == 'dj'){
+
+                      }else{
+                          echo htmlspecialchars($messages["37"]);
+                      }
                         ?></a></li>
                     <li><a href="loadContent-autodj" title=""><?php
                         echo htmlspecialchars($messages["38"]);

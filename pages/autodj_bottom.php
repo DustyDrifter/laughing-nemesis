@@ -88,7 +88,14 @@ if (!isset($_GET['action']) || $_GET['action'] !== "edit") {
                         echo '</select>
 									</td>
 									<td><a class="selector" href="javascript:document.sc_transform' . $data['portbase'] . '.submit()">' . $messages["285"] . '</a></td>
-									<td><a class="delete" href="content.php?include=autodj&id=' . $data['id'] . '&action=stop">' . $messages["286"] . '</a><a class="edit" href="content.php?include=autodj&id=' . $data['id'] . '&action=edit">' . $messages["287"] . '</a></td>
+									<td>
+									<a class="delete" href="content.php?include=autodj&id=' . $data['id'] . '&action=stop">' . $messages["286"] . '</a> ';
+
+                                    if ($user_level != 'dj'){
+									echo '<a class="edit" href="content.php?include=autodj&id=' . $data['id'] . '&action=edit">' . $messages["287"] . '</a></td>';
+                                    }
+
+                        echo '
 									</tr>
 									</form>';
                     }
