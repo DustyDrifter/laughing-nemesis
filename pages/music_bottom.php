@@ -87,8 +87,8 @@ $select = mysql_query("SELECT * FROM servers WHERE owner='".$loginun."' ORDER BY
 						<td><a href="http://'.$setting['host_add'].':'.$data['portbase'].'/" target="_blank">'.$setting['host_add'].'</a></td>
 						<td><a href="http://'.$setting['host_add'].':'.$data['portbase'].'/" target="_blank">'.$data['portbase'].'</a></td>
 						<td><div class="space_show" style="background-position:';
-						if (file_exists("./uploads/".$data['portbase']."/")) {
-							$dir = "./uploads/".$data['portbase']."/";
+						if (file_exists("./pages/uploads/".$data['portbase']."/")) {
+							$dir = "./pages/uploads/".$data['portbase']."/";
 							$filesize = 0;
 							if(is_dir($dir)) {
 								if($dp = opendir($dir)) {

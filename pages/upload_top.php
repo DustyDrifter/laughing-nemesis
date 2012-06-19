@@ -54,12 +54,12 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 	}
 	$database_space = mysql_query("SELECT * FROM servers WHERE portbase='".$port."'") or die ();
 	$data = mysql_fetch_array($database_space); 
-	if (file_exists("./uploads/".$port."/")) {
+	if (file_exists("./pages/uploads/".$port."/")) {
 		$port_use = $port;
 	}
 	else {
 		$old = umask(0);
-		mkdir("./uploads/".$port."", 0777);
+		mkdir("./pages/uploads/".$port."", 0777);
 		umask($old);
 		$port_use = $port;
 		if ($old != umask()) {
@@ -67,8 +67,8 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 			die ();
 		}
 	}
-	if (file_exists("./uploads/".$port."/")) {
-		$dir = "./uploads/".$port."/";
+	if (file_exists("./pages/uploads/".$port."/")) {
+		$dir = "./pages/uploads/".$port."/";
 		$filesize = 0;
 		if(is_dir($dir)) {
 			if($dp = opendir($dir)) {
@@ -76,7 +76,7 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 					if(($filename == '.') || ($filename == '..')) 
 					continue;
 					$filedata = stat($dir."/".$filename);
-					$filesize += $filedata[250];
+					$filesize += $filedata[7];
 				}
 				$actual_dir_size = $filesize/1024;
 			}
@@ -110,7 +110,7 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
     	)
 	) 
 	{
-		$newname = "./uploads/".$port_use."/$filename";
+		$newname = "./pages/uploads/".$port_use."/$filename";
 		if (!file_exists($newname)) {
 			if ((move_uploaded_file($_FILES['uploaded_file']['tmp_name'],$newname))) {
 				$correc[] = "<h2>".$messages["550"]."</h2>";
@@ -128,8 +128,8 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 		$errors[] = "<h2>".$messages["553"]."</h2>";
 	}
 	}
-	if (file_exists("./uploads/".$port."/")) {
-		$dir = "./uploads/".$port."/";
+	if (file_exists("./pages/uploads/".$port."/")) {
+		$dir = "./pages/uploads/".$port."/";
 		$filesize = 0;
 		if(is_dir($dir)) {
 			if($dp = opendir($dir)) {
@@ -137,7 +137,7 @@ if((!empty($_FILES["uploaded_file"])) && ($_FILES['uploaded_file']['error'] == 0
 					if(($filename == '.') || ($filename == '..')) 
 					continue;
 					$filedata = stat($dir."/".$filename);
-					$filesize += $filedata[250];
+					$filesize += $filedata[7];
 				}
 				$actual_dir_size = $filesize/1024;
 			}
@@ -168,8 +168,8 @@ else {
 	}
 	if (isset($_GET['delete'])) {
 		$deletefiledecoded = base64_decode($_GET['delete']);
-		if (file_exists("./uploads/".$port."/".$deletefiledecoded."")) {
-			unlink("./uploads/".$port."/".$deletefiledecoded."");
+		if (file_exists("./pages/uploads/".$port."/".$deletefiledecoded."")) {
+			//unlink("./pages/uploads/".$port."/".$deletefiledecoded."");
 			$correc[] = "<h2>".$messages["556"]."</h2>";
 			$playlistupdate = "2";
 		}
@@ -179,8 +179,8 @@ else {
 	}
 	if (isset($_GET['download'])) {
 		$downloadiddecode=base64_decode($_GET['download']);
-		if (file_exists("./uploads/".$port."/".$downloadiddecode."")) {
-			$filename = "./uploads/".$port."/".$downloadiddecode."";
+		if (file_exists("./pages/uploads/".$port."/".$downloadiddecode."")) {
+			$filename = "./pages/uploads/".$port."/".$downloadiddecode."";
 			if(ini_get("zlib.output_compression")) ini_set("zlib.output_compression", "Off");
 			header("Pragma: public");
 			header("Expires: 0");
@@ -200,8 +200,8 @@ else {
 	$database_space = mysql_query("SELECT * FROM servers WHERE portbase='".$port."'") or die ();
 	$data = mysql_fetch_array($database_space);
 	$port = strip_tags(str_replace('/', '', $port));
-	if (file_exists("./uploads/".$port."/")) {
-		$dir = "./uploads/".$port."/";
+	if (file_exists("./pages/uploads/".$port."/")) {
+		$dir = "./pages/uploads/".$port."/";
 		$filesize = 0;
 		if(is_dir($dir)) {
 			if($dp = opendir($dir)) {
@@ -209,7 +209,7 @@ else {
 					if(($filename == '.') || ($filename == '..')) 
 					continue;
 					$filedata = stat($dir."/".$filename);
-					$filesize += $filedata[250];
+					$filesize += $filedata[7];
 				}
 				$actual_dir_size = $filesize/1024;
 			}
@@ -222,8 +222,8 @@ else {
 		}
 	}
 }
-$dirlistdir = @opendir("./uploads/".$port."/") or $errors[] = "<h2>".$messages["561"]."</h2>";
-define('entries_per_page',250);
+$dirlistdir = @opendir("./pages/uploads/".$port."/") or $errors[] = "<h2>".$messages["561"]."</h2>";
+define('entries_per_page',7);
 if (!isset($_GET['filecount']) or !is_numeric($_GET['filecount'])) $offset = 1;
 else $offset = $_GET['filecount'];
 if ($offset == 1) {
@@ -233,7 +233,7 @@ else {
 	$listing_start = $offset * entries_per_page - entries_per_page + 3;
 }					
 $listing_end = $offset * entries_per_page + 2;
-$dirlisting = @scandir("./uploads/".$port) or $errors[] = "<h2>".$messages["562"]."</h2>";
+$dirlisting = @scandir("./pages/uploads/".$port) or $errors[] = "<h2>".$messages["562"]."</h2>";
 if (!isset($dirlisting[$listing_start])) $errors[] = "<h2>".$messages["563"]."</h2>";
 if (isset($_GET['playlist']) or is_numeric($_GET['playlist'])) {
 	if (!file_exists("./temp/".$port.".lst")) {
@@ -241,7 +241,7 @@ if (isset($_GET['playlist']) or is_numeric($_GET['playlist'])) {
     	fclose($handle);
    		chmod("./temp/".$port.".lst",0777);
 	}
-	shell_exec('find '.dirname(__FILE__).'/uploads/'.$port.'/ -type f -name "*.mp3" > ./temp/'.$port.'.lst');
+	shell_exec('find '.dirname(__FILE__).'/pages/uploads/'.$port.'/ -type f -name "*.mp3" > ./temp/'.$port.'.lst');	
 	header('Location: content.php?include=music&error=playlist');
 	die ();
 }

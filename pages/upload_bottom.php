@@ -96,7 +96,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 						if (($dirlisting[$i]!=".") and ($dirlisting[$i]!="..") and ($dirlisting[$i]!="")) {
 							echo "<tr>
 								<td>$dirlisting[$i]</td>
-								<td>".round((filesize("./uploads/".$port."/".$dirlisting[$i])/1024), 2)." KB (".round((filesize("./uploads/".$port."/".$dirlisting[$i])/1024/1024), 2)." MB)</td>
+								<td>".round((filesize("./pages/uploads/".$port."/".$dirlisting[$i])/1024), 2)." KB (".round((filesize("./pages/uploads/".$port."/".$dirlisting[$i])/1024/1024), 2)." MB)</td>
 									<td><a class=\"delete\" href=\"content.php?include=upload&portbase=".$port."&delete=".base64_encode($dirlisting[$i])."\">".$messages["543"]."</a><a class=\"selector\" href=\"content.php?include=upload&portbase=".$port."&download=".base64_encode($dirlisting[$i])."\">".$messages["544"]."</a></td>
 								</tr>";
 						}
@@ -111,11 +111,11 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 				$recursive=false;
 				while (($datei = readdir($dirlistdir)) !== false) {
 					if(($datei!=".") and ($datei!="..")) {
-						$counter = (is_dir("./uploads/".$port."/".$datei)) ? num_files("./uploads/".$port."/".$datei, $recursive, $counter) : $counter+1;
+						$counter = (is_dir("./pages/uploads/".$port."/".$datei)) ? num_files("./pages/uploads/".$port."/".$datei, $recursive, $counter) : $counter+1;
 					}
 				}
 				closedir($dirlistdir);
-				$pagessubcount = ceil($counter/250);
+				$pagessubcount = ceil($counter/7);
 				if ($offset == 1) {
 					echo "<li><a href=\"content.php?include=upload&portbase=".$port."&filecount=".($offset)."\">".$messages["545"]."</a></li>";
 				}

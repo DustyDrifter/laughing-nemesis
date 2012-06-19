@@ -53,7 +53,7 @@ $requirements = array(
 	),
 	array(
 		'function' => function() {
-			$rights = substr(sprintf('%o', fileperms('uploads')), -3);
+			$rights = substr(sprintf('%o', fileperms('pages')), -3);
 			return $rights === '777';
 		},
 		'success_message' => 'i25',
