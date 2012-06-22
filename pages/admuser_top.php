@@ -51,23 +51,90 @@ if ($_GET['action'] == "newuser" && $_GET['function'] == "update") {
 			$notifi[] = "<h2>".$messages["267"]."</h2>";
 		}
 		else {
-			if (mysql_query("INSERT INTO users (username,user_password,md5_hash,user_level,user_email,contact_number,mobile_number,account_notes,name,surname,age) VALUES('".$_POST['eusername']."', '".$_POST['euser_password']."','".md5(strtolower($_POST['eusername'].$_POST['euser_password']))."','".$_POST['euser_level']."', '".$_POST['euser_email']."', '".$_POST['econtact_number']."', '".$_POST['emobile_number']."', '".$_POST['eaccount_notes']."', '".$_POST['ename']."', '".$_POST['esurname']."', '".$_POST['eage']."') ")) {
-				$correc[] = "<h2>".$messages["268"]."</h2>";
-			}
-			else {
-				$errors[] = "<h2>".$messages["269"]."</h2>";
-			}
+            if ( $_SESSION['user_level'] == 'User'){
+                if (mysql_query("INSERT INTO users (
+			username,
+			user_password,
+			md5_hash,
+			user_level,
+			user_email,
+			contact_number,
+			mobile_number,
+			account_notes,
+			name,
+			surname,
+			age,
+			dj_of_user
+			)
+			    VALUES(
+
+			'".$_POST['eusername']."',
+			'".$_POST['euser_password']."',
+			'".md5(strtolower($_POST['eusername'].$_POST['euser_password']))."',
+			'".$_POST['euser_level']."',
+			'".$_POST['euser_email']."',
+			'".$_POST['econtact_number']."',
+			'".$_POST['emobile_number']."',
+			'".$_POST['eaccount_notes']."',
+			'".$_POST['ename']."',
+			'".$_POST['esurname']."',
+			'".$_POST['eage']."',
+			'".$_SESSION['user_tb_id']."') "))
+
+                {
+                    $correc[] = "<h2>".$messages["268"]."</h2>";
+                }
+                else {
+                    $errors[] = "<h2>".$messages["269"]."</h2>";
+                }
+            }else{
+
+                if (mysql_query("INSERT INTO users (
+			username,
+			user_password,
+			md5_hash,
+			user_level,
+			user_email,
+			contact_number,
+			mobile_number,
+			account_notes,
+			name,
+			surname,
+			age )
+			    VALUES(
+
+			'".$_POST['eusername']."',
+			'".$_POST['euser_password']."',
+			'".md5(strtolower($_POST['eusername'].$_POST['euser_password']))."',
+			'".$_POST['euser_level']."',
+			'".$_POST['euser_email']."',
+			'".$_POST['econtact_number']."',
+			'".$_POST['emobile_number']."',
+			'".$_POST['eaccount_notes']."',
+			'".$_POST['ename']."',
+			'".$_POST['esurname']."',
+			'".$_POST['eage']."') "))
+
+                {
+                    $correc[] = "<h2>".$messages["268"]."</h2>";
+                }
+                else {
+                    $errors[] = "<h2>".$messages["269"]."</h2>";
+                }
+
+
+            }
 		}
 	}
 }
+
+
 if ($_GET['action'] == "edit") { 
 
     if (!empty($_POST['seluser'])){
         $dj_of_user = $_POST['seluser'];
          mysql_query("UPDATE users SET dj_of_user= '$dj_of_user' WHERE id='".$_GET['id']."'");
     }
-
-
 
 
 	$user = mysql_query("SELECT username FROM users WHERE id='".$_GET['id']."'");
@@ -78,6 +145,8 @@ if ($_GET['action'] == "edit") {
 	else {
 		$user_check = "0";
 	}
+
+
 	if ($_GET['function'] == "update" && isset($_GET['id']) && $user_check !== "1") {
 		if (mysql_query("UPDATE users SET md5_hash='".md5(mysql_result($user,0).$_POST['euser_password'])."', user_level='".$_POST['euser_level']."', contact_number='".$_POST['econtact_number']."', mobile_number='".$_POST['emobile_number']."', user_email='".$_POST['euser_email']."', name='".$_POST['ename']."', surname='".$_POST['esurname']."', age='".$_POST['eage']."', account_notes='".$_POST['eaccount_notes']."' WHERE id='".$_GET['id']."'")) {
 			$correc[] = "<h2>".$messages["271"]."</h2>";

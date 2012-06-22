@@ -187,6 +187,7 @@ $messages["30"]		=		"server, seite und stream";
 $messages["31"]		=		"Nachrichtencenter";
 $messages["32"]		=		"Öffentliche Server";
 $messages["33"]		=		"Meine Kontoeinstellungen";
+$messages["add33"]	=   	"DJ anlegen";
 $messages["34"]		=		"Eigene Radioserver";
 $messages["add34"]	=		"Radioserver";
 $messages["35"]		=		"AutoDJ";
@@ -341,13 +342,13 @@ $messages["172"]	=		"Der angegebene Port ist keine Zahl, bitte &uuml;berpr&uuml;
 $messages["173"]	=		"Die Servereinstellungen wurden erfolgreich ge&auml;ndert und gespeichert";
 $messages["174"]	=		"Die Einstellungen konnten nicht in die Datenbank gespeichert werden";
 $messages["175"]	=		"Dieser Server existiert nicht in der Datenbank oder auf diesem Server";
-$messages["176"]	=		"Die PID des Servers konnte nicht aus der Datenbank gelesen werden";
+$messages["176"]	=		"Die PID des Servers konnte nicht aus der Datenbank gelesen ";
 $messages["177"]	=		"Dieser Server ist schon Online, und ben&ouml;tigt kein weiteren Start";
 $messages["178"]	=		"Das Panel kann die tempor&auml;re Konfigdatei nicht erstellen";
 $messages["179"]	=		"Das Panel kann die tempor&auml;re Konfigdatei nicht beschreiben";
 $messages["180"]	=		"Das Panel kann den Server nicht starten, Admin wurde kontaktiert";
 $messages["181"]	=		"Das Panel hat den Shoutcast Server neugestartet und ist jetzt Online";
-$messages["182"]	=		"Die PID des Servers konnte nicht aus der Datenbank gelesen werden";
+$messages["182"]	=		"Die PID des Servers konnte nicht aus der Datenbank gelesen werden (Server war nicht gestartet)";
 $messages["183"]	=		"Die angegebene ID stimmt mit keinem Server auf diesem Server &uuml;berein";
 $messages["184"]	=		"Der Server wurde erfolgreich auf der Datenbank und diesem Panel gel&ouml;scht";
 $messages["185"]	=		"Der gew&uuml;nschte Server konnte nicht aus diesem System gel&ouml;scht werden";
@@ -423,7 +424,6 @@ $messages["247"]	=		"Super Administrator";
 $messages["add247"] =       "DJ";
 $messages["248"]	=		"Benutzer";
 $messages["249"]	=		"Ihr Benutzerstatus in diesem Panel";
-
 $messages["250"]	=		"Telefonnummer";
 $messages["251"]	=		"Eine Festnetznummer von Ihnen";
 $messages["252"]	=		"Handynummer";
@@ -451,6 +451,12 @@ $messages["273"]	=		"Ein Benutzer kann nicht seinen eigenen Benutzernamen aus de
 $messages["274"]	=		"Ein Administrator kann nur direkt &uuml;ber die Datenbank gel&ouml;scht werden";
 $messages["275"]	=		"Der Benutzer wurde erfolgreich aus der Datenbank und dem System gel&ouml;scht";
 $messages["276"]	=		"Der Benutzer konnte nicht erfolgreich aus dem System gel&ouml;scht werden";
+
+
+
+
+
+
 //
 //
 //	./pages/autodj_bottom.php
@@ -757,13 +763,13 @@ $messages["550"]	=		"Die Datei wurde erfolgreich hochgeladen und in das Verzeich
 $messages["551"]	=		"Es ist ein Fehler beim Versuch aufgetreten, diese Datei hochzuladen";
 $messages["552"]	=		"Diese Datei existiert schon auf diesem System Port";
 $messages["553"]	=		"Dieser Dateityp ist nicht erlaubt, oder beinhaltet keine MP3 Datei";
-$messages["554"]	=		"Der Gesamtspeicherplatz des Ordners konnte nicht ermittelt werden";
-$messages["555"]	=		"Der Gesamtspeicherplatz des Ordners konnte nicht ermittelt werden";
+$messages["554"]	=		""; //Doppelte Funktion gewesen
+$messages["555"]	=		""; //Doppelte Funktion gewesen
 $messages["556"]	=		"Die Datei wurde erfolgreich vom System und dem Panel gel&ouml;scht";
 $messages["557"]	=		"Die Datei zur L&ouml;schung kann nicht im System gefunden werden";
 $messages["558"]	=		"Der Download konnte nicht gestartet werden, da keine Datei gefunden wurde";
-$messages["559"]	=		"Der Gesamtspeicherplatz des Ordners konnte nicht ermittelt werden";
-$messages["560"]	=		"Der Gesamtspeicherplatz des Ordners konnte nicht ermittelt werden";
+$messages["559"]	=		"";    //Doppelte Funktion gewesen
+$messages["560"]	=		"";   // Doppelte Funktion gewesen
 $messages["561"]	=		"Das Verzeichnis konnte nicht ausgelesen werden!";
 $messages["562"]	=		"Das Verzeichnis konnte nicht ausgelesen werden!";
 $messages["563"]	=		"Das Verzeichnis konnte nicht ausgelesen werden!";

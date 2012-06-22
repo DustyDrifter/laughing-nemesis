@@ -25,6 +25,7 @@
 
 if (!include("database.php")) die("database.php could not be loaded!");
 if ($db_host == "" || !isset($db_host)) die("please reinstall this panel");
+
 //MySQL Verbindung wird getestet
 $connection = mysql_connect($db_host, $db_username, $db_password) or die ("database could not be connected");
 $db = mysql_select_db($database) or die ("database could not be selected");

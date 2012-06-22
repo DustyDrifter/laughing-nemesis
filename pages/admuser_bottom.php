@@ -28,7 +28,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 }
 
 ?>
-		<h2><?php echo $messages["228"];?> <?php if (isset($port)){echo $port;} ?></h2>
+<h2 xmlns="http://www.w3.org/1999/html"><?php echo $messages["228"];?> <?php if (isset($port)){echo $port;} ?></h2>
 		<div class="tool_top_menu">
 			<div class="main_shorttool"><?php echo $messages["229"];?></div>
 			<div class="main_righttool">
@@ -47,15 +47,29 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 			</thead>
 			<tbody>
 					<?php
-					$get_users = mysql_query("SELECT * FROM users order by id ASC limit $p,$limit");
-					while($data = mysql_fetch_array($get_users)) {
-						$get_servers = mysql_query("SELECT * FROM servers WHERE owner='".$data['username']."'");
-						echo "<tr>
+                    // If User = Super Administrator Show all USER!
+                    if ( $_SESSION['user_level'] == 'Super Administrator'){
+                        $get_users = mysql_query("SELECT * FROM users order by id ASC limit $p,$limit");
+                        while($data = mysql_fetch_array($get_users)) {
+                            $get_servers = mysql_query("SELECT * FROM servers WHERE owner='".$data['username']."'");
+                            echo "<tr>
 							<td>".$data['username']."</td>
 							<td>".mysql_num_rows($get_servers)." ".$messages["237"]."</td>
 							<td><a class=\"delete\" href=\"content.php?include=admuser&action=edit&id=".$data['id']."&function=delete\">".$messages["235"]."</a><a class=\"edit\" href=\"content.php?include=admuser&action=edit&id=".$data['id']."\">".$messages["236"]."</a></td>
 							</tr>";
-					}
+                        }
+                    }else{
+                        $get_users = mysql_query("SELECT * FROM users WHERE dj_of_user = 23 order by id ASC limit $p,$limit");
+                        while($data = mysql_fetch_array($get_users)) {
+                            $get_servers = mysql_query("SELECT * FROM servers WHERE owner='".$data['username']."'");
+                            echo "<tr>
+							<td>".$data['username']."</td>
+							<td>".mysql_num_rows($get_servers)." ".$messages["237"]."</td>
+							<td><a class=\"delete\" href=\"content.php?include=admuser&action=edit&id=".$data['id']."&function=delete\">".$messages["235"]."</a><a class=\"edit\" href=\"content.php?include=admuser&action=edit&id=".$data['id']."\">".$messages["236"]."</a></td>
+							</tr>";
+                        }
+                    }
+
 					?>
 			</tbody>
 		</table>
@@ -90,9 +104,9 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 				}
 			}
 
-
 		?>
 		<br />
+
 		<h2><?php if ($_GET['action'] == "newuser") { echo $messages["238"]; } else { echo $messages["239"]; }?></h2>
 		<form method="post" action="content.php?include=admuser&action=<?php if ($_GET['action'] == "newuser") { echo "newuser"; } else { echo "edit"; }?>&function=update<?php if ($_GET['action'] == "edit") { echo "&id=".$_GET['id']; }?>">
 			<fieldset>
@@ -118,15 +132,28 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 					<label for="a"><?php echo $messages["265"];?></label>
 					<?php
 					if ($_GET['action'] == "newuser") {
-						echo '<select class="formselect_loca" name="euser_level"><option value="Super Administrator">'.$messages["247"].'</option><option selected="selected" value="User">'.$messages["248"].'</option><option selected="selected" value="dj">'.$messages["add247"].'</option></select>';
+
+                       echo '<select class="formselect_loca" name="euser_level">';
+                        if ($_SESSION['user_level'] == 'Super Administrator'){
+                        echo'
+						<option value="Super Administrator">'.$messages["247"].'</option>
+						<option selected="selected" value="User">'.$messages["248"].'</option>';
+                        };
+                        echo'
+						<option selected="selected" value="dj">'.$messages["add247"].'</option>
+						</select>';
 					}
 					else {
                         echo '<select class="formselect_loca" name="euser_level">';
 
+                        // HIDE Super Admin und User if Login = User
+                        if ($_SESSION['user_level'] == 'Super Administrator'){
                         ?>
                          <option value="Super Administrator" <? if($userdata['user_level'] == 'Super Adminsitrator') echo'selected="selected"' ?>>Super Adminstrator</option>
                          <option value="User" <? if($userdata['user_level'] == 'User') echo'selected="selected"'  ?>>User</option>
-                         <option value="dj" <? if($userdata['user_level'] == 'dj') echo'selected="selected"' ?>>Dj-Moderator</option>
+                        <?php }else{};?>
+
+                        <option value="dj" <? if($userdata['user_level'] == 'dj') echo'selected="selected"' ?>>Dj-Moderator</option>
                         <option value="banned" <? if($userdata['user_level'] == 'banned') echo'selected="selected"' ?>>Disable</option>
                         </select>
                         <span class="field_desc">DJ bitte einem Benutzer zuordnen!</span>
@@ -138,7 +165,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
                 <div class="input_field">
                     <label for="a">Benutzerzuordnung</label>
                     <select class="formselect_loca" name="seluser">
-                        <option>Bitte DJ wählen!</option>
+                        <option>Bitte Benutzer wählen!</option>
                         <?php
                     $userlist= mysql_query("SELECT * FROM users WHERE user_level ='User'");
                     while($lsituser = mysql_fetch_object($userlist)) {

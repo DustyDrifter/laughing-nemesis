@@ -27,7 +27,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
     die ("You can't access this file directly...");
 }
 
-defined('entries_per_page') || define('entries_per_page',100);
+defined('entries_per_page') || define('entries_per_page',250);
 if (!isset($_GET['filecount']) or !is_numeric($_GET['filecount'])) $offset = 1;
 else $offset = $_GET['filecount'];
 if ($offset == 1) {

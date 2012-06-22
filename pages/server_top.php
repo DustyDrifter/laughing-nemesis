@@ -112,12 +112,6 @@ if (isset($_GET['view'])) {
                                 $pid = shell_exec("nohup " . $setting['dir_to_cpanel'] . "files/linux/sc_serv.bin " . $setting['dir_to_cpanel'] . $filename . " > /dev/null & echo $!");
                             }
 
-
-
-
-
-
-
                             if (!$pid || $pid == "") {
                                 mysql_query("INSERT INTO notices (username,reason,message,ip) VALUES('" . mysql_real_escape_string($loginun) . "','Server failure','The server with id " . mysql_real_escape_string($_GET['view']) . " cannot start on port " . mysql_real_escape_string($serverdata['portbase']) . "','" . mysql_real_escape_string($_SERVER['REMOTE_ADDR']) . "')");
                                 $errors[] = "<h2>" . $messages["517"] . "</h2>";

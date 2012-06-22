@@ -101,7 +101,7 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         }
     }
     $hash = md5($loginun . $loginpw);
-
+    $free_space = 980999;
     $selectuser = mysql_query("SELECT * FROM users WHERE md5_hash='" . mysql_real_escape_string($hash) . "'");
     if (mysql_num_rows($selectuser) == 1) {
         $_SESSION['username'] = $loginun;
@@ -109,7 +109,8 @@ if (isset($_SESSION['username']) && isset($_SESSION['user_password']) || isset($
         $userdata = mysql_fetch_array($selectuser);
         $loginun = $userdata['username'];
         $user_level = $userdata['user_level'];
-        $_SESSION['loginun'] = $loginun;
+        $_SESSION['user_level'] = $user_level;
+        $_SESSION['user_tb_id'] = $userdata['id'];
 
         // Abfrage Server
         if ($user_level == 'dj') {
@@ -157,11 +158,17 @@ if (isset($loggedin) && $loggedin == TRUE) {
 }
 
 
+
+      // Alter Uplaoder
+     /*
+
+
 if ($include_php == "upload" && isset($_GET['upport'])) {
-    $target_path = "pages/uploads/" . $_GET['upport'] . '/';
+    $target_path = "uploads/" . $_GET['upport'] . '/';
     $allowedExts = array();
     $maxFileSize = 0;
 
+    $new_free_space = 50;
     function ByteSize($bytes)
     {
         $size = $bytes / 1024;
@@ -200,7 +207,7 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
         $fileSize = $headers['X-File-Size'];
         $ext = substr($fileName, strrpos($fileName, '.') + 1);
         if (in_array($ext, $allowedExts) or empty($allowedExts)) {
-            if ($fileSize < $maxFileSize or empty($maxFileSize)) {
+            if ($fileSize < $maxFileSize or empty($maxFileSize) ) {
                 $input = fopen("php://input", 'r');
                 $output = fopen($target_path . $fileName, 'a');
                 if ($output != false) {
@@ -222,16 +229,18 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
         }
     } else {
         if ($_FILES['file']['name'] != '') {
-            $fileName = $_FILES['file']['name'];
-            $fileSize = $_FILES['file']['size'];
+
+                $fileName = $_FILES['file']['name'];
+                $fileSize = $_FILES['file']['size'];
+
             $ext = substr($fileName, strrpos($fileName, '.') + 1);
             if (in_array($ext, $allowedExts) or empty($allowedExts)) {
-                if ($fileSize < $maxFileSize or empty($maxFileSize)) {
+                if ($fileSize < $maxFileSize or empty($maxFileSize) ) {
                     $target_path = $target_path . basename($_FILES['file']['name']);
                     if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
                         echo '{"success":true, "file": "' . $target_path . '"}';
                     } else {
-                        echo '{"success":false, "details": "move_uploaded_file failed"}';
+                       // echo '{"success":false, "details": "move_uploaded_file failed"}';
                     }
                 } else {
                     echo ('{"success":false, "details": "Maximum file size: ' . ByteSize($maxFileSize) . '."}');
@@ -241,11 +250,14 @@ if ($include_php == "upload" && isset($_GET['upport'])) {
                 echo ('{"success":false, "details": "File type ' . $ext . ' not allowed."}');
         } else
             echo '{"success":false, "details": "No file received."}';
-
-
     }
     die();
 }
+
+
+  */
+
+
 
 if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
     if (isset($_GET['portbase'])) {
@@ -256,7 +268,7 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
             echo '<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>';
             $listing_start = 1;
             $listing_end = 10000;
-            $dirlisting = @scandir(dirname(__FILE__) . '/pages/uploads/' . $port) or die();
+            $dirlisting = @scandir(dirname(__FILE__) . '/uploads/' . $port) or die();
             $dirlistingsearch = array(
                 '&',
                 '<',
@@ -280,7 +292,7 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
                 }
 
                 if (($dirlisting[$i] != ".") && ($dirlisting[$i] != "..") && ($dirlisting[$i] != "")) {
-                    $itemId = sprintf('%s/pages/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
+                    $itemId = sprintf('%s/uploads/%d/%s', dirname(__FILE__), $port, str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]));
                     $itemText = str_replace($dirlistingsearch, $dirlistingreplace, $dirlisting[$i]);
                     printf('<item id="%s" text="%s"/>', $itemId, $itemText);
                 }
@@ -320,7 +332,7 @@ if (isset($_GET['playlist']) && $_GET['playlist'] == "left") {
                 $inta = 0;
                 foreach ($entrys as $entry) {
                     $inta++;
-                    $entry1 = str_replace(dirname(__FILE__) . "/pages/uploads/" . $port . "/", "", $entry);
+                    $entry1 = str_replace(dirname(__FILE__) . "/uploads/" . $port . "/", "", $entry);
                     if ($entry1 != "") {
                         $magix = str_replace($dirlistingsearch, $dirlistingreplace, $entry1);
                         printf('<item child="0" id="%s" text="%s"></item>', $magix, $magix);
@@ -349,7 +361,6 @@ if (!isset($_GET['message_ext']) or !isset($_GET['message_lang'])) {
     }
 }
 
-
 // MySQL connection
 $connection = mysql_connect($db_host, $db_username, $db_password) or die($messages["g1"]);
 $db = mysql_select_db($database) or die($messages["g2"]);
@@ -369,7 +380,9 @@ if (file_exists("./pages/" . $include_php . "_bottom.php")) {
         $include_php = "_no";
     }
 }
-if (($include_php == "admserver") || ($include_php == "admradio") || ($include_php == "admuser")) {
+
+// Überprüfung ob User passende Rechte hat diese Seite zu öffnen
+if (($include_php == "admserver") || ($include_php == "admradio")) {
     if ($user_level != "Super Administrator") {
         $include_php = "main";
         $errors[] = "<h2>" . $messages["17"] . "</h2>";
@@ -390,6 +403,7 @@ if ($user_level == "Super Administrator" && (isset($_GET['action']) && $_GET['ac
 if ((file_exists("./pages/" . $include_php . "_top.php")) && ($include_php != "_no")) {
     @include("./pages/" . $include_php . "_top.php");
 }
+
 // get all settings of db
 $settingsq = mysql_query("SELECT * FROM settings WHERE id='0'") or die($messages["g5"]);
 foreach (mysql_fetch_array($settingsq) as $key => $pref) {
@@ -397,9 +411,9 @@ foreach (mysql_fetch_array($settingsq) as $key => $pref) {
         $setting[$key] = stripslashes($pref);
     }
 }
+
 // update check
 $currentVersion = SAP_VERSION;
-
 
 if ($setting['update_check'] == 1 && $include_php == 'main') {
     require_once './pages/update.php';
@@ -408,7 +422,6 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
     require_once './pages/' . $include_php . '_bottom.php';
     die();
 }
-
 ?>
 <!DOCTYPE HTML>
 <html class="no-js">
@@ -441,30 +454,31 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
     }
     ?>
     <?php
-    if ($include_php == "upload") {
-        ?>
-        <link rel="stylesheet" type="text/css" href="./css/uploadbox.css"/>
-        <script type="text/javascript" src="./js/uploadrr.js"></script>
-        <script script type="text/javascript">
-            var langArray = new Array('Durchsuchen', 'Um Multimedia-Dateien hochzuladen, klicken Sie bitte auf "Durchsuchen" ', ', oder schieben Sie die Multimedia-Dateien einfach in diese Box.', 'Erlaubte Dateitypen:', 'Upload', ' wird nicht akzeptiert.\r\nErlaubte Dateitypen: ', 'Löschen',
-                ' gelöscht.', ' Datei', ' Dateien', 'Maximale Dateigröße: ', 'Keine Dateien ausgewählt.', 'Aktuelle Datei: ', 'Zusammenfassung: ', ' Datei(en) ', 'Ihre Datei(en) wurden erfolgreich hochgeladen.', 'Server meldete eine ungültigen JSON Antwort.', 'Die gesendete Datei und die Datei die empfangen wurde, stimmen nicht überein.', 'Upload fehlgeschlagen.', 'Uploade: ', ' hinzugefügt.', 'Aktuelle Datei: ');
-            $(document).ready(function () {
-                $('#uploadbox').Uploadrr({
-                    allowedExtensions:['.mp3'],
-                    simpleFile:false,
-                    maxFileSize:-1,
-                    'onComplete':function () {
-                        setTimeout("location.reload(true);", 3000);
-                    },
-                    progressGIF:'images/pr.gif',
-                    target:'content.php?include=upload&upport=<?php
-                        echo htmlspecialchars($_GET['portbase']);
-                        ?>'
-                });
-            });
-        </script>
-        <?php
-    }
+if ($include_php == "upload") {
+    ?>
+    <script src="./js/shCore.js" type="text/javascript"></script>
+    <script src="./js/shBrushJScript.js"  type="text/javascript" ></script>
+    <script src="./js/shBrushXml.js"  type="text/javascript" ></script>
+
+    <!-- SET UP AXUPLOADER  -->
+    <script src="./js/jquery-1.5.min.js" type="text/javascript"></script>
+    <script src="./js/ajaxupload.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="./css/fancyTheme/style.css" type="text/css" media="all" />
+    <!-- /SET UP AXUPLOADER  -->
+
+
+    <link rel="stylesheet" href="./mcss/shCore.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="./css/shThemeEclipse.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="./css/shCoreDefault.css" type="text/css"/>
+
+    <script type="text/javascript">
+        SyntaxHighlighter.all({toolbar:false});
+    </script>
+
+    <?php
+}
+
     ?>
     <?php
     if ($include_php == 'playlist') {
@@ -515,7 +529,7 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
         <a href="loadContent-main" title=""><img src="./images/logo.png" alt=""/></a>
     </div>
         <span class="header profileStatus"><?php
-            echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($_SESSION['loginun']) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
+            echo htmlspecialchars($messages["20"]) . ' <strong>' . htmlspecialchars($_SESSION['username']) . '</strong>&nbsp;(<a href="content.php?login=logout" title="Sign out">' . htmlspecialchars($messages["21"]) . '</a>)</span>';
             ?>
 </header>
 <div class="clear"></div>
@@ -558,16 +572,12 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
         </div>
         <?php
 
-
         if ($user_level == 'User' OR $user_level == 'Super Administrator') {
             ?>
             <nav class="navFirst">
                 <ul class="navMenu">
-
-
-
                     <li><a href="loadContent-contact" title=""><?php
-                       echo htmlspecialchars($messages["31"]);
+                        echo htmlspecialchars($messages["31"]);
                         ?></a></li>
                     <li><a href="loadContent-public" title=""><?php
                         echo htmlspecialchars($messages["32"]);
@@ -575,6 +585,13 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
                     <li><a href="loadContent-account" title=""><?php
                         echo htmlspecialchars($messages["33"]);
                         ?></a></li>
+
+                    <?php  if ($user_level == 'User') { ?>
+                    <li><a href="loadContent-admuser" title=""><?php
+                        echo htmlspecialchars($messages["add33"]);
+                        ?></a></li>
+                    <?php } ?>
+
                     <li><a href="loadContent-server" title=""><?php
                         if ($user_level == 'Super Administrator') {
                             echo htmlspecialchars($messages["add34"]);
@@ -590,28 +607,28 @@ if (isset($_GET['request']) && $_GET['request'] == 'html') {
             <?php
         }
         if ($setting['os'] == 'linux') {
-                ?>
+            ?>
 
 
-                <div id="navHeadSub">
-                    <h4><?php
-                        echo htmlspecialchars($messages["35"]);
-                        ?></h4>
-                    <h5><?php
-                        echo htmlspecialchars($messages["36"]);
-                        ?></h5>
-                </div>
+            <div id="navHeadSub">
+                <h4><?php
+                    echo htmlspecialchars($messages["35"]);
+                    ?></h4>
+                <h5><?php
+                    echo htmlspecialchars($messages["36"]);
+                    ?></h5>
+            </div>
 
 
             <nav class="navBottom">
                 <ul class="navMenu">
                     <li><a href="loadContent-music" title=""><?php
 
-                      if ($user_level == 'dj'){
+                        if ($user_level == 'dj') {
 
-                      }else{
-                          echo htmlspecialchars($messages["37"]);
-                      }
+                        } else {
+                            echo htmlspecialchars($messages["37"]);
+                        }
                         ?></a></li>
                     <li><a href="loadContent-autodj" title=""><?php
                         echo htmlspecialchars($messages["38"]);

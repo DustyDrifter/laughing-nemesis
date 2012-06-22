@@ -91,7 +91,7 @@ if ($_GET['new'] == "server") {
 	    autopid) VALUES('" . $_POST['owner'] . "', '" . $_POST['maxuser'] . "', '" . $_POST['portbase'] . "', '" . $_POST['bitrate'] . "', '" . $_POST['adminpassword'] . "', '" . $_POST['password'] . "', '" . $_POST['sitepublic'] . "', '" . getcwd() . "/logs/" . $_POST['logfile'] . "', '" . $_POST['realtime'] . "', '" . $_POST['screenlog'] . "', '" . $_POST['showlastsongs'] . "', '" . $_POST['tchlog'] . "', '" . $_POST['weblog'] . "', '" . $_POST['w3cenable'] . "', '" . getcwd() . "/logs/" . $_POST['w3clog'] . "', '" . $_POST['srcip'] . "', '" . $_POST['destip'] . "', '" . $_POST['yport'] . "', '" . $_POST['namelookups'] . "', '" . $_POST['relayport'] . "', '" . $_POST['relayserver'] . "', '" . $_POST['autodumpusers'] . "', '" . $_POST['autodumpsourcetime'] . "', '" . $_POST['contentdir'] . "', '" . $_POST['introfile'] . "', '" . $_POST['titleformat'] . "', '" . $_POST['publicserver'] . "', '" . $_POST['allowrelay'] . "', '" . $_POST['allowpublicrelay'] . "', '" . $_POST['metainterval'] . "', '" . ($_POST['webspace'] * 1024) . "', '" . $setting['host_add'] . "', '" . $_POST['portbase'] . "', 'Neuer Shoutcast AutoDJ', 'http://" . $setting['host_add'] . "', '1', '44100', '2', 'Jazz', '1', '1', '8000', '1', 'default', '" . $_POST['autopid'] . "')")
         ) {
             $old = umask(0);
-            @mkdir("./pages/uploads/" . $_POST['portbase'] . "", 0777);
+            @mkdir("./uploads/" . $_POST['portbase'] . "", 0777);
             @mkdir("./temp/" . $_POST['portbase'] . "", 0777);
             sleep(1);
             @mkdir("./temp/" . $_POST['portbase'] . "/playlist", 0777);
@@ -273,7 +273,7 @@ if (isset($_GET['view'])) {
                 @rmdir($dirname);
             }
 
-            //delete_directory("./pages/uploads/" . $unlink_port_sql_port . "/");
+            //delete_directory("./uploads/" . $unlink_port_sql_port . "/");
             //delete_directory("./temp/" . $unlink_port_sql_port . "/playlist/");
             //delete_directory("./temp/" . $unlink_port_sql_port . "/");
             if (mysql_query("DELETE FROM servers WHERE id='" . $_GET['view'] . "'")) {
