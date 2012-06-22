@@ -35,16 +35,7 @@ else {
 	$p = $_GET['p'] * $limit;
 }
 $l = $p + $limit;
-
-if ($user_level == 'Super Administrator') {
-
-    $listq = mysql_query("SELECT * FROM servers ORDER BY id ASC LIMIT $p,$limit");
-}else{
-    $listq = mysql_query("SELECT * FROM servers WHERE owner='".$loginun."' ORDER BY id ASC LIMIT $p,$limit");
-}
-
-
-
+$listq = mysql_query("SELECT * FROM servers WHERE owner='".$loginun."' ORDER BY id ASC LIMIT $p,$limit");
 if (!isset($_GET['manage'])) {
 ?>
 		<h2><?php echo $messages["433"];?></h2>
@@ -60,12 +51,9 @@ if (!isset($_GET['manage'])) {
 				<table cellspacing="0" cellpadding="0">
 					<thead>
 						<tr>
-
-                            <?php   if ($user_level == 'Super Administrator') { echo "<th>".$messages["add439"]."</th>";} ?>
-                            <th><?php echo $messages["437"];?></th>
+							<th><?php echo $messages["437"];?></th>
 							<th><?php echo $messages["438"];?></th>
 							<th><?php echo $messages["439"];?></th>
-
 							<th>&nbsp;</th>
 						</tr>
 					</thead>
@@ -78,15 +66,12 @@ if (!isset($_GET['manage'])) {
 						}
 						else {
 							while($data = mysql_fetch_array($listq)) {
-
-                                echo "<tr>";
-                                if ($user_level == 'Super Administrator') { echo "<td>".$data['owner']."</td>";}
-                                echo '
+								echo '<tr>
 									<td><a href="http://'.$setting['host_add'].':'.$data['portbase'].'/" target="_blank">'.$setting['host_add'].'</a></td>
 									<td><a href="http://'.$setting['host_add'].':'.$data['portbase'].'/" target="_blank">'.$data['portbase'].'</a></td>
 									<td><div class="space_show" style="background-position:';
-								if (file_exists("./uploads/".$data['portbase']."/")) {
-									$dir = "./uploads/".$data['portbase']."/";
+								if (file_exists("./pages/uploads/".$data['portbase']."/")) {
+									$dir = "./pages/uploads/".$data['portbase']."/";
 									$filesize = 0;
 									if(is_dir($dir)) {
 										if($dp = opendir($dir)) {
@@ -102,7 +87,7 @@ if (!isset($_GET['manage'])) {
 								}
 								$negative_background_pos = ($actual_dir_size/$data['webspace'])*120;
 								echo '-'.$negative_background_pos.'px 0px;"></div></td>
-									<td><a class="delete" href="content.php?include=server&view='.$data["id"].'&action=stop">'.$messages["441"].'</a><a class="selector" href="content.php?include=server&view='.$data["id"].'&action=start">'.$messages["442"].'</a><a class="edit" href="content.php?include=server&manage='.$data["id"].'">'.$messages["443"].'</a></td>
+									<td><a class="delete" href="content.php?include=server&view='.$data["id"].'&action=stop">'.$messages["441"].'</a><a class="selector" href="content.php?include=server&view='.$data["id"].'&action=start">'.$messages["442"].'</a><a class="selector" href="content.php?include=server&view='.$data["id"].'&action=restart">'.$messages["96"].'</a><a class="edit" href="content.php?include=server&manage='.$data["id"].'">'.$messages["443"].'</a></td>
 									</tr>';
 							}
 						}
