@@ -59,7 +59,7 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 							</tr>";
                         }
                     }else{
-                        $get_users = mysql_query("SELECT * FROM users WHERE dj_of_user = 23 order by id ASC limit $p,$limit");
+                        $get_users = mysql_query("SELECT * FROM users WHERE dj_of_user = '".$_SESSION['user_tb_id']."' order by id ASC limit $p,$limit");
                         while($data = mysql_fetch_array($get_users)) {
                             $get_servers = mysql_query("SELECT * FROM servers WHERE owner='".$data['username']."'");
                             echo "<tr>

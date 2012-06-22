@@ -37,7 +37,20 @@ if (stripos($_SERVER['PHP_SELF'], 'content.php') === false) {
 <div class="main_top_menu">
     <div class="main_short">
 
-        <?php if ($user_level != 'dj'){
+        <?php if ($user_level == 'dj'){ ?>
+        <div class="_shortcut_auto">
+            <span><a href="content.php?include=autodj">Source Kick</a></span>
+        </div>
+
+        <?php }
+
+        if (isset($_POST['kickIt'])){
+
+        }
+
+
+
+         if ($user_level != 'dj'){
          if ($setting['os']=="linux") { ?>
         <div class="_shortcut_auto">
             <span><a href="content.php?include=autodj"><?php echo $messages["359"];?></a></span>

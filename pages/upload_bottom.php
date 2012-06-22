@@ -25,6 +25,9 @@
                     <td class="subnav_child"><?php echo $messages["533"];?></td>
                     <td class="upload_table"><?php echo "".round(($data['webspace']/1024), 2)." MB";?></td>
                     <td class="upload_table"><?php echo "".round(($actual_dir_size/1024), 2)." MB";?></td>
+
+
+
                     <?php
                     echo '<td><div class="upload_table_show" style="background-position:';
                     $negative_background_pos = ($actual_dir_size/$data['webspace'])*180;
@@ -124,8 +127,14 @@
                     dropArea:'#drophere',
                     maxConnections: '5',
                     allowExt: ['mp3'],
-                    success: '',
-                    finish: 'window.location.reload();'
+
+                    finish:function(filelist)
+                    {
+                        setTimeout("location.reload(true);", 5000);
+                    }
+
+
+
 
 
 
@@ -135,5 +144,4 @@
 
         </td>
     </tr>
-</body>
-</html>
+
